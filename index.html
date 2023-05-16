@@ -25,21 +25,31 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Benjamin Randoing</h1>
-								<p>Welcome! I am a Stanford and Duke trained
-									engineer.
-									In recent
-									years, I have had the opportunity to work with biotechnology startups,
-									college/independent research labs, and engineering teams to produce novel devices and software.
-									This portfolio features the highlights
-									of my experiences as I aspire to pursue
-									work where I may bridge AI with product
-									design and health tech.</p>
+								<p>Product Design | AI | Software | Hardware
+									| Research
+								</p>
+<!--								<p>Welcome! I am a Stanford and Duke trained-->
+<!--									engineer.-->
+<!--									In recent-->
+<!--									years, I have had the opportunity to work with biotechnology startups,-->
+<!--									college/independent research labs, and engineering teams to produce novel devices and software.-->
+<!--									This portfolio features the highlights-->
+<!--									of my experiences as I aspire to pursue-->
+<!--									work where I may bridge AI with product-->
+<!--									design and health tech.</p>-->
 							</div>
 						</div>
 						<nav>
 							<ul>
 								<li><a href="#intro">Intro</a></li>
 								<li><a href="#work">Projects</a></li>
+									<a style="display: none;"
+									   href="#test">RecipeGen
+									</a>
+
+
+
+
 <!--								<li><a href="#work">Projects by Category</a></li>-->
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
@@ -73,14 +83,15 @@
 
 						<!-- Work -->
 							<article id="work">
-								<h2 class="major">Work</h2>
+								<h2 class="major">Projects</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
 								<h1>2023</h1>
 								<ul>
-									<p>Sketch2CAD</p>
+									<p><a href="#s2c">Sketch2CAD</a></p>
 									<p>Smart Pharmacy</p>
-									<p>NLP Recipe Generation with
-										Transformers</p>
+									<p> <a href="#recipeGen">NLP Recipe
+										Generation with
+										Transformers</a></p>
 									<p>NMBL Pilot Study with EStim </p>
 									<p>NMBL Wearable Haptic Device and
 										Study</p>
@@ -91,13 +102,13 @@
 								</ul>
 								<h1>2022</h1>
 								<ul>
-									<a href="#Intro">Paper Bike</a>
+									<p><a href="#pbike">Paper Bike</a></p>
 									<p>Melanoma Computer Vision Project</p>
 									<p>getMoovin</p>
 									<p>Bicep Wearable Internal
 										Temperature Monitor</p>
 									<p>Humacyte</p>
-									<p>HairDAO</p>
+									<p><a href="#hairDAO">HairDAO</a></p>
 									<p>Server Client Monitor BME547</p>
 								</ul>
 								<h1>2021</h1>
@@ -110,9 +121,14 @@
 								<h1>2020</h1>
 								<ul>
 									<p></p>
-									<p></p>
-									<p>Scottish Rite MATLAB for Clubfoot</p>
-									<p>Arya Project</p>
+									<p>Scottish Rite Peak EMG</p>
+									<p><a href="#clubfoot">IMU Analysis
+										Software:
+										  Operative
+										and Non-operative Treatment of
+										Clubfoot</a></p>
+									<p><a href="#arya">DNA Origami
+										Design with Monte Carlo Methods</a></p>
 								</ul>
 								<h1>2019</h1>
 								<ul>
@@ -123,12 +139,495 @@
 								</ul>
 								<h1>2018</h1>
 								<ul>
-									<p>Drone Project</p>
-									<p></p>
+									<p><a href="#droneDuke">XPrize
+										Drone for Ocean Discovery</a></p>
+<!--									<p><a href="#phoneHold">XPrize-->
+<!--										Drone for Ocean Discovery</a></p>-->
 									<p></p>
 									<p></p>
 								</ul>
 							</article>
+
+
+						<!-- sketch2cad -->
+						<article id="s2c">
+								<h2 class="major">Sketch 2 CAD</h2>
+								<p class="major">Generative AI CAD Step
+									Generation from Isometric Sketch Inputs</p>
+<!--								<span class="image main"><img-->
+<!--										src="documents/recipeGen/transformer.png"-->
+<!--										alt="" /></span>-->
+
+								<h4>Abstract</h4>
+<!--								<blockquote>Recipe generation from recipe titles only is currently unsolved, as state of the art models require both recipe titles and ingredients lists for instruction generation (Lee et al., 2020). This project investigates if a number of different architectures such as Long Short-Term Memory (LSTM) encoder-decoders, LSTM decoders, or Transformer-based decoders, can produce meaningful ingredient lists when given recipe titles only. The recipe titles and generated ingredients are then passed into an existing recipe instruction generation framework to produce cooking instructions (Liu et al., 2022). Our best ingredient generation model yielded qualitatively coherent ingredients lists with BLEU score 11.2 and F1 score 8.9, however, the BLEU and ROUGE-L scores for the final recipe instructions with ingredients from our selected transformer decode were 3.4 and 22.7. The baseline plug-and-play recipe instruction generation framework, relying on RecipeGPT and ground truth recipe title and ingredients demonstrates BLEU and ROUGE-L scores of 13.73 and 39.1 respectively for instruction generation. Since BLEU and ROUGE-L performance are influenced by n-gram matching and order, further evaluation would be required with metrics such as Semantic Textual Similarity (STS) to evaluate the meaning of the produced ingredients in the context of each recipe.</blockquote>-->
+								<h4>Report</h4>
+
+								<br>
+								<br>
+								<h4>Poster</h4>
+
+								<br>
+								<br>
+								<h4>Technical Skills</h4>
+
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+
+						<!-- RecipeGen -->
+							<article id="recipeGen">
+								<h2 class="major">NLP Recipe Generation</h2>
+								<p class="major">Generating Recipe Ingredients and Instructions with
+Controlled Text Generation</p>
+								<span class="image main"><img
+										src="documents/recipeGen/transformer.png"
+										alt="" /></span>
+
+								<h4>Abstract</h4>
+								<blockquote>Recipe generation from recipe titles only is currently unsolved, as state of the art models require both recipe titles and ingredients lists for instruction generation (Lee et al., 2020). This project investigates if a number of different architectures such as Long Short-Term Memory (LSTM) encoder-decoders, LSTM decoders, or Transformer-based decoders, can produce meaningful ingredient lists when given recipe titles only. The recipe titles and generated ingredients are then passed into an existing recipe instruction generation framework to produce cooking instructions (Liu et al., 2022). Our best ingredient generation model yielded qualitatively coherent ingredients lists with BLEU score 11.2 and F1 score 8.9, however, the BLEU and ROUGE-L scores for the final recipe instructions with ingredients from our selected transformer decode were 3.4 and 22.7. The baseline plug-and-play recipe instruction generation framework, relying on RecipeGPT and ground truth recipe title and ingredients demonstrates BLEU and ROUGE-L scores of 13.73 and 39.1 respectively for instruction generation. Since BLEU and ROUGE-L performance are influenced by n-gram matching and order, further evaluation would be required with metrics such as Semantic Textual Similarity (STS) to evaluate the meaning of the produced ingredients in the context of each recipe.</blockquote>
+								<h4>Report</h4>
+								<embed
+										src="documents/recipeGen/report.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Poster</h4>
+								<embed
+										src="documents/recipeGen/poster.pdf"
+									   width="560" height="420"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>Natural Language Processing</li>
+										<li>AWS EC2 Instance with EBS
+											Storage</li>
+										<li>Transformers</li>
+										<li>Deep Learning</li>
+										<li>Python</li>
+										<li>Git</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+						<!-- pBike -->
+							<article id="pbike">
+								<h2 class="major">Paper Bike</h2>
+								<p class="major">Designing a bicycle with
+									exclusively paper based materials</p>
+								<p> <a href="https://www.hairdao.xyz">Visit
+									HairDAO</a></p>
+								<h4>Project Introduction</h4>
+								<blockquote>
+								</blockquote>
+								<h4>Contributions & Outcomes</h4>
+								<blockquote>
+								</blockquote>
+								<h4>Market Report</h4>
+								<embed
+										src="documents/hairDAO/hairDAO.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>Design</li>
+										<li>Rapid Prototyping</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+						<!-- HairDAO -->
+							<article id="hairDAO">
+								<h2 class="major">HairDAO Research</h2>
+								<p class="major">Market Research for
+									Topical Hair Growth Stimulants</p>
+								<p> <a href="https://www.hairdao.xyz">Visit
+									HairDAO</a></p>
+								<h4>Project Introduction</h4>
+								<blockquote>HairDAO is a patient-owned,
+									DAO united by the goal of making hair loss
+									a problem of the past!
+									As an early contributing member, I
+									identified and documented promising
+									novel therapies.
+								</blockquote>
+								<h4>Contributions & Outcomes</h4>
+								<blockquote>I contributed to early market
+									research at HairDAO, a decentralized
+									autonomous organization providing
+									patients with control over how research
+									for novel hair loss related therapies are
+									funded. I investigated topical
+									biochemical therapies. Notably, I
+									identified and supported preliminary
+									contact with Amplifica, a vendor of
+									biologically-based topical drugs for
+									hair loss treatment. The drug contains
+									senescence-associated secretory
+									phenotype (SASP) factors that hyperactivate hair follicle stem cells, bypassing the androgen-induced negative signaling responsible for Androgenic Alopecia. Their research found that the drug demonstrated meaningful stimulation of the human hair cycle in pre-clinical trials, with AMP-506 and AMP-303 showing statistically different average responses compared to controls. Amplifica's AMP-303 drug is 1/2a ready, and the AMP-506 drug is in pre-clinical development, with clinical studies planned for early and late 2023.
+								The early market research conducted by HairDAO on Amplifica provided valuable insights into the promising potential of the biologically-based topical drug for hair loss treatment.
+								</blockquote>
+								<h4>Market Report</h4>
+								<embed
+										src="documents/hairDAO/hairDAO.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>Research</li>
+										<li>Biomedical Engineering</li>
+										<li>Microsoft Office</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+
+						<!-- Arya -->
+							<article id="arya">
+								<h2 class="major">DNA Origami Design
+								</h2>
+								<p class="major">Thermally reversible
+									pattern formation in arrays of molecular rotors</p>
+								<span class="image main"><img
+										src="documents/arya/top.jpeg"
+										alt="" /></span>
+								<p> <a href="https://aryalab.pratt.duke.edu/">Visit
+									Arya Biological & Soft Materials
+									Modeling Lab</a></p>
+								<h4>Project Introduction</h4>
+								<blockquote>
+									DNA origami presents an opportunity to
+									leverage order-disorder transitions to
+									develop novel drug deliveary therapeutics.
+									My research focused on utilizing the
+									Ising and Potts models to study the behavior of
+									DNA nano-technology shapes and their
+									potential critical temperature
+									thresholds when arranged in a lattice.
+								</blockquote>
+								<h4>Contributions & Outcomes</h4>
+								<blockquote>
+									In my research, I made significant
+									contributions by leveraging the Ising
+									and Potts Statistical Mechanics models
+									to investigate the behavior of different
+									DNA nano-technology shapes.
+									Specifically, I focused on the
+									interaction of DNA subunits with sticky
+									ends, which can be controlled by their
+									nucleotide sequencing, as members of
+									spin systems. This
+									exploration yielded valuable insights that can be applied to drug delivery applications.
+
+									I studied the energy of the systems, which were influenced by a combination
+									of
+									enthalpic and entropic forces. When the
+									temperature exceeds a certain threshold,
+									the DNA subunits exhibit random
+									orientations. However, below a
+									threshold, specific
+									clustering patterns emerge. By studying
+									behavior of surrogate models,
+									I was able to propose critical temperature
+									at which lattice clustering may
+									dissipate.
+
+									My findings suggest that by designing
+									DNA	structures with appropriate sticky ends, it is possible to create temperature-responsive drug delivery systems.
+									As the temperature increases, the DNA enclosure undergoes a conformational change, enabling the release of the enclosed drug.
+									This approach provides a promising avenue for controlled drug delivery mechanisms based on the principles of statistical mechanics and DNA nanotechnology.
+								</blockquote>
+
+								<h4>Nanoscale Publication</h4>
+								<embed
+										src="documents/arya/arrya%20pub.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Potts Lattice Simulations with L-Shaped
+									DNA</h4>
+								The Potts Monte Carlo Simulations above feature an L-shaped DNA subunit.
+								There are two sticky ends per subunit. The gif on the left depicts the lattice behavior when the
+								temperature is below the critical temperature
+								<br>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img src="documents/arya/L_Shaped1.5-4.gif" alt="" />
+										</span>
+									</div>
+
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img src="documents/arya/NewLCoordination.gif" alt="" />
+										</span>
+									</div>
+								</div>
+
+
+								<h4>Ising Lattice Simulations</h4>
+								Monte Carlo simulations of an Ising Lattice above depict the influence of adjusting
+								the thermal energy of the system on the aggregation of each spin subunit.
+								<br>
+								<br>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<video width="565" height="500" controls>
+										  <source src="documents/arya/MagnetismLong%20(Converted).mp4"
+												  type="video/mp4">
+										  Your browser does not support the video tag.
+										</video>
+									</div>
+									<div style="display: inline-block;">
+										<video width="565" height="500" controls>
+										  <source src="documents/arya/IsingB%20(Converted).mp4"
+												  type="video/mp4">
+										  Your browser does not support the video tag.
+										</video>
+									</div>
+								</div>
+								<br>
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>Research</li>
+										<li>Biomedical Engineering</li>
+										<li>Python</li>
+										<li>MATLAB</li>
+										<li>Probabilistic Modeling</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+						<!-- Clubfoot -->
+							<article id="clubfoot">
+								<h2 class="major">Scottish Rite IMU
+									Analysis</h2>
+								<p class="major">Developing software to
+									analyze IMU data to describe agility of
+									patients with clubfoot
+								</p>
+
+								<h4>Project Introduction</h4>
+								<blockquote> Nonoperative treatment is widely accepted as the standard care for children with clubfoot,
+									and various technologies, including accelerometers, have allowed researchers to assess functional outcomes
+									and movement mechanics in-depth. However, it is still unclear whether nonoperatively treated children with clubfoot
+									exhibit sided differences in dynamic agility tasks and whether ankle strength affects the quality of their movement in
+									such tasks at skeletal maturity.
+								</blockquote>
+								<h4>Contributions & Outcomes</h4>
+								<blockquote> I developed a MATLAB analysis
+									software from provenance	to
+									validation that read in IMU
+									accelerometry data from Edgren, Single
+									Leg Stance, and L-Test agility tasks
+									performed by patients with clubfoot. The
+									software involved signal processing
+									techniques including: filtering, step
+									detection, envelop creation, and Fourier
+									Transforms. The resulting metrics
+									included step frequency, peak G
+									(acceleration), vector magnitude, split
+									times, and lag times. The software
+									empowered research to identify children
+									with unilateral clubfoot who remained nonoperative until skeletal maturity showed minimal sided differences
+									in time/accelerometer measures during a
+									dynamic agility test.
+									However, ankle strength in the unaffected
+									foot was correlated with better performance and movement quality,
+									highlighting the importance of integrating accelerometry
+									measures for assessing functional deficits and their relationship to ankle strength in clubfoot treatment.
+								</blockquote>
+								<h4>Report</h4>
+								<embed
+										src="documents/clubfoot/Abstract.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Signal Processing: Filtering</h4>
+								<embed
+										src="documents/clubfoot/Accelerometry_Filtering.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Signal Processing: Step Detection</h4>
+								<embed
+										src="documents/clubfoot/ESST%20Butter%20Filter.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>MATLAB Software Standard Operating
+									Procedure</h4>
+								<embed
+										src="documents/clubfoot/pediCHAMP%20-%20Edgren%20Side%20Step%20Test%20Automated%20Events%20v2.pdf"
+									   width="560" height="600"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Software Overview</h4>
+								<blockquote> A raw .csv data stream of x,y, and z accelerometry vales was compiled into a resultant vector magnitude using the sum of squares. The subsequent data values were spliced into smaller data segments-representing one trial-with timestamps from a LabView created .txt file. Within each trial, a patient moves in 6 main phases: left 3 times and right 3 times. Signal analysis quantities are calculated for each of the three segments. These 6 segments are automatically identified using a proprietary automatic approach. A low-pass Butterworth Filter is applied to the raw data to identify the envelope of the total trial. There are two main frequencies in the accelerometry profile as seen below. The envelope and identification of minimal accelerometry values allowed for splitting each of the 6 phases.
+Three main quantities are identified: Peak G Force, Stride frequency, and a Vector Magnitude. Peak acceleration is identified using a max command, vector magnitude is identified using a trapezoidal integral function, and the stride frequency is calculated by finding the greatest amplitude frequency after applying the Fast Fourier Transform.
+								</blockquote>
+
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>MATLAB</li>
+										<li>Time Series Signal
+											Processing</li>
+										<li>Research</li>
+										<li>IMU</li>
+										<li>Biomechanics</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+
+						<!-- dukeDrone -->
+							<article id="droneDuke">
+								<h2 class="major">Drone Base
+									Optimization</h2>
+								<p class="major">Redesigning a hexacopter
+									base for the XPrize ocean discovery
+									competition</p>
+								<h4>Project Introduction</h4>
+								<blockquote>The XPRIZE Ocean Discovery contest challenges teams to develop cutting-edge technology for mapping and exploring the ocean floor.
+									The Duke University hexacopter base
+									presented an inability to withstand
+									impact from sudden landing or mild
+									crashes. The failure mode was most
+									commonly fractures along the 3D print
+									plane.
+								</blockquote>
+								<h4>Contributions & Outcomes</h4>
+								<blockquote>
+									I modified and developed a MATLAB code
+									for modeling the stress experienced in
+									the carbon fiber chassis and th 3D
+									printed joints provided a specific drone
+									base design.
+									Additionally, I assisted with wiring the drone's ESCs and motor controllers, ensuring proper functionality.
+									I also helped design mechanical
+									joints for the drone that would
+									integrate with the carbon fiber frame.
+									The implementation of filets throughout
+									the 3D printed joints with a print
+									orientation that resulted in the
+									layers being 45° with respect to the
+									ground led to a successful impact
+									resistant drone base at a reduced scale.
+								</blockquote>
+								<div style="overflow-x: auto; white-space:
+									nowrap;">
+									<div style="display: inline-block;">
+										<video width="565" height="400"
+											   controls>
+										  <source
+												  src="documents/droneDuke/IMG_2397.mov"
+												  type="video/mp4">
+										  Your browser does not support the video tag.
+										</video>
+									</div>
+									<div style="display: inline-block;">
+										<video width="565" height="400"
+											   controls>
+										  <source
+												  src="documents/droneDuke/IMG_2429.mov"
+												  type="video/mp4">
+										  Your browser does not support the video tag.
+										</video>
+									</div>
+								</div>
+								<br>
+								<br>
+								<div style="overflow-x: auto; white-space:
+									nowrap;">
+									<div style="display: inline-block;">
+											<video width="565" height="500" controls>
+											  <source
+													  src="documents/droneDuke/IMG_2454.mov"
+													  type="video/mp4">
+											  Your browser does not support the video tag.
+											</video>
+										</div>
+								</div>
+								<br>
+								<br>
+								<h4>Poster</h4>
+								<embed
+										src="documents/droneDuke/EGR101L%20Fall%202018%20Poster%20Templates.pdf"
+									   width="560" height="610"
+										type="application/pdf">
+								<br>
+								<br>
+								<h4>Sketch and Drone Images </h4>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img
+													src="documents/droneDuke/IMG_2265.png" alt="" />
+										</span>
+									</div>
+								</div>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img
+													src="documents/droneDuke/IMG_2266.png" alt="" />
+										</span>
+									</div>
+								</div>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img
+													src="documents/droneDuke/IMG_2283.png" alt="" />
+										</span>
+									</div>
+								</div>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img
+													src="documents/droneDuke/IMG_2365.png" alt="" />
+										</span>
+									</div>
+								</div>
+								<div style="overflow-x: auto; white-space: nowrap;">
+									<div style="display: inline-block;">
+										<span class="image main">
+											<img
+													src="documents/droneDuke/IMG_2448.png" alt="" />
+										</span>
+									</div>
+								</div>
+								<h4>Technical Skills</h4>
+									<ul>
+										<li>CAD</li>
+										<li>3D Printing</li>
+										<li>Circuit Design</li>
+										<li>MATLAB</li>
+										<li>Optimization</li>
+									</ul>
+
+								<p> <a href="#work">Projects</a></p>
+							</article>
+
+
 
 						<!-- About -->
 							<article id="about">
@@ -413,7 +912,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright"><a href="https://html5up.net"></a>.</p>
+						<p class="copyright"><a href="https://html5up.net"></a></p>
 					</footer>
 
 			</div>
