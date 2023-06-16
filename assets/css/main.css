@@ -1739,7 +1739,7 @@ input, select, textarea {
 		}
 
 		h2 {
-			font-size: 1.25em;
+			font-size: 0.8em;
 			line-height: 1.5;
 		}
 
@@ -2666,7 +2666,7 @@ input, select, textarea {
 			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
 			background-image: url("../../images/A7308327 (4).png");
 			background-position: center;
-			background-position-x: 80px;
+			background-position-x: 0px;
 			background-size: cover;
 			background-repeat: no-repeat;
 			z-index: 1;
