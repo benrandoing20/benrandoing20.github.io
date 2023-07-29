@@ -68,10 +68,30 @@
                   (CS224n) at Stanford, my team attempted
                   to develop a transformer model to generate
                   recipe instructions from only a recipe
-                  title.
+                  title. Existing recipee generation pipelines requir
+                  significant compute to achieve. We set out to identify
+                  less complex architectures that could provide sufficient
+                  recipe generation outputs to expand the possible use of
+                  recipe geneeation.
               </p>
               <h3>Abstract</h3>
-              <blockquote>Recipe generation from recipe titles only is currently unsolved, as state of the art models require both recipe titles and ingredients lists for instruction generation (Lee et al., 2020). This project investigates if a number of different architectures such as Long Short-Term Memory (LSTM) encoder-decoders, LSTM decoders, or Transformer-based decoders, can produce meaningful ingredient lists when given recipe titles only. The recipe titles and generated ingredients are then passed into an existing recipe instruction generation framework to produce cooking instructions (Liu et al., 2022). Our best ingredient generation model yielded qualitatively coherent ingredients lists with BLEU score 11.2 and F1 score 8.9, however, the BLEU and ROUGE-L scores for the final recipe instructions with ingredients from our selected transformer decode were 3.4 and 22.7. The baseline plug-and-play recipe instruction generation framework, relying on RecipeGPT and ground truth recipe title and ingredients demonstrates BLEU and ROUGE-L scores of 13.73 and 39.1 respectively for instruction generation. Since BLEU and ROUGE-L performance are influenced by n-gram matching and order, further evaluation would be required with metrics such as Semantic Textual Similarity (STS) to evaluate the meaning of the produced ingredients in the context of each recipe.</blockquote>
+              <blockquote>Recipe generation from recipe titles only is currently unsolved,
+                  as state of the art models require both recipe titles and ingredients lists for
+                  instruction generation (Lee et al., 2020). This project investigates if a number
+                  of different architectures such as Long Short-Term Memory (LSTM) encoder-decoders,
+                  LSTM decoders, or Transformer-based decoders, can produce meaningful ingredient lists
+                  when given recipe titles only. The recipe titles and generated ingredients are then passed
+                  into an existing recipe instruction generation framework to produce cooking instructions
+                  (Liu et al., 2022). Our best ingredient generation model yielded qualitatively coherent
+                  ingredients lists with BLEU score 11.2 and F1 score 8.9, however, the BLEU and ROUGE-L
+                  scores for the final recipe instructions with ingredients from our selected transformer
+                  decode were 3.4 and 22.7. The baseline plug-and-play recipe instruction generation framework,
+                  relying on RecipeGPT and ground truth recipe title and ingredients demonstrates BLEU and
+                  ROUGE-L scores of 13.73 and 39.1 respectively for instruction generation. Since BLEU and
+                  ROUGE-L performance are influenced by n-gram matching and order, further evaluation would
+                  be required with metrics such as Semantic Textual Similarity (STS) to evaluate the meaning
+                  of the produced ingredients in the context of each recipe.
+              </blockquote>
 
             </div>
           </div>
@@ -93,7 +113,15 @@
             <div class="portfolio-description">
               <h3>Contributions & Outcomes</h3>
               <p>
-
+                  I developed the recipe generating component from
+                  ingredient and recipe title inputs. These inputs were
+                  contrived from a model developed by my teammates. My
+                  recipe generating model explored LSTM and Transformer
+                  encoder-decoder architectures with limited layers and
+                  attention heads to minimize model complexity. Despite
+                  identiffyiing an optimal model and hyperparameters,
+                  additional work is necessary to replicate LLM performance
+                  on recipe generation with less complex models.
               </p>
               <h3>Technical Skills</h3>
               <ul>
