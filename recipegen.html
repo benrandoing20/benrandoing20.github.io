@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Portfolio Details - Personal Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Updated: Jun 13 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <iframe src="documents/recipeGen/poster.pdf"
+									   width="800" height="550"></iframe>
+                </div>
+
+<!--                <div class="swiper-slide">-->
+<!--                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">-->
+<!--                </div>-->
+
+
+              </div>
+              <div class="swiper-pagination"></div>
+              <h3>Project Introduction</h3>
+              <p>
+                  As part of my AI coursework
+                  (CS224n) at Stanford, my team attempted
+                  to develop a transformer model to generate
+                  recipe instructions from only a recipe
+                  title.
+              </p>
+              <h3>Abstract</h3>
+              <blockquote>Recipe generation from recipe titles only is currently unsolved, as state of the art models require both recipe titles and ingredients lists for instruction generation (Lee et al., 2020). This project investigates if a number of different architectures such as Long Short-Term Memory (LSTM) encoder-decoders, LSTM decoders, or Transformer-based decoders, can produce meaningful ingredient lists when given recipe titles only. The recipe titles and generated ingredients are then passed into an existing recipe instruction generation framework to produce cooking instructions (Liu et al., 2022). Our best ingredient generation model yielded qualitatively coherent ingredients lists with BLEU score 11.2 and F1 score 8.9, however, the BLEU and ROUGE-L scores for the final recipe instructions with ingredients from our selected transformer decode were 3.4 and 22.7. The baseline plug-and-play recipe instruction generation framework, relying on RecipeGPT and ground truth recipe title and ingredients demonstrates BLEU and ROUGE-L scores of 13.73 and 39.1 respectively for instruction generation. Since BLEU and ROUGE-L performance are influenced by n-gram matching and order, further evaluation would be required with metrics such as Semantic Textual Similarity (STS) to evaluate the meaning of the produced ingredients in the context of each recipe.</blockquote>
+
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h2>NLP Recipe Generation</h2>
+              <p class="major">Generating Recipe Ingredients and Instructions with
+              Controlled Text Generation</p>
+              <ul>
+                <li><strong>Category</strong>: AI Research</li>
+                <li><strong>Client</strong>: Stanford NLP CS 224N</li>
+                <li><strong>Project date</strong>: 01/2023 - 03/2023</li>
+                <li><strong>Project Report</strong>: <a
+                        href="documents/recipeGen/report.pdf"
+                        target="_blank">View</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h3>Contributions & Outcomes</h3>
+              <p>
+
+              </p>
+              <h3>Technical Skills</h3>
+              <ul>
+                  <li>Natural Language Processing</li>
+                  <li>AWS EC2 Instance with EBS
+                      Storage</li>
+                  <li>Transformers</li>
+                  <li>Deep Learning</li>
+                  <li>Python</li>
+                  <li>Git</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
