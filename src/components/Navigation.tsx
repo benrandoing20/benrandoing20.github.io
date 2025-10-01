@@ -15,6 +15,9 @@ const Navigation = () => {
   const navItems = [
     { name: 'Work', href: '#projects' },
     { name: 'About', href: '#about' },
+    { name: 'Thoughts', href: '#thoughts' },
+    { name: 'Resources', href: '/resources' },
+    { name: 'Bucket List', href: '/bucket-list' },
     { name: 'Contact', href: '#contact' },
   ];
 

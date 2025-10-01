@@ -9,14 +9,15 @@ const Hero = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extralight mb-8 tracking-tight text-balance">
-            Biomedical Engineer
+            Innovator & Entrepreneur
             <br />
-            <span className="text-black/60">AI Researcher</span>
+            <span className="text-black/60">Building the Future of AI</span>
           </h1>
           
           <p className="text-xl md:text-2xl font-light text-black/60 max-w-2xl mx-auto text-balance leading-relaxed">
-            From medical school to Stanford AI research. 
-            Now at Apple and NVIDIA, shaping the future of artificial intelligence.
+            From biomedical engineering to Stanford AI. Leading innovation at Apple and NVIDIA.
+            <br />
+            Pioneering breakthroughs at the intersection of technology, healthcare, and finance.
           </p>
         </div>
         

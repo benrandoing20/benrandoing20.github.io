@@ -19,7 +19,7 @@ const Blog = () => {
   ];
 
   return (
-    <section className="py-32 px-8">
+    <section id="thoughts" className="py-32 px-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-24">
           <h2 className="text-4xl md:text-5xl font-extralight mb-6 tracking-tight">

@@ -55,10 +55,15 @@ const About = () => {
         </div>
         
         <div className="mt-32 max-w-3xl">
+          <p className="text-xl font-light leading-relaxed text-black/70 mb-8">
+            An innovator at the convergence of artificial intelligence, healthcare, and finance. 
+            My mission is to build transformative systems that redefine industries and create 
+            lasting impact at scale.
+          </p>
           <p className="text-xl font-light leading-relaxed text-black/70">
-            My work focuses on the intersection of artificial intelligence and healthcare, 
-            developing systems that meaningfully improve patient outcomes while maintaining 
-            the highest standards of safety and ethics.
+            From pioneering AI research at Stanford to driving product innovation at Apple and NVIDIA,
+            I'm committed to turning visionary ideas into reality—combining technical excellence with
+            entrepreneurial execution.
           </p>
         </div>
       </div>
