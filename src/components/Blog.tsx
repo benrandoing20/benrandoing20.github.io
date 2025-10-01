@@ -25,7 +25,11 @@ const Blog = () => {
           <h2 className="text-4xl md:text-5xl font-extralight mb-6 tracking-tight">
             Thoughts
           </h2>
-          <div className="w-16 h-px bg-black/20"></div>
+          <div className="w-16 h-px bg-black/20 mb-6"></div>
+          <p className="text-lg font-light text-black/60 max-w-2xl leading-relaxed">
+            Here's what I've been thinking about lately—ideas from building AI systems, 
+            lessons learned, and questions I'm still figuring out.
+          </p>
         </div>
         
         <div className="space-y-12">

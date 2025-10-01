@@ -3,21 +3,25 @@ const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-8 geometric-bg">
       <div className="max-w-4xl text-center">
-        <div className="mb-16">
+      <div className="mb-16">
           <div className="w-24 h-24 mx-auto mb-12 bg-black/5 rounded-full flex items-center justify-center">
             <div className="w-12 h-12 bg-black rounded-full"></div>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extralight mb-8 tracking-tight text-balance">
-            Innovator & Entrepreneur
+            Hi, I'm building the future
             <br />
-            <span className="text-black/60">Building the Future of AI</span>
+            <span className="text-black/60">one system at a time</span>
           </h1>
           
           <p className="text-xl md:text-2xl font-light text-black/60 max-w-2xl mx-auto text-balance leading-relaxed">
-            From biomedical engineering to Stanford AI. Leading innovation at Apple and NVIDIA.
+            A few years ago, I chose Stanford's AI program over medical school.
             <br />
-            Pioneering breakthroughs at the intersection of technology, healthcare, and finance.
+            I believed code could help more patients than I ever could alone.
+            <br className="hidden md:block" />
+            <span className="block mt-4 text-black/50">
+              Now I'm at NVIDIA, building AI systems that transform healthcare and finance.
+            </span>
           </p>
         </div>
         

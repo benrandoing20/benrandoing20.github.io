@@ -3,23 +3,27 @@ const About = () => {
   const timeline = [
     {
       title: "Biomedical Engineering",
-      subtitle: "Foundation",
-      year: "2018"
+      subtitle: "Where it all started",
+      year: "2018",
+      story: "Built my first medical device prototype"
     },
     {
-      title: "Medical School Acceptance",
-      subtitle: "Traditional Path",
-      year: "2020"
+      title: "The Big Decision",
+      subtitle: "Medical school or AI?",
+      year: "2020",
+      story: "Chose code over a stethoscope"
     },
     {
       title: "Stanford AI Research",
-      subtitle: "The Pivot",
-      year: "2021"
+      subtitle: "The deep dive",
+      year: "2021",
+      story: "Learned AI could scale my impact"
     },
     {
       title: "Apple & NVIDIA",
-      subtitle: "Industry Impact",
-      year: "2023"
+      subtitle: "Building at scale",
+      year: "2023",
+      story: "Shipping AI systems to millions"
     }
   ];
 
@@ -47,8 +51,11 @@ const About = () => {
               <h3 className="text-lg font-light mb-2 text-balance">
                 {item.title}
               </h3>
-              <p className="text-sm font-light text-black/60">
+              <p className="text-sm font-light text-black/60 mb-3">
                 {item.subtitle}
+              </p>
+              <p className="text-xs font-light text-black/40 italic">
+                {item.story}
               </p>
             </div>
           ))}
@@ -56,14 +63,18 @@ const About = () => {
         
         <div className="mt-32 max-w-3xl">
           <p className="text-xl font-light leading-relaxed text-black/70 mb-8">
-            An innovator at the convergence of artificial intelligence, healthcare, and finance. 
-            My mission is to build transformative systems that redefine industries and create 
-            lasting impact at scale.
+            My path hasn't been typical. I started in biomedical engineering, got into medical school, 
+            and then... didn't go. Instead, I chose Stanford's AI program. My family thought I was crazy.
+          </p>
+          <p className="text-xl font-light leading-relaxed text-black/70 mb-8">
+            But here's what I realized: one doctor can help hundreds of patients in their lifetime. 
+            One AI system can help millions. That's not replacing human care—it's amplifying it.
           </p>
           <p className="text-xl font-light leading-relaxed text-black/70">
-            From pioneering AI research at Stanford to driving product innovation at Apple and NVIDIA,
-            I'm committed to turning visionary ideas into reality—combining technical excellence with
-            entrepreneurial execution.
+            Today, I get to work on the problems I care most about. At NVIDIA and Apple, I've built 
+            systems that are being used in hospitals and trading floors. But what drives me isn't the 
+            technology—it's the impact. Every line of code is a chance to help someone, somewhere, 
+            make a better decision.
           </p>
         </div>
       </div>

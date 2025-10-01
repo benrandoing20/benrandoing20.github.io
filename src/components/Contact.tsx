@@ -5,16 +5,20 @@ const Contact = () => {
       <div className="max-w-5xl mx-auto">
         <div className="mb-24">
           <h2 className="text-4xl md:text-5xl font-extralight mb-6 tracking-tight">
-            Connect
+            Let's Talk
           </h2>
-          <div className="w-16 h-px bg-black/20"></div>
+          <div className="w-16 h-px bg-black/20 mb-6"></div>
+          <p className="text-lg font-light text-black/60 max-w-2xl leading-relaxed">
+            I love meeting people working on interesting problems. Whether you're building something 
+            in AI, healthcare, or finance—or just want to chat about ideas—reach out anytime.
+          </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-24">
           <div>
             <p className="text-xl font-light text-black/60 mb-12 leading-relaxed">
-              Interested in collaborating on AI healthcare projects or discussing 
-              the future of biomedical engineering?
+              Currently based in the Bay Area, but always happy to connect virtually. 
+              Drop me a line—I typically respond within a day or two.
             </p>
             
             <div className="space-y-8">
