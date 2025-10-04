@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
-const HealthAI = () => {
+const DigitalHealth = () => {
   const sections = [
     {
-      title: "Medical Imaging AI",
+      title: "Medical Imaging & Diagnostics",
       content: [
         {
-          subtitle: "Diagnostic Radiology",
-          description: "AI systems for X-ray, CT, and MRI analysis. Deep learning models achieving radiologist-level performance in detecting cancers, fractures, and abnormalities."
+          subtitle: "Diagnostic Radiology AI",
+          description: "Deep learning models for X-ray, CT, and MRI analysis. Achieving radiologist-level performance in detecting cancers, fractures, and abnormalities."
         },
         {
           subtitle: "Pathology & Histology",
@@ -33,25 +33,8 @@ const HealthAI = () => {
           description: "Evidence-based treatment planning using machine learning on clinical guidelines, literature, and patient-specific factors."
         },
         {
-          subtitle: "Risk Prediction",
+          subtitle: "Risk Prediction Models",
           description: "Predicting patient deterioration, readmission risk, and adverse events using electronic health records and real-time monitoring."
-        }
-      ]
-    },
-    {
-      title: "Drug Discovery & Development",
-      content: [
-        {
-          subtitle: "Molecular Design",
-          description: "Generative AI for novel drug candidate creation. Predicting molecular properties, binding affinity, and toxicity profiles."
-        },
-        {
-          subtitle: "Clinical Trial Optimization",
-          description: "Patient recruitment, trial design, and endpoint prediction using machine learning on historical trial data."
-        },
-        {
-          subtitle: "Repurposing Existing Drugs",
-          description: "Identifying new therapeutic applications for approved drugs using network analysis and biological pathway modeling."
         }
       ]
     },
@@ -60,15 +43,15 @@ const HealthAI = () => {
       content: [
         {
           subtitle: "Genomic Analysis",
-          description: "AI-powered interpretation of whole genome sequencing, variant calling, and prediction of disease susceptibility."
-        },
-        {
-          subtitle: "Treatment Response Prediction",
-          description: "Using patient genetics, biomarkers, and clinical data to predict optimal treatment approaches and drug responses."
+          description: "AI-powered interpretation of whole genome sequencing, variant calling, and prediction of disease susceptibility and drug responses."
         },
         {
           subtitle: "Precision Oncology",
-          description: "Tumor genomic profiling, targeted therapy selection, and immunotherapy response prediction using multi-omic data."
+          description: "Tumor genomic profiling, targeted therapy selection, and immunotherapy response prediction using multi-omic data integration."
+        },
+        {
+          subtitle: "Pharmacogenomics",
+          description: "Using patient genetics and biomarkers to predict optimal drug selection, dosing, and potential adverse reactions."
         }
       ]
     },
@@ -76,50 +59,50 @@ const HealthAI = () => {
       title: "Remote Patient Monitoring",
       content: [
         {
-          subtitle: "Wearable Devices",
-          description: "Continuous health monitoring with smartwatches, biosensors, and medical-grade wearables. Detecting arrhythmias, sleep apnea, and chronic disease markers."
+          subtitle: "Wearable Health Devices",
+          description: "Continuous monitoring with smartwatches, biosensors, and medical-grade wearables. Detecting arrhythmias, sleep apnea, and chronic disease markers."
         },
         {
           subtitle: "Vital Signs Analysis",
           description: "AI algorithms for heart rate variability, oxygen saturation, blood pressure trends, and early warning score systems."
         },
         {
-          subtitle: "Behavioral Health",
-          description: "Mental health monitoring through smartphone sensors, speech analysis, and digital phenotyping for depression and anxiety."
+          subtitle: "Digital Therapeutics",
+          description: "App-based interventions for mental health, chronic disease management, and behavioral modification with clinical validation."
         }
       ]
     },
     {
-      title: "Healthcare Operations",
+      title: "Healthcare Operations AI",
       content: [
         {
           subtitle: "Hospital Resource Optimization",
           description: "Predicting bed capacity, optimizing surgical scheduling, and improving emergency department flow using operations research and ML."
         },
         {
-          subtitle: "Staff Scheduling",
-          description: "AI-driven workforce management balancing patient demand, staff preferences, and regulatory requirements."
+          subtitle: "Staff Scheduling & Workflow",
+          description: "AI-driven workforce management balancing patient demand, staff preferences, and regulatory requirements for optimal care delivery."
         },
         {
-          subtitle: "Supply Chain Management",
-          description: "Predicting medical supply needs, reducing waste, and optimizing inventory using demand forecasting models."
+          subtitle: "Supply Chain Intelligence",
+          description: "Predicting medical supply needs, reducing waste, and optimizing inventory using demand forecasting and predictive analytics."
         }
       ]
     },
     {
-      title: "Ethics & Regulation",
+      title: "Ethics & Regulatory Compliance",
       content: [
         {
-          subtitle: "Bias & Fairness",
-          description: "Addressing algorithmic bias in healthcare AI. Ensuring equitable outcomes across demographics and preventing discrimination."
+          subtitle: "Algorithmic Bias & Fairness",
+          description: "Addressing bias in healthcare AI systems. Ensuring equitable outcomes across demographics and preventing discriminatory practices."
         },
         {
-          subtitle: "Privacy & Security",
+          subtitle: "Privacy & Data Security",
           description: "HIPAA compliance, federated learning, differential privacy, and secure multi-party computation for patient data protection."
         },
         {
-          subtitle: "FDA & Regulatory Approval",
-          description: "Navigating SaMD (Software as Medical Device) regulations, clinical validation requirements, and post-market surveillance."
+          subtitle: "FDA & Medical Device Regulation",
+          description: "Navigating SaMD (Software as Medical Device) regulations, clinical validation requirements, and post-market surveillance protocols."
         }
       ]
     }
@@ -140,11 +123,11 @@ const HealthAI = () => {
             </Link>
             
             <h1 className="text-5xl md:text-7xl font-extralight mb-8 tracking-tight">
-              Health AI
+              Digital Health Concepts
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
             <p className="text-xl font-light text-black/60 max-w-3xl">
-              Artificial intelligence transforming healthcare—from diagnostic precision to personalized treatment and operational excellence.
+              The intersection of artificial intelligence and healthcare—transforming diagnostics, treatment, and patient care through digital innovation.
             </p>
           </div>
 
@@ -177,4 +160,4 @@ const HealthAI = () => {
   );
 };
 
-export default HealthAI;
+export default DigitalHealth;

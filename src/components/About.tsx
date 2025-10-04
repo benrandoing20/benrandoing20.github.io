@@ -2,30 +2,43 @@
 const About = () => {
   const timeline = [
     {
-      title: "Biomedical Engineering",
-      subtitle: "Where it all started",
-      year: "2018",
-      story: "Built my first medical device prototype"
+      title: "Early Years",
+      subtitle: "Percussion Nerd",
+      year: "High School",
+      story: "Studied at Tanglewood and Juilliard"
     },
     {
-      title: "The Big Decision",
-      subtitle: "Medical school or AI?",
-      year: "2020",
-      story: "Chose code over a stethoscope"
+      title: "Duke",
+      subtitle: "BME & Music",
+      year: "2018–2022",
+      story: "Hard work and Duke basketball"
     },
     {
-      title: "Stanford AI Research",
-      subtitle: "The deep dive",
-      year: "2021",
-      story: "Learned AI could scale my impact"
+      title: "The Decision",
+      subtitle: "Med School or AI?",
+      year: "2022",
+      story: "A time of deep reflection"
     },
     {
-      title: "Apple & NVIDIA",
-      subtitle: "Building at scale",
-      year: "2023",
-      story: "Shipping AI systems to millions"
+      title: "Stanford",
+      subtitle: "AI & Biomechanics",
+      year: "2022–2024",
+      story: "CS & Neuromuscular biomechanics research"
+    },
+    {
+      title: "Industry",
+      subtitle: " Health & Startups",
+      year: "2023–2024",
+      story: "Research and moonshot projects"
+    },
+    {
+      title: "NVIDIA",
+      subtitle: "AI Applications",
+      year: "2024–Present",
+      story: "Digital humans, agents, healthcare"
     }
   ];
+  
 
   return (
     <section id="about" className="py-32 px-8">
@@ -37,7 +50,7 @@ const About = () => {
           <div className="w-16 h-px bg-black/20"></div>
         </div>
         
-        <div className="grid md:grid-cols-4 gap-16">
+        <div className="grid md:grid-cols-6 gap-8 lg:gap-12">
           {timeline.map((item, index) => (
             <div key={index} className="group">
               <div className="mb-6">
@@ -61,20 +74,18 @@ const About = () => {
           ))}
         </div>
         
-        <div className="mt-32 max-w-3xl">
-          <p className="text-xl font-light leading-relaxed text-black/70 mb-8">
-            My path hasn't been typical. I started in biomedical engineering, got into medical school, 
-            and then... didn't go. Instead, I chose Stanford's AI program. My family thought I was crazy.
-          </p>
-          <p className="text-xl font-light leading-relaxed text-black/70 mb-8">
-            But here's what I realized: one doctor can help hundreds of patients in their lifetime. 
-            One AI system can help millions. That's not replacing human care—it's amplifying it.
+        <div className="mt-32 space-y-8">
+          <p className="text-xl font-light leading-relaxed text-black/70">
+            I have been fortunate in my opportunities. I studied biomedical engineering, earned a place in medical school, 
+            and chose to study AI at Stanford. What guides me is not comfort but the urgency to learn, to do meaningful work, and to win.
           </p>
           <p className="text-xl font-light leading-relaxed text-black/70">
-            Today, I get to work on the problems I care most about. At NVIDIA and Apple, I've built 
-            systems that are being used in hospitals and trading floors. But what drives me isn't the 
-            technology—it's the impact. Every line of code is a chance to help someone, somewhere, 
-            make a better decision.
+            At NVIDIA and Apple I have worked on AI systems, agents, and voice technologies. I have also spent time volunteering in hospitals 
+            and mentoring others. I am driven by a desire to succeed, to push boundaries, and to help others do the same. What matters to me is not the resume line but the growth, the service, and the clarity of purpose.
+          </p>
+          <p className="text-xl font-light leading-relaxed text-black/70">
+            I value honesty and depth. I want to work with people who push each other to think harder, care more, and strive for excellence together. 
+            The hardest problems are not technical, they are human, and that is where I want to keep growing, both to achieve and to help others achieve.
           </p>
         </div>
       </div>
