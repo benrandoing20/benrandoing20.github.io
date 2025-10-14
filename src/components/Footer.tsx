@@ -5,9 +5,6 @@ const Footer = () => {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div className="mb-8 md:mb-0">
-            <div className="text-sm font-light text-black/40 mb-2">
-              © 2025 Portfolio
-            </div>
           </div>
           
           <div className="flex space-x-8">

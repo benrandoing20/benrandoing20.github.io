@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetail from "./components/ProjectDetail";
+import ThoughtDetail from "./components/ThoughtDetail";
 import BucketList from "./pages/BucketList";
 import Resources from "./pages/Resources";
 import AppliedAI from "./pages/resources/AppliedAI";
@@ -28,6 +29,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/thought/:id" element={<ThoughtDetail />} />
           <Route path="/bucket-list" element={<BucketList />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/digital-biology" element={<DigitalBiology />} />

@@ -71,67 +71,74 @@ const Experience = () => {
   };
   
   return (
-    <section className="py-32 px-8">
+    <section className="py-24 px-8">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-extralight mb-6 tracking-tight">
             Experience
           </h2>
           <div className="w-16 h-px bg-black/20"></div>
         </div>
         
-        <div className="space-y-3">
-          {experiences.map((exp, index) => {
-            const isExpanded = expandedIndex === index;
-            
-            return (
-              <div
-                key={index}
-                className="group border-b border-black/5 last:border-b-0 transition-all duration-200"
-              >
-                <button
-                  onClick={() => toggleExpand(index)}
-                  className="w-full text-left py-4 hover:bg-black/[0.02] transition-colors px-4 -mx-4 rounded"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col md:flex-row md:items-baseline md:gap-3 mb-1">
-                        <h3 className="text-lg font-light truncate">
-                          {exp.role}
-                        </h3>
-                        <span className="text-sm font-light text-black/40 flex-shrink-0">
-                          {exp.period}
-                        </span>
+        {/* Horizontal Scroll Container */}
+        <div className="relative">
+          <div className="overflow-x-auto pb-8 scrollbar-hide -mx-8 px-8">
+            <div className="flex gap-6 min-w-max">
+              {experiences.map((exp, index) => {
+                const isExpanded = expandedIndex === index;
+                
+                return (
+                  <div
+                    key={index}
+                    className="w-80 flex-shrink-0 border border-black/10 p-6 hover:border-black/30 transition-all duration-300 bg-white"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="text-xs font-light text-black/40 tracking-wider uppercase">
+                        {exp.period}
                       </div>
-                      <div className="text-base font-light text-black/60">
-                        {exp.company}
-                      </div>
-                    </div>
-                    <div className="flex-shrink-0 text-black/40 transition-transform duration-200 pt-1">
-                      <svg
-                        className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                      <button
+                        onClick={() => toggleExpand(index)}
+                        className="text-black/40 hover:text-black/70 transition-colors"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                      </svg>
+                        <svg
+                          className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+                    
+                    <h3 className="text-lg font-light mb-2 leading-snug">
+                      {exp.role}
+                    </h3>
+                    <div className="text-base font-light text-black/60 mb-4">
+                      {exp.company}
+                    </div>
+                    
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <p className="text-sm font-light text-black/60 leading-relaxed pt-2 border-t border-black/5">
+                        {exp.description}
+                      </p>
                     </div>
                   </div>
-                </button>
-                
-                <div
-                  className={`overflow-hidden transition-all duration-200 ${
-                    isExpanded ? 'max-h-48 opacity-100 mb-4' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <p className="text-base font-light text-black/60 leading-relaxed px-4">
-                    {exp.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="text-center mt-4">
+            <p className="text-xs font-light text-black/40 tracking-wide">
+              ← Scroll to explore →
+            </p>
+          </div>
         </div>
       </div>
     </section>

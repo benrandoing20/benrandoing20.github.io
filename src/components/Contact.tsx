@@ -61,15 +61,14 @@ const Contact = () => {
           </h2>
           <div className="w-16 h-px bg-black/20 mb-6"></div>
           <p className="text-lg font-light text-black/60 max-w-2xl leading-relaxed">
-            I’m always looking to connect with people who are driven to win and push boundaries. If you’re serious about building, winning, solving hard problems, or just want to talk strategy and ambition—let’s connect. I welcome those who bring intensity, curiosity, and a desire to make an impact.
+            Some of my best opportunities started with a cold message people gave me a shot. Always open to a quick 10 15 minute chat if you want to connect.
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-24">
           <div>
             <p className="text-xl font-light text-black/60 mb-12 leading-relaxed">
-              Currently based in the San Francisco, but always happy to connect virtually. 
-              Drop me a line. I typically respond within a day or two.
+              Drop me a line.
             </p>
             
             <div className="space-y-8">

@@ -76,16 +76,13 @@ const About = () => {
         
         <div className="mt-32 space-y-8">
           <p className="text-xl font-light leading-relaxed text-black/70">
-            I have been fortunate in my opportunities. I studied biomedical engineering, earned a place in medical school, 
-            and chose to study AI at Stanford. What guides me is not comfort but the urgency to learn, to do meaningful work, and to win.
+            I've been fortunate in my opportunities. I studied biomedical engineering, was admitted to medical school, and chose AI at Stanford. What drives me is not comfort but the urgency to learn, do meaningful work, and win.
           </p>
           <p className="text-xl font-light leading-relaxed text-black/70">
-            At NVIDIA and Apple I have worked on AI systems, agents, and voice technologies. I have also spent time volunteering in hospitals 
-            and mentoring others. I am driven by a desire to succeed, to push boundaries, and to help others do the same. What matters to me is not the resume line but the growth, the service, and the clarity of purpose.
+            At NVIDIA and Apple I've worked on AI systems, agents, and voice tech. I've also volunteered in hospitals and mentored others. What matters to me is not the resume line but the growth, service, and clarity of purpose.
           </p>
           <p className="text-xl font-light leading-relaxed text-black/70">
-            I value honesty and depth. I want to work with people who push each other to think harder, care more, and strive for excellence together. 
-            The hardest problems are not technical, they are human, and that is where I want to keep growing, both to achieve and to help others achieve.
+            I value honesty and depth. I want to work with people who push each other to think harder and strive for excellence. The hardest problems are human, and that's where I intend to keep growing.
           </p>
         </div>
       </div>
