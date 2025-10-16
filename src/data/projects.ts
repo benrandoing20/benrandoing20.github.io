@@ -111,7 +111,7 @@ export const projects: Project[] = [
     fullDescription: "Developed a computer vision pipeline to extract motion signals from standard RGB video for downstream temporal analysis. Used optical flow, frequency-domain filtering, and dimensionality reduction to isolate meaningful periodic motion in noisy visual streams.",
     technologies: ["Optical Flow", "Fourier Analysis", "PCA", "Computer Vision"],
     impact: "Delivered a robust motion feature extraction pipeline for use in time-series modeling applications",
-    role: "Computer Vision Engineer",
+    role: "Machine Learning Engineer",
     duration: "6 months",
     team: " R&D Engineering Health Technology Team",
     status: "Completed",
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     fullDescription: "Developed a hybrid workflow combining scripted automation with manual review tooling to clean and repair large collections of 3D wireframe models. Built interpolation utilities to resolve geometry gaps and inconsistencies and implemented structured labeling to enable downstream retrieval and reuse.",
     technologies: ["3D Geometry", "Data Cleaning", "PgVector", "Interpolation"],
     impact: "Reduced manual 3D data preparation time by streamlining cleanup, repair, and annotation workflows",
-    role: "Software Engineer",
+    role: "Machine Learning Engineer",
     duration: "6 months",
     team: " R&D Engineering Health Technology Team",
     status: "Completed",
@@ -156,7 +156,7 @@ export const projects: Project[] = [
     fullDescription: "Developed a lightweight prototype that estimated relative depth from RGB video and visualized depth contours in real time. Designed as a feasibility demo to explore how monocular depth cues could complement hardware depth sensors for downstream signal estimation tasks.",
     technologies: ["Monocular Depth Estimation", "Computer Vision", "Real Time Systems", "Swift/SwiftUI"],
     impact: "Showcased practical use of RGB-only depth inference to augment sensing pipelines",
-    role: "Computer Vision Engineer",
+    role: "Machine Learning Engineer",
     duration: "6 months",
     team: " R&D Engineering Health Technology Team",
     status: "Completed",
@@ -184,6 +184,23 @@ export const projects: Project[] = [
     links: {
       paper: "/resources/pdfs/sketch-2-cad/report.pdf",
       poster: "/resources/pdfs/sketch-2-cad/poster.pdf"
+    }
+  },
+  {
+    id: "oa-haptic-retraining",
+    title: "Reducing Knee Load via Haptic Muscle Coordination Retraining",
+    category: "Research",
+    year: "2024",
+    description: "Studied gait retraining to reduce knee osteoarthritis loading through muscle coordination changes",
+    fullDescription: "Contributed to a clinical gait retraining study demonstrating that biofeedback-driven reductions in gastrocnemius activation can lower knee contact force during walking in individuals with knee osteoarthritis. Supported experimental design, EMG acquisition, and musculoskeletal simulation workflows. Processed motion capture, ground reaction force, and muscle activity data to run inverse kinematics and static optimization in OpenSim for joint load estimation. Results showed that 72% of participants reduced gastrocnemius activation and achieved a 12% reduction in late-stance knee contact force using step-level haptic feedback.",
+    technologies: ["OpenSim", "Motion Capture", "EMG", "MATLAB", "Biomechanics", "Static Optimization"],
+    impact: "Validated a noninvasive gait retraining strategy capable of reducing joint loading without altering gait mechanics",
+    role: "Biomechanics Research Engineer",
+    duration: "6 months",
+    team: "Stanford Neuromuscular Biomechanics Lab",
+    status: "Completed",
+    links: {
+      paper: "/resources/pdfs/gait-retrain/report.pdf"
     }
   },
   {
@@ -273,6 +290,23 @@ export const projects: Project[] = [
     status: "Completed",
     links: {
       paper: "https://doi.org/10.26603/001c.120898"
+    }
+  },
+  {
+    id: "imu-agility-clubfoot",
+    title: "IMU Signal Processing for Functional Movement Analysis",
+    category: "Research",
+    year: "2022",
+    description: "Developed MATLAB pipeline to analyze IMU accelerometry for dynamic agility assessment",
+    fullDescription: "Built a full IMU data processing pipeline to quantify movement quality in adolescents treated nonoperatively for unilateral clubfoot at skeletal maturity. Designed MATLAB software to convert raw triaxial accelerometer streams into biomechanical metrics using filtering, envelope detection, FFT-based stride frequency estimation, and automatic phase segmentation. Extracted features including peak G-force, vector magnitude integrals, split times, and directional lag times across multi-phase agility trials. Results demonstrated minimal sided performance differences but revealed correlations between plantarflexion strength and movement efficiency.",
+    technologies: ["MATLAB", "Signal Processing", "Time-Series Analysis", "IMU", "Biomedical Data"],
+    impact: "Enabled clinical researchers to quantify movement asymmetry and strength-performance relationships in pediatric clubfoot patients",
+    role: "Software Developer and Research Analyst",
+    duration: "10 months",
+    team: "Scottish Rite for Children Movement Science Lab",
+    status: "Completed",
+    links: {
+      paper: "/resources/pdfs/clubfoot/report.pdf"
     }
   },
   {

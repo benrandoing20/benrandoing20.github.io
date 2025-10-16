@@ -4,105 +4,211 @@ import Footer from '@/components/Footer';
 
 const DigitalHealth = () => {
   const sections = [
+    // 1) Clinical AI & Decision Support
     {
-      title: "Medical Imaging & Diagnostics",
+      title: "Clinical AI & Decision Support",
       content: [
         {
-          subtitle: "Diagnostic Radiology AI",
-          description: "Deep learning models for X-ray, CT, and MRI analysis. Achieving radiologist-level performance in detecting cancers, fractures, and abnormalities."
+          subtitle: "Clinical Reasoning & Diagnosis",
+          description: "AI systems for symptom evaluation, differential diagnosis ranking, Bayesian reasoning, and uncertainty-aware assistance."
         },
         {
-          subtitle: "Pathology & Histology",
-          description: "Digital pathology with AI-powered tissue analysis. Automated detection of cancer cells, tumor classification, and prognostic predictions."
+          subtitle: "Clinical Question Answering",
+          description: "Retrieval-augmented clinical reasoning, guideline-grounded response generation, and integration with medical literature sources."
         },
         {
-          subtitle: "Retinal Imaging",
-          description: "Diabetic retinopathy detection, glaucoma screening, and age-related macular degeneration diagnosis using fundus photography and OCT scans."
+          subtitle: "Treatment & Care Pathway Support",
+          description: "Evidence-based recommendations aligned with clinical guidelines, personalized therapy selection, and outcome prediction."
         }
       ]
     },
+
+    // 2) LLMs in Healthcare
     {
-      title: "Clinical Decision Support",
+      title: "LLMs in Healthcare",
       content: [
         {
-          subtitle: "Diagnosis Assistance",
-          description: "AI systems that analyze patient symptoms, medical history, and lab results to suggest differential diagnoses and recommend next steps."
+          subtitle: "Medical Foundation Models",
+          description: "Pretrained clinical LLMs such as Med-PaLM, GatorTron, BioGPT; tuning for safety, accuracy, and low hallucination."
         },
         {
-          subtitle: "Treatment Recommendations",
-          description: "Evidence-based treatment planning using machine learning on clinical guidelines, literature, and patient-specific factors."
+          subtitle: "Clinical Note Intelligence",
+          description: "Summarization, entity extraction, medical coding, temporal reasoning, and contextual understanding of longitudinal records."
         },
         {
-          subtitle: "Risk Prediction Models",
-          description: "Predicting patient deterioration, readmission risk, and adverse events using electronic health records and real-time monitoring."
+          subtitle: "Agentic Healthcare Systems",
+          description: "LLM-driven agents that write orders, schedule follow-ups, manage referrals, and execute EHR tool use with safety constraints."
         }
       ]
     },
+
+    // 3) Electronic Health Records & Data Systems
     {
-      title: "Personalized Medicine",
+      title: "Healthcare Data & EHR Systems",
       content: [
         {
-          subtitle: "Genomic Analysis",
-          description: "AI-powered interpretation of whole genome sequencing, variant calling, and prediction of disease susceptibility and drug responses."
+          subtitle: "EHR Data Engineering",
+          description: "Data normalization, FHIR resource modeling, feature stores, cohort builders, and clinical ontologies."
         },
         {
-          subtitle: "Precision Oncology",
-          description: "Tumor genomic profiling, targeted therapy selection, and immunotherapy response prediction using multi-omic data integration."
+          subtitle: "Interoperability at Scale",
+          description: "HL7, FHIR, SMART-on-FHIR, TEFCA, and healthcare information exchange (HIE) frameworks."
+        },
+        {
+          subtitle: "Clinical Knowledge Graphs",
+          description: "Graph representations of patient states, diseases, ontologies, causal pathways, and phenotype relationships."
+        }
+      ]
+    },
+
+    // 4) Patient Monitoring & Digital Care
+    {
+      title: "Remote Monitoring & Digital Care",
+      content: [
+        {
+          subtitle: "Remote Physiologic Monitoring (RPM)",
+          description: "Wearable and at-home device integration, data aggregation, alert fatigue mitigation, and signal monitoring."
+        },
+        {
+          subtitle: "Virtual Care Delivery",
+          description: "Telehealth platforms, asynchronous care loops, patient triage flows, and virtual-first primary care."
+        },
+        {
+          subtitle: "Digital Therapeutics (DTx)",
+          description: "Evidence-based software therapies for mental health, metabolic disease, and neurology with regulatory pathways."
+        }
+      ]
+    },
+
+    // 5) Population & Precision Medicine
+    {
+      title: "Population & Precision Medicine",
+      content: [
+        {
+          subtitle: "Risk Prediction & Stratification",
+          description: "Early warning scores for sepsis, readmission, shock, CHF exacerbation, and chronic disease forecasting."
+        },
+        {
+          subtitle: "Precision Oncology & Genomic Care",
+          description: "Multi-omic tumor profiling, targeted treatment suggestions, immunotherapy biomarkers, and tumor boards."
         },
         {
           subtitle: "Pharmacogenomics",
-          description: "Using patient genetics and biomarkers to predict optimal drug selection, dosing, and potential adverse reactions."
+          description: "Drug-response modeling using CYP genes, gene-drug interaction prediction, and medication optimization."
         }
       ]
     },
+
+    // 6) Clinical Trials & Real-World Evidence
     {
-      title: "Remote Patient Monitoring",
+      title: "Clinical Trials & Real-World Evidence",
       content: [
         {
-          subtitle: "Wearable Health Devices",
-          description: "Continuous monitoring with smartwatches, biosensors, and medical-grade wearables. Detecting arrhythmias, sleep apnea, and chronic disease markers."
+          subtitle: "Trial Matching & Eligibility AI",
+          description: "Automated eligibility parsing, phenotype extraction, decentralized trial enrollment and matching engines."
         },
         {
-          subtitle: "Vital Signs Analysis",
-          description: "AI algorithms for heart rate variability, oxygen saturation, blood pressure trends, and early warning score systems."
+          subtitle: "Real-World Evidence (RWE)",
+          description: "Regulatory-grade observational studies, longitudinal outcomes, and causal inference from EHR + claims data."
         },
         {
-          subtitle: "Digital Therapeutics",
-          description: "App-based interventions for mental health, chronic disease management, and behavioral modification with clinical validation."
+          subtitle: "Synthetic Control Arms",
+          description: "External control arms using historical or synthetic cohorts to reduce trial cost and improve feasibility."
         }
       ]
     },
+
+    // 7) Healthcare Operations & Enterprise AI
     {
-      title: "Healthcare Operations AI",
+      title: "Healthcare Operations & Enterprise AI",
       content: [
         {
-          subtitle: "Hospital Resource Optimization",
-          description: "Predicting bed capacity, optimizing surgical scheduling, and improving emergency department flow using operations research and ML."
+          subtitle: "Operational Optimization",
+          description: "Patient flow optimization, surgical block allocation, ED wait forecasting, and hospital throughput modeling."
         },
         {
-          subtitle: "Staff Scheduling & Workflow",
-          description: "AI-driven workforce management balancing patient demand, staff preferences, and regulatory requirements for optimal care delivery."
+          subtitle: "Revenue Cycle Management",
+          description: "AI-driven medical coding, denial prediction, claims optimization, and payment integrity analysis."
         },
         {
-          subtitle: "Supply Chain Intelligence",
-          description: "Predicting medical supply needs, reducing waste, and optimizing inventory using demand forecasting and predictive analytics."
+          subtitle: "Payer-Provider Automation",
+          description: "Prior authorization, eligibility checks, medical necessity review automation, and utilization management."
         }
       ]
     },
+
+    // 8) Safety, Regulation & Ethics
     {
-      title: "Ethics & Regulatory Compliance",
+      title: "Safety, Regulation & Ethics",
       content: [
         {
-          subtitle: "Algorithmic Bias & Fairness",
-          description: "Addressing bias in healthcare AI systems. Ensuring equitable outcomes across demographics and preventing discriminatory practices."
+          subtitle: "Model Safety & Clinical Risk",
+          description: "Safety evaluation frameworks, out-of-distribution detection, fail-safes, and uncertainty gating."
         },
         {
-          subtitle: "Privacy & Data Security",
-          description: "HIPAA compliance, federated learning, differential privacy, and secure multi-party computation for patient data protection."
+          subtitle: "Bias & Fairness",
+          description: "Subgroup calibration analysis, health equity impact, fairness constraints, and real-world auditing."
         },
         {
-          subtitle: "FDA & Medical Device Regulation",
-          description: "Navigating SaMD (Software as Medical Device) regulations, clinical validation requirements, and post-market surveillance protocols."
+          subtitle: "Regulation & SaMD",
+          description: "FDA Software as a Medical Device (SaMD), Good Machine Learning Practice (GMLP), post-market surveillance."
+        }
+      ]
+    },
+
+    // 9) Healthcare Privacy & Security
+    {
+      title: "Healthcare Privacy & Security",
+      content: [
+        {
+          subtitle: "De-Identification & PHI Protection",
+          description: "Structured and unstructured de-ID, privacy guarantees, k-anonymity, and protected data handling."
+        },
+        {
+          subtitle: "Federated Learning in Healthcare",
+          description: "Distributed model training without raw data sharing; NVIDIA FLARE for cross-institutional AI."
+        },
+        {
+          subtitle: "Secure AI Deployment",
+          description: "HIPAA/SOC2 compliance, role-based access control, audit logs, encryption, HIE security."
+        }
+      ]
+    },
+
+    // 10) Clinical Deployment & MLOps
+    {
+      title: "Clinical Deployment & MLOps",
+      content: [
+        {
+          subtitle: "Clinical Validation & Monitoring",
+          description: "Retrospective, silent, and shadow deployments; drift detection; pre- and post-market evaluation."
+        },
+        {
+          subtitle: "Model Explainability in Medicine",
+          description: "Case-level explanations, global transparency, auditability, and physician trust frameworks."
+        },
+        {
+          subtitle: "Production AI Systems",
+          description: "Triton inference, microservice pipelines, latency design, failover systems, and uptime guarantees."
+        }
+      ]
+    },
+
+    // 11) Industry & Ecosystem
+    {
+      title: "Health AI Industry & Ecosystem",
+      content: [
+        {
+          subtitle: "Clinical AI Platforms",
+          description: "Abridge, Nabla, Microsoft Nuance Dragon Ambient, AWS HealthScribe, Google MedLM ecosystem."
+        },
+        {
+          subtitle: "Health Data Platforms",
+          description: "Epic Cosmos, Truveta, Tempus, Flatiron, Komodo Health, OMOP-based population platforms."
+        },
+        {
+          subtitle: "AI-Driven Care Delivery",
+          description: "Forward, Oak Street Health, One Medical, K Health, Carbon Health—tech-enabled primary care."
         }
       ]
     }
@@ -123,11 +229,11 @@ const DigitalHealth = () => {
             </Link>
             
             <h1 className="text-5xl md:text-7xl font-extralight mb-8 tracking-tight">
-              Digital Health Concepts
+              Digital Health
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
             <p className="text-xl font-light text-black/60 max-w-3xl">
-              The intersection of artificial intelligence and healthcare—transforming diagnostics, treatment, and patient care through digital innovation.
+              AI-powered healthcare—clinical intelligence, decision support, digital therapeutics, workflow automation, and precision medicine at scale.
             </p>
           </div>
 
@@ -139,14 +245,20 @@ const DigitalHealth = () => {
                 </h2>
                 <div className="space-y-10">
                   {section.content.map((item, itemIndex) => (
-                    <div key={itemIndex} className="group">
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black/70 transition-colors duration-300">
+                    <Link 
+                      key={itemIndex} 
+                      to={`/resources/digital-health/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
+                      state={{ title: item.subtitle }}
+                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
+                    >
+                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
                         {item.subtitle}
+                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
                       </h3>
                       <p className="text-base font-light text-black/60 leading-relaxed">
                         {item.description}
                       </p>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

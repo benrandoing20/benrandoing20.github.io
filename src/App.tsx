@@ -17,6 +17,7 @@ import HedgeFundAI from "./pages/resources/HedgeFundAI";
 import NextGenerationSequencing from "./pages/resources/digital-biology/NextGenerationSequencing";
 import StructurePrediction from "./pages/resources/digital-biology/StructurePrediction";
 import NotFound from "./pages/NotFound";
+import ComingSoon from "./pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,14 @@ const App = () => (
           {/* Digital Biology subsections */}
           <Route path="/resources/digital-biology/genomics-and-sequencing/next-generation-sequencing-ngs" element={<NextGenerationSequencing />} />
           <Route path="/resources/digital-biology/protein-structure-and-function/structure-prediction" element={<StructurePrediction />} />
+          
+          {/* Catch-all for resource subsections - shows Coming Soon */}
+          <Route path="/resources/digital-biology/*" element={<ComingSoon />} />
+          <Route path="/resources/digital-devices/*" element={<ComingSoon />} />
+          <Route path="/resources/digital-health/*" element={<ComingSoon />} />
+          <Route path="/resources/applied-ai/*" element={<ComingSoon />} />
+          <Route path="/resources/hedge-fund-ai/*" element={<ComingSoon />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

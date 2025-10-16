@@ -4,105 +4,230 @@ import Footer from '@/components/Footer';
 
 const DigitalDevices = () => {
   const sections = [
+    // 1) Physiological Sensors & Biosignals
     {
-      title: "Edge AI & Embedded Systems",
+      title: "Physiological Sensors & Biosignals",
       content: [
         {
-          subtitle: "Neural Processing Units (NPUs)",
-          description: "Specialized hardware for AI inference at the edge. Understanding TPUs, Neural Engines, and custom ASIC designs for efficient on-device computation."
+          subtitle: "Core Biosignals (ECG, PPG, EMG, EEG, EDA, BCG/SCG)",
+          description: "Signal physics, electrode/optical interfaces, sampling, anti-aliasing, and sensor-specific artifacts in real-world conditions."
+        },
+        {
+          subtitle: "Vital Sign Estimation",
+          description: "Heart rate, HRV, respiration, SpO₂, blood pressure proxies, and temperature inference with calibration and personalization."
+        },
+        {
+          subtitle: "Artifact Rejection & Denoising",
+          description: "Motion, ambient light, baseline wander, muscle noise; adaptive filtering, ICA, wavelets, and robust feature extraction."
+        }
+      ]
+    },
+
+    // 2) Wearables & Health Sensing
+    {
+      title: "Wearables & Health Sensing",
+      content: [
+        {
+          subtitle: "Device Modalities",
+          description: "Wrist, ring, chest, ear, patch, textile; optical vs electrical trade-offs, mechanical design, skin contact quality."
+        },
+        {
+          subtitle: "Digital Biomarkers",
+          description: "Clinically anchored features for sleep, activity, cardiometabolic risk; validation against gold standards."
+        },
+        {
+          subtitle: "Power & Battery Life",
+          description: "Duty cycling, sensor scheduling, low-power DSP/NN accelerators, energy harvesting, and thermal constraints."
+        }
+      ]
+    },
+
+    // 3) Biomechanics & Motion AI
+    {
+      title: "Biomechanics & Motion AI",
+      content: [
+        {
+          subtitle: "IMU Kinematics & Gait",
+          description: "Orientation estimation, drift handling, step detection, spatiotemporal gait metrics, and fall risk analytics."
+        },
+        {
+          subtitle: "Pose Estimation & Human Performance",
+          description: "2D/3D pose, joint kinematics/kinetics, activity recognition, rehabilitation metrics, and sports performance."
+        },
+        {
+          subtitle: "Musculoskeletal Modeling",
+          description: "Inverse dynamics, joint loading estimation, OpenSim-style workflows, and validation with force plates/EMG."
+        }
+      ]
+    },
+
+    // 4) Medical Imaging Devices & Systems
+    {
+      title: "Medical Imaging Devices & Systems",
+      content: [
+        {
+          subtitle: "Acquisition Physics (X-ray/CT, MRI, Ultrasound, PET)",
+          description: "Dose/SNR trade-offs, beamforming, k-space, attenuation and emission models; hardware and protocol design."
+        },
+        {
+          subtitle: "Reconstruction & Enhancement",
+          description: "Compressed sensing, unrolled networks, super-resolution, artifact correction, and image quality metrics."
+        },
+        {
+          subtitle: "Enterprise Imaging Integration",
+          description: "DICOM, PACS/VNA, routing and de-identification, study lifecycle, and edge inference insertion points."
+        }
+      ]
+    },
+
+    // 5) Edge AI & Embedded Health Systems
+    {
+      title: "Edge AI & Embedded Health Systems",
+      content: [
+        {
+          subtitle: "NPUs & On-Device Inference",
+          description: "ARM/DSP/NPUs, Tensor cores, memory bandwidth limits; execution graphs and real-time scheduling."
         },
         {
           subtitle: "Model Optimization",
-          description: "Quantization, pruning, and knowledge distillation techniques to deploy large models on resource-constrained devices."
+          description: "Quantization, pruning, distillation, operator fusion; latency–accuracy–power trade-off analysis."
         },
         {
-          subtitle: "Real-time Inference",
-          description: "Optimizing latency and power consumption for real-time AI applications. Hardware-software co-design for maximum efficiency."
+          subtitle: "Firmware & RTOS",
+          description: "Drivers, ISR design, secure boot, OTA updates, and deterministic execution under medical constraints."
         }
       ]
     },
+
+    // 6) Sensor Fusion & Estimation
     {
-      title: "Sensor Fusion & Data Processing",
+      title: "Sensor Fusion & Estimation",
       content: [
         {
-          subtitle: "Multi-modal Sensing",
-          description: "Combining data from cameras, IMUs, GPS, microphones, and environmental sensors for comprehensive situational awareness."
+          subtitle: "Probabilistic Filters",
+          description: "Kalman, EKF/UKF, particle filters; observability, noise modeling, and cross-sensor synchronization."
         },
         {
-          subtitle: "Signal Processing",
-          description: "Digital signal processing techniques for noise reduction, feature extraction, and pattern recognition from sensor data streams."
+          subtitle: "Multimodal Health Fusion",
+          description: "Vision + IMU + biosignals + context; late/early fusion, learned filters, and uncertainty propagation."
         },
         {
-          subtitle: "Kalman Filtering",
-          description: "State estimation and sensor fusion using Kalman filters, particle filters, and other probabilistic approaches."
+          subtitle: "Time Sync & Clock Drift",
+          description: "PTP/NTP, BLE timebases, jitter compensation, and alignment with clinical ground truth systems."
         }
       ]
     },
+
+    // 7) Real-Time Health AI Runtimes
     {
-      title: "Wearable Technology",
+      title: "Real-Time Health AI Runtimes",
       content: [
         {
-          subtitle: "Biosignal Monitoring",
-          description: "Continuous monitoring of heart rate, blood oxygen, skin conductance, and other physiological parameters using wearable sensors."
+          subtitle: "Holoscan Surgical Pipelines",
+          description: "Low-latency graph execution for video/US fusion, tool tracking, AR overlays, and safety fallbacks."
         },
         {
-          subtitle: "Activity Recognition",
-          description: "Machine learning algorithms for recognizing human activities, gestures, and behaviors from accelerometer and gyroscope data."
+          subtitle: "Triton & Ensemble Serving",
+          description: "Multi-model ensembles, dynamic batching, telemetry, and throughput tuning on edge and in-clinic servers."
         },
         {
-          subtitle: "Power Management",
-          description: "Ultra-low power design strategies, energy harvesting, and battery optimization for always-on wearable devices."
+          subtitle: "Streaming & QoS",
+          description: "gRPC/WebRTC pipelines, rate control, backpressure, and end-to-end latency budgeting."
         }
       ]
     },
+
+    // 8) Device Validation & Clinical Studies
     {
-      title: "Smart Device Architectures",
+      title: "Device Validation & Clinical Studies",
+      content: [
+        {
+          subtitle: "Feasibility & Repeatability (Apple-style)",
+          description: "Study setup, IRB, cohort selection; Gage R&R, test–retest, inter/intra-device variability characterization."
+        },
+        {
+          subtitle: "Clinical Ground Truth & Protocols",
+          description: "ECG/ABP/polysomnography references, labeling quality, adjudication, and reference device calibration."
+        },
+        {
+          subtitle: "Performance Reporting",
+          description: "Agreement plots, Bland–Altman, calibration, reliability diagrams, and predefined acceptance criteria."
+        }
+      ]
+    },
+
+    // 9) Regulated Medical Device Engineering
+    {
+      title: "Regulated Medical Device Engineering",
+      content: [
+        {
+          subtitle: "Standards & Quality Systems",
+          description: "IEC 62304, ISO 13485, ISO 14971, IEC 60601; design controls, risk management, traceability."
+        },
+        {
+          subtitle: "SaMD & AI Lifecycle",
+          description: "Locked vs learning systems, change protocols, post-market surveillance, and incident response."
+        },
+        {
+          subtitle: "Cybersecurity & Privacy",
+          description: "Threat modeling, HSM/TPM, secure elements, encryption at rest/in flight, PHI handling and HIPAA."
+        }
+      ]
+    },
+
+    // 10) Neurotechnology & Implants
+    {
+      title: "Neurotechnology & Implants",
+      content: [
+        {
+          subtitle: "Brain–Computer Interfaces",
+          description: "EEG/MEG/fNIRS vs invasive arrays, decoding/encoding pipelines, and closed-loop control."
+        },
+        {
+          subtitle: "Neuromodulation Devices",
+          description: "DBS/VNS/TMS signal design, parameter tuning, safety envelopes, and therapy personalization."
+        },
+        {
+          subtitle: "Implantable Systems",
+          description: "Power/data links, biocompatibility, hermetic sealing, telemetry, and long-term reliability."
+        }
+      ]
+    },
+
+    // 11) Connectivity, Security & Fleet Ops
+    {
+      title: "Connectivity, Security & Fleet Ops",
       content: [
         {
           subtitle: "IoT Connectivity",
-          description: "Wireless communication protocols: WiFi, Bluetooth, Zigbee, LoRaWAN, and 5G for device interconnectivity."
+          description: "BLE, Wi-Fi, LTE/5G, LoRaWAN; provisioning, pairing security, roaming, and throughput management."
         },
         {
-          subtitle: "Device Management",
-          description: "Over-the-air updates, remote configuration, and fleet management for large-scale IoT deployments."
+          subtitle: "Fleet Management & Telemetry",
+          description: "OTA updates, remote config, device health, and privacy-preserving analytics at scale."
         },
         {
-          subtitle: "Security & Privacy",
-          description: "Hardware security modules, secure boot, encryption, and privacy-preserving techniques for connected devices."
+          subtitle: "Interoperability",
+          description: "HL7/FHIR gateways, companion apps, cloud ingestion, and integration with clinical systems."
         }
       ]
     },
+
+    // 12) Accelerated Healthcare Compute
     {
-      title: "Hardware-Software Co-design",
+      title: "Accelerated Healthcare Compute",
       content: [
         {
-          subtitle: "System-on-Chip (SoC) Design",
-          description: "Integrating processors, memory, and specialized accelerators on a single chip for optimal performance and efficiency."
+          subtitle: "MONAI for Imaging AI",
+          description: "Training/evaluation, transform pipelines, label tooling, and model zoo for clinical perception tasks."
         },
         {
-          subtitle: "FPGA Development",
-          description: "Field-programmable gate arrays for custom hardware acceleration and rapid prototyping of digital systems."
+          subtitle: "Holoscan on Edge Platforms",
+          description: "Jetson/IGX runtimes for real-time perception; graph optimization and safety watchdogs."
         },
         {
-          subtitle: "Firmware Development",
-          description: "Real-time operating systems, device drivers, and low-level software for embedded systems and smart devices."
-        }
-      ]
-    },
-    {
-      title: "Applications & Use Cases",
-      content: [
-        {
-          subtitle: "Smart Home Automation",
-          description: "Intelligent lighting, climate control, security systems, and voice assistants powered by edge AI and sensor networks."
-        },
-        {
-          subtitle: "Industrial IoT",
-          description: "Predictive maintenance, quality control, and process optimization in manufacturing using smart sensors and edge computing."
-        },
-        {
-          subtitle: "Autonomous Vehicles",
-          description: "Sensor fusion, perception systems, and decision-making algorithms for self-driving cars and drones."
+          subtitle: "CUDA & TensorRT Optimization",
+          description: "Kernel-level acceleration, INT8/FP16 quantization, layer fusion, and deployment benchmarking."
         }
       ]
     }
@@ -127,7 +252,7 @@ const DigitalDevices = () => {
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
             <p className="text-xl font-light text-black/60 max-w-3xl">
-              Hardware and software systems powering the next generation of intelligent devices and IoT ecosystems.
+              Hardware and software systems powering health sensing, medical imaging, and real-time edge AI—from biosignals and biomechanics to regulated device engineering.
             </p>
           </div>
 
@@ -139,14 +264,20 @@ const DigitalDevices = () => {
                 </h2>
                 <div className="space-y-10">
                   {section.content.map((item, itemIndex) => (
-                    <div key={itemIndex} className="group">
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black/70 transition-colors duration-300">
+                    <Link 
+                      key={itemIndex} 
+                      to={`/resources/digital-devices/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
+                      state={{ title: item.subtitle }}
+                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
+                    >
+                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
                         {item.subtitle}
+                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
                       </h3>
                       <p className="text-base font-light text-black/60 leading-relaxed">
                         {item.description}
                       </p>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

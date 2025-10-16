@@ -7,7 +7,7 @@ const Hero = () => {
           <div className="relative group">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-black/10 group-hover:border-black/30 transition-all duration-300">
               <img
-                src="/resources/images/personal/profile.svg"
+                src="/resources/images/personal/profile.jpeg"
                 alt="Ben Randoing"
                 className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
               />
@@ -21,7 +21,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-xl md:text-2xl font-light text-black/60 max-w-2xl mx-auto text-balance leading-relaxed">
-            Curious about what I do? Let's dive in.
+            Curious about what I do? Let's dive in
             <br className="hidden md:block" />
             <span className="block mt-4 text-black/50">
               Currently at NVIDIA, I bring a breadth of technical experience

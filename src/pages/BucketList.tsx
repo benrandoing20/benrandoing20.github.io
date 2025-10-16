@@ -21,6 +21,7 @@ const BucketList = () => {
     { done: true, item: "Ride a motorcycle" },
     { done: true, item: "Take a helicopter ride (Kauai, Hawaii)" },
     { done: true, item: "Live one year with zero alcohol" },
+    { done: true, item: "Give a best man speech that people never forget" },
   
     // ADVENTURE + TRAVEL
     { done: false, item: "Travel to all seven continents" },
@@ -52,8 +53,8 @@ const BucketList = () => {
     // PERSONAL DEVELOPMENT
     { done: false, item: "Become fluent in French" },
     { done: false, item: "Live with no fear of judgment" },
-    { done: false, item: "Become emotionally unbreakable" },
-    { done: false, item: "Forgive myself fully" },
+    // { done: false, item: "Become emotionally unbreakable" },
+    // { done: false, item: "Forgive myself fully" },
     { done: false, item: "Write letters to friends after decades and send them" },
   
     // FAMILY & RELATIONSHIPS
@@ -70,7 +71,7 @@ const BucketList = () => {
     // MENTAL TOUGHNESS & DISCIPLINE
     // { done: false, item: "Develop a disciplined morning routine I live by" },
 
-    // 🎯 CAREER & CRAFT MASTERY
+    // CAREER & CRAFT MASTERY
     // { done: false, item: "Become world-class at building AI systems end to end" },
     // { done: false, item: "Publish meaningful research that gets cited" },
     // { done: false, item: "Speak at Stanford or MIT as a guest lecturer" },
@@ -87,7 +88,6 @@ const BucketList = () => {
 
     // RELATIONSHIPS & BROTHERHOOD
     // { done: false, item: "Build a tribe of lifelong friends who push each other" },
-    { done: true, item: "Give a best man speech that people never forget" },
     { done: false, item: "Be a mentor to someone who needs guidance" },
 
     // INNER WORK & GROWTH
