@@ -29,12 +29,20 @@ const Hero = () => {
           </p>
         </div>
         
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-4 flex-wrap">
           <a
             href="#about"
             className="inline-block px-8 py-3 text-sm font-light tracking-wide border border-black/20 hover:bg-black hover:text-white transition-all duration-300 geometric-hover"
           >
             Learn More
+          </a>
+          <a
+            href="https://calendly.com/benrandoing/clinical-ai-audit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 text-sm font-light tracking-wide bg-black text-white hover:bg-black/80 transition-all duration-300 geometric-hover"
+          >
+            ☕ Coffee Chat (15 min)
           </a>
         </div>
       </div>
