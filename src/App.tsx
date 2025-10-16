@@ -6,12 +6,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetail from "./components/ProjectDetail";
+import ThoughtDetail from "./components/ThoughtDetail";
 import BucketList from "./pages/BucketList";
 import Resources from "./pages/Resources";
 import AppliedAI from "./pages/resources/AppliedAI";
-import HealthAI from "./pages/resources/HealthAI";
+import DigitalBiology from "./pages/resources/DigitalBiology";
+import DigitalDevices from "./pages/resources/DigitalDevices";
+import DigitalHealth from "./pages/resources/DigitalHealth";
 import HedgeFundAI from "./pages/resources/HedgeFundAI";
+import NextGenerationSequencing from "./pages/resources/digital-biology/NextGenerationSequencing";
+import StructurePrediction from "./pages/resources/digital-biology/StructurePrediction";
 import NotFound from "./pages/NotFound";
+import ComingSoon from "./pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -24,11 +30,26 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/thought/:id" element={<ThoughtDetail />} />
           <Route path="/bucket-list" element={<BucketList />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/digital-biology" element={<DigitalBiology />} />
+          <Route path="/resources/digital-devices" element={<DigitalDevices />} />
+          <Route path="/resources/digital-health" element={<DigitalHealth />} />
           <Route path="/resources/applied-ai" element={<AppliedAI />} />
-          <Route path="/resources/health-ai" element={<HealthAI />} />
           <Route path="/resources/hedge-fund-ai" element={<HedgeFundAI />} />
+          
+          {/* Digital Biology subsections */}
+          <Route path="/resources/digital-biology/genomics-and-sequencing/next-generation-sequencing-ngs" element={<NextGenerationSequencing />} />
+          <Route path="/resources/digital-biology/protein-structure-and-function/structure-prediction" element={<StructurePrediction />} />
+          
+          {/* Catch-all for resource subsections - shows Coming Soon */}
+          <Route path="/resources/digital-biology/*" element={<ComingSoon />} />
+          <Route path="/resources/digital-devices/*" element={<ComingSoon />} />
+          <Route path="/resources/digital-health/*" element={<ComingSoon />} />
+          <Route path="/resources/applied-ai/*" element={<ComingSoon />} />
+          <Route path="/resources/hedge-fund-ai/*" element={<ComingSoon />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

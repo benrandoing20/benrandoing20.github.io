@@ -139,14 +139,20 @@ const AppliedAI = () => {
                 </h2>
                 <div className="space-y-10">
                   {section.content.map((item, itemIndex) => (
-                    <div key={itemIndex} className="group">
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black/70 transition-colors duration-300">
+                    <Link 
+                      key={itemIndex} 
+                      to={`/resources/applied-ai/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
+                      state={{ title: item.subtitle }}
+                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
+                    >
+                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
                         {item.subtitle}
+                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
                       </h3>
                       <p className="text-base font-light text-black/60 leading-relaxed">
                         {item.description}
                       </p>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

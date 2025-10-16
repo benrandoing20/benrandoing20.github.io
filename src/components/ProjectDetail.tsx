@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
-import { ArrowLeft, ExternalLink, Github, FileText } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, FileText, Image, Presentation, BookOpen, Book, FolderGit2, Globe } from 'lucide-react';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -59,6 +59,42 @@ const ProjectDetail = () => {
                 <a href={project.links.paper} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
                   <FileText className="w-4 h-4 mr-2" />
                   Research Paper
+                </a>
+              )}
+              {project.links?.poster && (
+                <a href={project.links.poster} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <Image className="w-4 h-4 mr-2" />
+                  Poster
+                </a>
+              )}
+              {project.links?.slides && (
+                <a href={project.links.slides} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <Presentation className="w-4 h-4 mr-2" />
+                  Slides
+                </a>
+              )}
+              {project.links?.blog && (
+                <a href={project.links.blog} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Blog Post
+                </a>
+              )}
+              {project.links?.docs && (
+                <a href={project.links.docs} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <Book className="w-4 h-4 mr-2" />
+                  Documentation
+                </a>
+              )}
+              {project.links?.repo && (
+                <a href={project.links.repo} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <FolderGit2 className="w-4 h-4 mr-2" />
+                  Repository
+                </a>
+              )}
+              {project.links?.website && (
+                <a href={project.links.website} className="inline-flex items-center px-6 py-2 border border-black/20 hover:bg-black hover:text-white transition-all text-sm font-light">
+                  <Globe className="w-4 h-4 mr-2" />
+                  Website
                 </a>
               )}
             </div>
