@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ViewToggle from '@/components/ViewToggle';
+import KnowledgeGraph3D from '@/components/KnowledgeGraph3D';
+import { digitalDevicesGraphData } from '@/data/graphs/digitalDevicesGraph';
 
 const DigitalDevices = () => {
+  const [view, setView] = useState<'list' | 'graph'>('graph');
   const sections = [
     // 1) Physiological Sensors & Biosignals
     {
@@ -251,12 +256,19 @@ const DigitalDevices = () => {
               Digital Devices
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
-            <p className="text-xl font-light text-black/60 max-w-3xl">
+            <p className="text-xl font-light text-black/60 max-w-3xl mb-8">
               Hardware and software systems powering health sensing, medical imaging, and real-time edge AI—from biosignals and biomechanics to regulated device engineering.
             </p>
+            
+            <ViewToggle view={view} onViewChange={setView} />
           </div>
 
-          <div className="space-y-20">
+          {view === 'graph' ? (
+            <div className="w-full" style={{ height: '800px' }}>
+              <KnowledgeGraph3D data={digitalDevicesGraphData} />
+            </div>
+          ) : (
+            <div className="space-y-20">
             {sections.map((section, index) => (
               <div key={index} className="border-l-2 border-black/5 pl-8">
                 <h2 className="text-3xl font-light mb-12 tracking-tight">
@@ -282,7 +294,8 @@ const DigitalDevices = () => {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </div>
       </main>
 

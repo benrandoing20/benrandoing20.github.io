@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ViewToggle from '@/components/ViewToggle';
+import KnowledgeGraph3D from '@/components/KnowledgeGraph3D';
+import { appliedAIGraphData } from '@/data/graphs/appliedAIGraph';
 
 const AppliedAI = () => {
+  const [view, setView] = useState<'list' | 'graph'>('graph');
   const sections = [
     {
       title: "Foundations",
@@ -126,12 +131,19 @@ const AppliedAI = () => {
               Applied AI Concepts
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
-            <p className="text-xl font-light text-black/60 max-w-3xl">
+            <p className="text-xl font-light text-black/60 max-w-3xl mb-8">
               A comprehensive guide to modern artificial intelligence—from foundational theory to production deployment.
             </p>
+            
+            <ViewToggle view={view} onViewChange={setView} />
           </div>
 
-          <div className="space-y-20">
+          {view === 'graph' ? (
+            <div className="w-full" style={{ height: '800px' }}>
+              <KnowledgeGraph3D data={appliedAIGraphData} />
+            </div>
+          ) : (
+            <div className="space-y-20">
             {sections.map((section, index) => (
               <div key={index} className="border-l-2 border-black/5 pl-8">
                 <h2 className="text-3xl font-light mb-12 tracking-tight">
@@ -157,7 +169,8 @@ const AppliedAI = () => {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </div>
       </main>
 
