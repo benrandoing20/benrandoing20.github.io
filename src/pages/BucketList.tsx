@@ -22,7 +22,8 @@ const BucketList = () => {
     { done: true, item: "Take a helicopter ride (Kauai, Hawaii)" },
     { done: true, item: "Live one year with zero alcohol" },
     { done: true, item: "Give a best man speech that people never forget" },
-  
+    { done: true, item: "Drive cross country (NC → CA)" },
+
     // ADVENTURE + TRAVEL
     { done: false, item: "Travel to all seven continents" },
     { done: false, item: "Swim with whale sharks in the wild" },
@@ -37,7 +38,6 @@ const BucketList = () => {
     { done: false, item: "Stand on the Great Wall of China" },
     { done: false, item: "Visit the Taj Mahal at sunrise" },
     { done: false, item: "Go on an African safari" },
-    { done: false, item: "Drive cross country (NC → CA)" },
     { done: false, item: "Watch a FIFA World Cup match live" },
     { done: false, item: "Attend a Monaco F1 Grand Prix" },
     { done: false, item: "Live in Europe for a season" },
@@ -52,7 +52,7 @@ const BucketList = () => {
   
     // PERSONAL DEVELOPMENT
     { done: false, item: "Become fluent in French" },
-    { done: false, item: "Live with no fear of judgment" },
+    // { done: false, item: "Live with no fear of judgment" },
     // { done: false, item: "Become emotionally unbreakable" },
     // { done: false, item: "Forgive myself fully" },
     { done: false, item: "Write letters to friends after decades and send them" },
@@ -118,8 +118,8 @@ const BucketList = () => {
     { done: false, item: "Write a book to inspire others" },
     { done: false, item: "Stand on stage and move an audience emotionally" },
     { done: false, item: "Build tools that reduce human suffering" },
-    { done: false, item: "Be proud of the man I became" },
-    { done: false, item: "Die with no potential left inside me" }
+    { done: false, item: "Be proud of the man I become" },
+    { done: false, item: "Die knowing I gave everything I had" }
   ];
   
 
