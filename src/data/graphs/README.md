@@ -18,10 +18,9 @@ src/data/graphs/
 
 ## Node Types
 
-The graph supports six different node types, each with a distinct color:
+The graph supports five different node types, each with a distinct color:
 
-- **category** (Black) - Top-level categories (root nodes)
-- **topic** (Blue) - Main topics and sections
+- **category** (Gray) - Categories at all levels (root nodes and subcategories)
 - **concept** (Purple) - Technical concepts and ideas
 - **company** (Green) - Companies and organizations
 - **blogpost** (Amber) - Blog posts and articles
@@ -32,8 +31,8 @@ The graph supports six different node types, each with a distinct color:
 Nodes are organized in layers to create a hierarchical structure:
 
 - **Layer 0** - Root category (largest node)
-- **Layer 1** - Main topics
-- **Layer 2** - Concepts and subtopics
+- **Layer 1** - Main categories
+- **Layer 2** - Subcategories and concepts
 - **Layer 3** - Companies, blog posts, and resources (smallest nodes)
 - **Layer 4+** - Additional depth as needed
 
@@ -47,7 +46,7 @@ To add a new node to any graph, add it to the `nodes` array:
 {
   id: 'unique-id',              // Unique identifier (lowercase, hyphenated)
   name: 'Display Name',         // Name shown in the visualization
-  type: 'concept',              // One of: category, topic, concept, company, blogpost, resource
+  type: 'concept',              // One of: category, concept, company, blogpost, resource
   layer: 2,                     // Hierarchy level (0 = top)
   description: 'Description',   // Shown on hover
   url: 'https://example.com',   // Optional: Link when clicked
@@ -148,8 +147,8 @@ To add your own blog post to the graph:
 
 ### Organization
 1. Keep the root category at layer 0
-2. Main topics at layer 1
-3. Concepts at layer 2
+2. Main categories at layer 1
+3. Subcategories and concepts at layer 2
 4. Companies/resources/blogs at layer 3+
 
 ### Connections

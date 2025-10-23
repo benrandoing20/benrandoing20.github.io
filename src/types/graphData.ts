@@ -1,4 +1,4 @@
-export type NodeType = 'category' | 'topic' | 'concept' | 'company' | 'blogpost' | 'resource';
+export type NodeType = 'category' | 'concept' | 'company' | 'blogpost' | 'resource';
 
 export interface GraphNode {
   id: string;
@@ -24,8 +24,7 @@ export interface GraphData {
 
 // Color scheme for different node types
 export const nodeColors: Record<NodeType, string> = {
-  category: '#a1a1aa',     // Medium-dark gray - Top level categories (readable with black text)
-  topic: '#d4d4d8',        // Light gray - Sub topics (readable with black text)
+  category: '#a1a1aa',     // Medium-dark gray - Categories (readable with black text)
   concept: '#8b5cf6',      // Purple - Technical concepts
   company: '#10b981',      // Green - Companies
   blogpost: '#f59e0b',     // Amber - Blog posts
@@ -34,8 +33,8 @@ export const nodeColors: Record<NodeType, string> = {
 
 // Size mapping based on layer (hierarchy)
 export const getNodeSize = (layer: number, nodeType?: NodeType): number => {
-  // Categories and topics should be progressively smaller with each layer
-  if (nodeType === 'category' || nodeType === 'topic') {
+  // Categories should be progressively smaller with each layer
+  if (nodeType === 'category') {
     // More aggressive size reduction for each layer
     // Layer 0: Root (28), Layer 1: Main (22), Layer 2: Sub (16), Layer 3: Detail (12), Layer 4: Specific (9), Layer 5+: (7)
     if (layer === 0) return 28;

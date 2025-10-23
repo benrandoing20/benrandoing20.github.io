@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { parseSimpleContent } from '@/lib/utils';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 interface SimpleSubsectionDetailProps {
   category: string;
@@ -25,6 +27,28 @@ const SimpleSubsectionDetail = ({
   
   const contentBlocks = parseSimpleContent(content);
   
+  // Helper function to render math in text
+  const renderTextWithMath = (text: string, mathExpressions: any[] = []) => {
+    let processedHtml = text;
+    
+    // Replace math placeholders with rendered KaTeX HTML
+    mathExpressions.forEach((mathExpr) => {
+      try {
+        const rendered = katex.renderToString(mathExpr.content, {
+          displayMode: mathExpr.type === 'display',
+          throwOnError: false,
+          trust: false
+        });
+        processedHtml = processedHtml.replace(mathExpr.placeholder, rendered);
+      } catch (e) {
+        console.error('KaTeX rendering error:', e);
+        processedHtml = processedHtml.replace(mathExpr.placeholder, mathExpr.content);
+      }
+    });
+    
+    return processedHtml;
+  };
+  
   const renderBlock = (block: any, index: number) => {
     switch (block.type) {
       case 'heading':
@@ -39,7 +63,7 @@ const SimpleSubsectionDetail = ({
         }[block.level] || 'text-lg font-light mb-3 mt-6';
         
         return (
-          <HeadingTag key={index} className={headingClasses}>
+          <HeadingTag key={index} id={block.id} className={headingClasses}>
             {block.content}
           </HeadingTag>
         );
@@ -58,12 +82,18 @@ const SimpleSubsectionDetail = ({
       case 'list':
         return (
           <ul key={index} className="my-8 space-y-3">
-            {block.items.map((item: string, itemIndex: number) => (
-              <li key={itemIndex} className="text-base font-light text-black/80 leading-relaxed flex items-start">
-                <span className="mr-3 text-black/40 mt-1">•</span>
-                <span dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-              </li>
-            ))}
+            {block.items.map((item: any, itemIndex: number) => {
+              const itemContent = typeof item === 'string' ? item : item.content;
+              const itemMath = typeof item === 'string' ? [] : item.math || [];
+              const processedContent = renderTextWithMath(itemContent, itemMath).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+              
+              return (
+                <li key={itemIndex} className="text-base font-light text-black/80 leading-relaxed flex items-start">
+                  <span className="mr-3 text-black/40 mt-1">•</span>
+                  <span dangerouslySetInnerHTML={{ __html: processedContent }} />
+                </li>
+              );
+            })}
           </ul>
         );
       
@@ -90,8 +120,9 @@ const SimpleSubsectionDetail = ({
       
       case 'text':
       default:
-        // Handle bold text and line breaks
-        const formattedText = block.content
+        // Handle bold text, line breaks, and math
+        const textWithMath = renderTextWithMath(block.content, block.math || []);
+        const formattedText = textWithMath
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .split('\n')
           .filter((line: string) => line.trim())
@@ -165,21 +196,6 @@ const SimpleSubsectionDetail = ({
           {/* Content */}
           <div className="space-y-6">
             {contentBlocks.map((block, index) => renderBlock(block, index))}
-          </div>
-
-          {/* Edit Note */}
-          <div className="mt-20 p-6 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-sm font-light text-green-800">
-              ✨ <strong>Super Easy Editing!</strong> Just modify the content string above using simple text formatting:
-            </p>
-            <ul className="text-xs font-light text-green-700 mt-2 space-y-1">
-              <li>• Regular paragraphs (just write normally)</li>
-              <li>• <code>## Headings</code> for section titles</li>
-              <li>• <code>• Bullet points</code> for lists</li>
-              <li>• <code>**Bold text**</code> for emphasis</li>
-              <li>• <code>```language</code> for code blocks</li>
-              <li>• <code>1. Step one</code> for numbered workflows</li>
-            </ul>
           </div>
         </div>
       </main>

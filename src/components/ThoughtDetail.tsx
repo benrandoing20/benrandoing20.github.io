@@ -1,6 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { thoughts } from '@/data/thoughts';
 import { ArrowLeft } from 'lucide-react';
+import { extractMathExpressions } from '@/lib/utils';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 const ThoughtDetail = () => {
   const { id } = useParams();
@@ -16,6 +19,32 @@ const ThoughtDetail = () => {
       </div>
     );
   }
+
+  // Helper function to render text with math
+  const renderTextWithMath = (text: string) => {
+    const { text: processedText, math } = extractMathExpressions(text);
+    let htmlContent = processedText;
+    
+    // Replace math placeholders with rendered KaTeX HTML
+    math.forEach((mathExpr) => {
+      try {
+        const rendered = katex.renderToString(mathExpr.content, {
+          displayMode: mathExpr.type === 'display',
+          throwOnError: false,
+          trust: false
+        });
+        htmlContent = htmlContent.replace(mathExpr.placeholder, rendered);
+      } catch (e) {
+        console.error('KaTeX rendering error:', e);
+        htmlContent = htmlContent.replace(mathExpr.placeholder, mathExpr.content);
+      }
+    });
+    
+    // Handle inline bold text
+    htmlContent = htmlContent.replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium text-black">$1</strong>');
+    
+    return htmlContent;
+  };
 
   // Simple content parser that preserves paragraphs and basic formatting
   const renderContent = (content: string) => {
@@ -47,20 +76,15 @@ const ThoughtDetail = () => {
           elements.push(<div key={key++} className="h-4"></div>);
         }
       } else {
-        // Regular paragraph
-        // Handle inline bold text
-        const parts = trimmed.split(/(\*\*.*?\*\*)/g);
-        const formatted = parts.map((part, i) => {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            return <strong key={i} className="font-medium text-black">{part.slice(2, -2)}</strong>;
-          }
-          return part;
-        });
+        // Regular paragraph - render with math support
+        const htmlContent = renderTextWithMath(trimmed);
         
         elements.push(
-          <p key={key++} className="text-lg font-light text-black/70 leading-relaxed mb-6">
-            {formatted}
-          </p>
+          <p 
+            key={key++} 
+            className="text-lg font-light text-black/70 leading-relaxed mb-6"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          />
         );
       }
     });

@@ -8,133 +8,180 @@ import { appliedAIGraphData } from '@/data/graphs/appliedAIGraph';
 
 const AppliedAI = () => {
   const [view, setView] = useState<'list' | 'graph'>('graph');
+  const [expandedSections, setExpandedSections] = useState<Set<number>>(new Set());
+
+  const toggleSection = (index: number) => {
+    setExpandedSections(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
   const sections = [
     {
       title: "Foundations",
       content: [
         {
-          subtitle: "Machine Learning Basics",
-          description: "Understanding supervised, unsupervised, and reinforcement learning paradigms. Core algorithms include linear regression, logistic regression, decision trees, and ensemble methods."
+          subtitle: "Mathematics",
+          description:
+            "The math you actually need for AI—matrix operations for neural networks, probability for understanding uncertainty, calculus for gradient descent, and optimization theory for training models efficiently.",
         },
         {
-          subtitle: "Neural Networks",
-          description: "From perceptrons to deep architectures. Understanding backpropagation, activation functions, and gradient descent optimization."
+          subtitle: "Classical ML",
+          description:
+            "Pre-deep learning machine learning that still matters—decision trees and random forests, gradient boosting machines like XGBoost, SVMs, and ensemble methods that often outperform neural nets on tabular data.",
         },
         {
-          subtitle: "Mathematics of AI",
-          description: "Linear algebra, calculus, probability theory, and statistics as the foundation for all machine learning systems."
-        }
-      ]
+          subtitle: "Neural Fundamentals",
+          description:
+            "How neural networks learn—forward and backward propagation, gradient descent variants like Adam, activation functions, regularization techniques like dropout, and how to train models that generalize.",
+        },
+      ],
     },
     {
       title: "Deep Learning",
       content: [
         {
-          subtitle: "Convolutional Neural Networks (CNNs)",
-          description: "Architecture for visual recognition. Key concepts: convolution layers, pooling, batch normalization, and residual connections."
+          subtitle: "Architectures",
+          description:
+            "The core neural network building blocks—convolutional networks for images with spatial structure, recurrent networks like LSTMs for sequences, and the evolution from ResNets to modern transformer architectures.",
         },
         {
-          subtitle: "Recurrent Neural Networks (RNNs)",
-          description: "Sequential data processing with LSTMs and GRUs. Applications in time series, language modeling, and speech recognition."
-        },
-        {
-          subtitle: "Transformers",
-          description: "Attention mechanisms and self-attention. The architecture behind GPT, BERT, and modern large language models."
-        }
-      ]
-    },
-    {
-      title: "Natural Language Processing",
-      content: [
-        {
-          subtitle: "Language Models",
-          description: "From n-grams to GPT-4. Understanding tokenization, embeddings, and the transformer revolution."
-        },
-        {
-          subtitle: "Fine-tuning & Transfer Learning",
-          description: "Adapting pre-trained models to specific tasks. Techniques like LoRA, prompt engineering, and few-shot learning."
-        },
-        {
-          subtitle: "Practical Applications",
-          description: "Building chatbots, sentiment analysis, text summarization, and question-answering systems."
-        }
-      ]
-    },
-    {
-      title: "Computer Vision",
-      content: [
-        {
-          subtitle: "Image Classification",
-          description: "ResNet, EfficientNet, Vision Transformers. State-of-the-art architectures for visual recognition."
-        },
-        {
-          subtitle: "Object Detection",
-          description: "YOLO, R-CNN family, and real-time detection systems. Applications in autonomous vehicles and surveillance."
+          subtitle: "NLP & Transformers",
+          description:
+            "How AI understands and generates language—transformer architecture with self-attention, tokenization and embeddings, large language models like GPT and BERT, and fine-tuning with LoRA and prompt engineering.",
         },
         {
           subtitle: "Generative Models",
-          description: "GANs, VAEs, and diffusion models. Creating photorealistic images and video synthesis."
-        }
-      ]
+          description:
+            "AI that creates new content—GANs with adversarial training for generating images, VAEs for learning compressed representations, and diffusion models like Stable Diffusion that power modern image generation.",
+        },
+      ],
     },
     {
-      title: "Reinforcement Learning",
+      title: "Specialized AI",
       content: [
         {
-          subtitle: "Core Concepts",
-          description: "Markov Decision Processes, Q-learning, policy gradients, and value functions."
+          subtitle: "Computer Vision",
+          description:
+            "Teaching machines to see—image classification for recognizing objects, object detection with YOLO and R-CNN, semantic and instance segmentation, and vision-language models that understand both images and text.",
         },
         {
-          subtitle: "Deep RL",
-          description: "DQN, A3C, PPO, and modern algorithms powering game-playing AI and robotics."
+          subtitle: "Reinforcement Learning",
+          description:
+            "AI that learns by trial and error—Markov decision processes, value-based methods like Q-learning and DQN, policy gradient approaches like PPO, and offline RL for learning from logged data without environment interaction.",
         },
         {
-          subtitle: "Real-world Applications",
-          description: "From AlphaGo to autonomous systems—how RL solves complex decision-making problems."
-        }
-      ]
+          subtitle: "Multimodal AI",
+          description:
+            "Models that understand multiple modalities—vision-language models like CLIP that connect images and text, audio-text models for speech recognition, and unified models that can handle any combination of inputs.",
+        },
+      ],
     },
     {
       title: "Production & Deployment",
       content: [
         {
-          subtitle: "MLOps",
-          description: "Model versioning, experiment tracking, and continuous training pipelines."
+          subtitle: "MLOps Infrastructure",
+          description:
+            "The engineering systems for ML workflows—experiment tracking with W&B or MLflow, orchestrating training pipelines with DAGs, model registries for versioning, and CI/CD for machine learning.",
         },
         {
-          subtitle: "Scaling AI Systems",
-          description: "Distributed training, model optimization, quantization, and serving at scale."
+          subtitle: "Model Optimization",
+          description:
+            "Making models faster and cheaper—quantization to INT8/FP8, pruning to remove unnecessary weights, knowledge distillation to compress models, model compilation, and distributed training across GPUs.",
         },
         {
-          subtitle: "Monitoring & Maintenance",
-          description: "Data drift detection, model performance tracking, and A/B testing in production."
-        }
-      ]
-    }
+          subtitle: "Monitoring & Governance",
+          description:
+            "Keeping models healthy in production—tracking latency and throughput, detecting data drift and model decay, maintaining data lineage, implementing approval workflows, and alerting when things go wrong.",
+        },
+        {
+          subtitle: "Serving & Inference",
+          description:
+            "Running models at scale—batch vs real-time inference tradeoffs, autoscaling to handle traffic, optimizing for latency and cost, serving frameworks like vLLM and TensorRT, and GPU utilization.",
+        },
+        {
+          subtitle: "Data Engineering",
+          description:
+            "Pipelines and infrastructure for ML data—feature stores for consistent online/offline features, data quality monitoring, vector databases for similarity search, and managing embeddings at scale.",
+        },
+        {
+          subtitle: "Security & Privacy",
+          description:
+            "Protecting models and data—handling PII and sensitive data, red-teaming to find vulnerabilities, access control and authentication, securing APIs, and compliance with data protection regulations.",
+        },
+      ],
+    },
+    {
+      title: "AI Agents & RAG",
+      content: [
+        {
+          subtitle: "RAG Systems",
+          description:
+            "Retrieval-Augmented Generation—chunking documents into retrievable pieces, creating embeddings, indexing with vector search, retrieving relevant context, re-ranking results, and injecting knowledge into LLM prompts.",
+        },
+        {
+          subtitle: "Tool-Use Agents",
+          description:
+            "LLMs that can use external tools—function calling with structured outputs, defining tool schemas, letting models call APIs, calculators, databases, and web searches, and handling tool errors gracefully.",
+        },
+        {
+          subtitle: "Agent Orchestration",
+          description:
+            "Coordinating complex AI agents—multi-agent patterns where agents collaborate, giving agents memory of past interactions, routing requests to specialized agents, and adding guardrails to prevent mistakes.",
+        },
+      ],
+    },
+    {
+      title: "AI Safety & Model Evaluation",
+      content: [
+        {
+          subtitle: "Evaluation Frameworks",
+          description:
+            "Systematically testing AI systems—building golden test sets, automated evaluation metrics, human-in-the-loop evals, A/B testing in production, regression testing, and continuous evaluation pipelines.",
+        },
+        {
+          subtitle: "Safety & Guardrails",
+          description:
+            "Preventing harmful model outputs—content filtering for toxic/inappropriate content, detecting and blocking jailbreak attempts, implementing usage policies, and input/output validation with tools like Nemo Guardrails.",
+        },
+        {
+          subtitle: "Alignment & Training",
+          description:
+            "Teaching models human preferences—Reinforcement Learning from Human Feedback (RLHF), Direct Preference Optimization (DPO), collecting preference data, constitutional AI, and safety tuning for responsible behavior.",
+        },
+      ],
+    },
   ];
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
+
       <main className="pt-32 pb-32 px-8">
         <div className="max-w-5xl mx-auto">
           <div className="mb-24">
-            <Link 
-              to="/resources" 
+            <Link
+              to="/resources"
               className="inline-flex items-center text-sm font-light text-black/60 hover:text-black mb-12 transition-colors duration-300"
             >
               <span className="mr-2">←</span> Back to Resources
             </Link>
-            
+
             <h1 className="text-5xl md:text-7xl font-extralight mb-8 tracking-tight">
-              Applied AI Concepts
+              Applied AI
             </h1>
             <div className="w-24 h-px bg-black/20 mb-8"></div>
             <p className="text-xl font-light text-black/60 max-w-3xl mb-8">
-              A comprehensive guide to modern artificial intelligence—from foundational theory to production deployment.
+              The complete landscape of applied artificial intelligence—from mathematical foundations to production-scale systems, intelligent agents, and safe deployment.
             </p>
-            
+
             <ViewToggle view={view} onViewChange={setView} />
           </div>
 
@@ -144,31 +191,60 @@ const AppliedAI = () => {
             </div>
           ) : (
             <div className="space-y-20">
-            {sections.map((section, index) => (
-              <div key={index} className="border-l-2 border-black/5 pl-8">
-                <h2 className="text-3xl font-light mb-12 tracking-tight">
-                  {section.title}
-                </h2>
-                <div className="space-y-10">
-                  {section.content.map((item, itemIndex) => (
-                    <Link 
-                      key={itemIndex} 
-                      to={`/resources/applied-ai/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
-                      state={{ title: item.subtitle }}
-                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
+              {sections.map((section, index) => (
+                <div key={index} className="border-l-2 border-black/5 pl-8">
+                  <button
+                    onClick={() => toggleSection(index)}
+                    className="w-full flex items-center justify-between text-left mb-12 group hover:opacity-70 transition-opacity duration-300"
+                  >
+                    <h2 className="text-3xl font-light tracking-tight">
+                      {section.title}
+                    </h2>
+                    <span
+                      className="text-2xl font-light text-black/40 transition-transform duration-300"
+                      style={{
+                        transform: expandedSections.has(index)
+                          ? 'rotate(90deg)'
+                          : 'rotate(0deg)',
+                      }}
                     >
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
-                        {item.subtitle}
-                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-                      </h3>
-                      <p className="text-base font-light text-black/60 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </Link>
-                  ))}
+                      →
+                    </span>
+                  </button>
+                  {expandedSections.has(index) && (
+                    <div className="space-y-10">
+                      {section.content.map((item, itemIndex) => (
+                        <Link
+                          key={itemIndex}
+                          to={`/resources/applied-ai/${section.title
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/&/g, 'and')}/${item.subtitle
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/[(),]/g, '')
+                            .replace(/&/g, 'and')
+                            .replace(/\//g, '-')}`}
+                          state={{ title: item.subtitle }}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
+                        >
+                          <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
+                            {item.subtitle}
+                            <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              →
+                            </span>
+                          </h3>
+                          <p className="text-base font-light text-black/60 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           )}
         </div>

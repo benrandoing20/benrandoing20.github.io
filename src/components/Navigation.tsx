@@ -18,7 +18,8 @@ const Navigation = () => {
   const isHomePage = location.pathname === '/';
   const isResourcesPage = location.pathname.startsWith('/resources');
   const isBucketListPage = location.pathname.startsWith('/bucket-list');
-  const isOnSeparatePage = isResourcesPage || isBucketListPage;
+  const isConsultingPage = location.pathname.startsWith('/consulting');
+  const isOnSeparatePage = isResourcesPage || isBucketListPage || isConsultingPage;
 
   const sectionNavItems = [
     { name: 'About', href: '#about' },
@@ -29,6 +30,7 @@ const Navigation = () => {
 
   const pageNavItems = [
     { name: 'Resources', href: '/resources', isActive: isResourcesPage },
+    { name: 'Work Together', href: '/consulting', isActive: isConsultingPage },
     { name: 'Bucket List', href: '/bucket-list', isActive: isBucketListPage },
   ];
 

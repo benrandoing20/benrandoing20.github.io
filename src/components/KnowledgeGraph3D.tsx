@@ -50,6 +50,24 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
   }, []);
 
   // Set initial camera position and configure forces
+  // 
+  // DAG POSITIONING EXPLANATION:
+  // ============================
+  // 1. VERTICAL POSITIONING (Y-axis):
+  //    - Category/Topic nodes use built-in DAG "top-down" layout (dagMode="td")
+  //    - Vertical spacing between layers controlled by dagLevelDistance={150}
+  //    - Colored nodes (resources) are forced to match their parent's Y-level (horizontal spread)
+  //
+  // 2. HORIZONTAL POSITIONING (X-Z plane):
+  //    - Category/Topic nodes: positioned automatically by DAG algorithm with horizontal repulsion
+  //    - Colored nodes: manually positioned in a horizontal circle around their parent node
+  //    - Circle radius determines horizontal spread (larger radius = more horizontal space)
+  //
+  // 3. NODE FIXING TIMELINE:
+  //    - 0-800ms: Initial constraints applied to keep colored nodes at parent's Y-level
+  //    - 1500ms: Colored nodes positioned in horizontal circle and fixed (fx, fy, fz set)
+  //    - 2000ms: ALL nodes frozen permanently, simulation stopped, positions locked
+  //
   useEffect(() => {
     if (graphRef.current) {
       const graph = graphRef.current;
@@ -58,10 +76,11 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
       const distance = 500;
       graph.cameraPosition({ z: distance });
 
-      // Force colored nodes to match parent's y-level immediately and continuously
+      // PHASE 1 (0-800ms): Force colored nodes to match parent's y-level immediately and continuously
+      // This prevents them from drifting vertically during initial layout
       const forceHorizontal = () => {
         graphData.nodes.forEach((node: any) => {
-          if (node.type !== 'category' && node.type !== 'topic') {
+          if (node.type !== 'category') {
             const parentLink = graphData.links.find((link: any) => 
               (link.target === node.id || (typeof link.target === 'object' && link.target.id === node.id))
             );
@@ -84,7 +103,8 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
       setTimeout(forceHorizontal, 500);
       setTimeout(forceHorizontal, 800);
 
-      // Position colored nodes horizontally around their parents
+      // PHASE 2 (1500ms): Position colored nodes horizontally around their parents
+      // At this point, category nodes have settled into their DAG positions
       setTimeout(() => {
         if (graph.d3Force) {
           // Disable radial force that might push nodes up/down
@@ -93,9 +113,15 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
             radialForce.strength(0);
           }
           
+          // Increase horizontal repulsion between nodes at same level for more spacing
+          const chargeForce = graph.d3Force('charge');
+          if (chargeForce) {
+            chargeForce.strength(-4000); // Increased from -3000 for more horizontal space
+          }
+          
           // Manually position colored nodes in a horizontal ring around parent
           graphData.nodes.forEach((node: any, index: number) => {
-            if (node.type !== 'category' && node.type !== 'topic') {
+            if (node.type !== 'category') {
               const parentLink = graphData.links.find((link: any) => 
                 (link.target === node.id || (typeof link.target === 'object' && link.target.id === node.id))
               );
@@ -107,7 +133,7 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
                 if (parentNode && parentNode.x !== undefined && parentNode.y !== undefined && parentNode.z !== undefined) {
                   // Count colored children for this parent
                   const siblings = graphData.nodes.filter((n: any) => {
-                    if (n.type === 'category' || n.type === 'topic') return false;
+                    if (n.type === 'category') return false;
                     const siblingLink = graphData.links.find((l: any) => 
                       (l.target === n.id || (typeof l.target === 'object' && l.target.id === n.id))
                     );
@@ -119,14 +145,18 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
                   const siblingIndex = siblings.findIndex((s: any) => s.id === node.id);
                   const angleStep = (Math.PI * 2) / siblings.length;
                   const angle = siblingIndex * angleStep;
-                  const radius = 20; // Distance from parent node
+                  
+                  // HORIZONTAL SPACING CONTROL:
+                  // Increase this radius value to add more horizontal space between colored nodes
+                  // Current value: 100 (increased from 60 for more horizontal spread)
+                  const radius = 100;
                   
                   // Position in HORIZONTAL circle around parent (x-z plane, same y as parent)
                   node.x = parentNode.x + Math.cos(angle) * radius;
                   node.z = parentNode.z + Math.sin(angle) * radius;
                   node.y = parentNode.y; // Same y-level as parent (maintains horizontal spread at each level)
                   
-                  // Fix in place strongly
+                  // Fix in place strongly (fx/fy/fz = fixed x/y/z positions)
                   node.fx = node.x;
                   node.fy = parentNode.y;
                   node.fz = node.z;
@@ -143,7 +173,8 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
         }
       }, 1500);
       
-      // Freeze all nodes after positioning
+      // PHASE 3 (2000ms): Freeze all nodes after positioning
+      // After this point, all nodes are permanently locked in place
       setTimeout(() => {
         if (!isSimulationPausedRef.current) {
           // Freeze all node positions
@@ -152,7 +183,7 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
               let finalY = node.y || 0;
               
               // For colored nodes, ensure they're at parent's y-level
-              if (node.type !== 'category' && node.type !== 'topic') {
+              if (node.type !== 'category') {
                 const parentLink = graphData.links.find((link: any) => 
                   (link.target === node.id || (typeof link.target === 'object' && link.target.id === node.id))
                 );
@@ -191,7 +222,7 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
 
   const handleNodeClick = useCallback((node: any) => {
     if (node.url) {
-      window.open(node.url, '_blank');
+      window.location.href = node.url;
     }
   }, []);
 
@@ -218,7 +249,7 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
   const handleEngineTick = useCallback(() => {
     // Keep colored nodes at their parent's y-level (horizontal spread at each level)
     graphData.nodes.forEach((node: any) => {
-      if (node.type !== 'category' && node.type !== 'topic') {
+      if (node.type !== 'category') {
         // Find parent to match y-level
         const parentLink = graphData.links.find((link: any) => 
           (link.target === node.id || (typeof link.target === 'object' && link.target.id === node.id))
@@ -269,10 +300,11 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
     // Create new object only if not cached
     const group = new THREE.Group();
     
-    // Create sphere for node
-    const geometry = new THREE.SphereGeometry(node.size || 10, 16, 16);
-    // Make category and topic nodes more opaque than colored nodes
-    const isMainNode = node.type === 'category' || node.type === 'topic';
+    // Create sphere for node - make category nodes much smaller
+    const isMainNode = node.type === 'category';
+    const nodeSize = isMainNode ? 4 : (node.size || 3);
+    const geometry = new THREE.SphereGeometry(nodeSize, 16, 16);
+    // Make category nodes more opaque than colored nodes
     const opacity = isMainNode ? 1.0 : 0.9;
     const material = new THREE.MeshLambertMaterial({
       color: node.color || nodeColors.concept,
@@ -282,19 +314,18 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
     const sphere = new THREE.Mesh(geometry, material);
     group.add(sphere);
 
-    // Add text label for category and topic nodes (both black)
+    // Add text label for category nodes (black)
     const isCategory = node.type === 'category';
-    const isTopic = node.type === 'topic';
     
-    if (isCategory || isTopic) {
+    if (isCategory) {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       if (context) {
         // Adjust font size based on layer - progressively smaller
-        const fontSize = node.layer === 0 ? 68 : 
-                        node.layer === 1 ? 56 : 
-                        node.layer === 2 ? 46 :
-                        node.layer === 3 ? 38 : 32;
+        const fontSize = node.layer === 0 ? 48 : 
+                        node.layer === 1 ? 42 : 
+                        node.layer === 2 ? 36 :
+                        node.layer === 3 ? 30 : 26;
         
         // Set font to measure text width
         context.font = `Bold ${fontSize}px Arial`;
@@ -334,12 +365,12 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
         const canvasAspect = canvas.width / canvas.height;
         
         // Scale sprites proportionally based on font size and maintain aspect ratio
-        const baseHeight = fontSize * 0.35; // Scale height based on font size
+        const baseHeight = fontSize * 0.3; // Scale height based on font size
         const scaleWidth = baseHeight * canvasAspect; // Maintain aspect ratio
         const scaleHeight = baseHeight;
         
         sprite.scale.set(scaleWidth, scaleHeight, 1);
-        sprite.position.set(0, (node.size || 10) + 16, 0);
+        sprite.position.set(0, nodeSize + 12, 0);
         
         // Store reference for camera facing update
         sprite.userData.isLabel = true;
@@ -355,10 +386,13 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
 
   // Memoize other callback functions
   const getNodeLabel = useCallback((node: any) => node.name, []);
-  const getNodeVal = useCallback((node: any) => node.size || 10, []);
+  const getNodeVal = useCallback((node: any) => {
+    const isMainNode = node.type === 'category';
+    return isMainNode ? 4 : (node.size || 3);
+  }, []);
   const getNodeColor = useCallback((node: any) => node.color || nodeColors.concept, []);
   const getLinkColor = useCallback(() => '#00000020', []);
-  const dagNodeFilter = useCallback((node: any) => node.type === 'category' || node.type === 'topic', []);
+  const dagNodeFilter = useCallback((node: any) => node.type === 'category', []);
 
   return (
     <div ref={containerRef} className={`relative ${className}`} style={{ width: '100%', height: '100%', cursor: 'default' }}>
@@ -430,7 +464,6 @@ const KnowledgeGraph3D = memo(({ data, className }: KnowledgeGraph3DProps) => {
         <h4 className="text-sm font-light mb-3 uppercase tracking-wide">Node Types</h4>
         <div className="space-y-2">
           {Object.entries(nodeColors)
-            .filter(([type]) => type !== 'topic')
             .map(([type, color]) => (
               <div key={type} className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />

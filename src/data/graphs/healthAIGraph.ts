@@ -17,65 +17,65 @@ export const healthAIGraphData: GraphData = {
     { 
       id: 'medical-imaging', 
       name: 'Medical Imaging AI', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'AI-powered diagnostic imaging',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'clinical-decision', 
       name: 'Clinical Decision Support', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'AI-assisted diagnosis and treatment',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'drug-discovery', 
       name: 'Drug Discovery & Development', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'AI-accelerated pharmaceutical research',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'personalized-medicine', 
       name: 'Personalized Medicine', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'Genomics and precision healthcare',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'remote-monitoring', 
       name: 'Remote Patient Monitoring', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'Wearables and continuous health tracking',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'healthcare-ops', 
       name: 'Healthcare Operations', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'Hospital efficiency and resource optimization',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
     { 
       id: 'ethics-regulation', 
       name: 'Ethics & Regulation', 
-      type: 'topic', 
+      type: 'category', 
       layer: 1,
       description: 'Bias, privacy, and FDA compliance',
       color: nodeColors.category,
-      size: getNodeSize(1, 'topic')
+      size: getNodeSize(1, 'category')
     },
 
     // Layer 2 - Medical Imaging Concepts
@@ -255,66 +255,66 @@ export const healthAIGraphData: GraphData = {
     },
 
     // Layer 3 - Companies
-    { 
-      id: 'tempus', 
-      name: 'Tempus', 
-      type: 'company', 
-      layer: 3,
-      description: 'Precision medicine and genomics',
-      url: 'https://tempus.com',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
-    { 
-      id: 'paige', 
-      name: 'Paige', 
-      type: 'company', 
-      layer: 3,
-      description: 'AI-powered digital pathology',
-      url: 'https://paige.ai',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
-    { 
-      id: 'insitro', 
-      name: 'Insitro', 
-      type: 'company', 
-      layer: 3,
-      description: 'ML-driven drug discovery',
-      url: 'https://insitro.com',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
-    { 
-      id: 'recursion', 
-      name: 'Recursion Pharmaceuticals', 
-      type: 'company', 
-      layer: 3,
-      description: 'AI for drug discovery',
-      url: 'https://recursion.com',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
-    { 
-      id: 'google-health', 
-      name: 'Google Health', 
-      type: 'company', 
-      layer: 3,
-      description: 'AI-powered healthcare solutions',
-      url: 'https://health.google',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
-    { 
-      id: 'aidoc', 
-      name: 'Aidoc', 
-      type: 'company', 
-      layer: 3,
-      description: 'AI radiology solutions',
-      url: 'https://aidoc.com',
-      color: nodeColors.company,
-      size: getNodeSize(3, 'company')
-    },
+    // { 
+    //   id: 'tempus', 
+    //   name: 'Tempus', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'Precision medicine and genomics',
+    //   url: 'https://tempus.com',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
+    // { 
+    //   id: 'paige', 
+    //   name: 'Paige', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'AI-powered digital pathology',
+    //   url: 'https://paige.ai',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
+    // { 
+    //   id: 'insitro', 
+    //   name: 'Insitro', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'ML-driven drug discovery',
+    //   url: 'https://insitro.com',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
+    // { 
+    //   id: 'recursion', 
+    //   name: 'Recursion Pharmaceuticals', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'AI for drug discovery',
+    //   url: 'https://recursion.com',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
+    // { 
+    //   id: 'google-health', 
+    //   name: 'Google Health', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'AI-powered healthcare solutions',
+    //   url: 'https://health.google',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
+    // { 
+    //   id: 'aidoc', 
+    //   name: 'Aidoc', 
+    //   type: 'company', 
+    //   layer: 3,
+    //   description: 'AI radiology solutions',
+    //   url: 'https://aidoc.com',
+    //   color: nodeColors.company,
+    //   size: getNodeSize(3, 'company')
+    // },
   ],
 
   links: [
@@ -360,12 +360,12 @@ export const healthAIGraphData: GraphData = {
     { source: 'ethics-regulation', target: 'fda-regulation', strength: 0.8 },
 
     // Companies connect to TOPICS (black nodes) only
-    { source: 'personalized-medicine', target: 'tempus', strength: 0.6 },
-    { source: 'medical-imaging', target: 'paige', strength: 0.6 },
-    { source: 'drug-discovery', target: 'insitro', strength: 0.6 },
-    { source: 'drug-discovery', target: 'recursion', strength: 0.6 },
-    { source: 'medical-imaging', target: 'google-health', strength: 0.5 },
-    { source: 'medical-imaging', target: 'aidoc', strength: 0.6 },
+    // { source: 'personalized-medicine', target: 'tempus', strength: 0.6 },
+    // { source: 'medical-imaging', target: 'paige', strength: 0.6 },
+    // { source: 'drug-discovery', target: 'insitro', strength: 0.6 },
+    // { source: 'drug-discovery', target: 'recursion', strength: 0.6 },
+    // { source: 'medical-imaging', target: 'google-health', strength: 0.5 },
+    // { source: 'medical-imaging', target: 'aidoc', strength: 0.6 },
   ]
 };
 
