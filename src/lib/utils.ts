@@ -87,6 +87,18 @@ export function parseSimpleContent(content: string) {
       continue;
     }
     
+    // Handle standalone display math blocks
+    if (section.trim().match(/^\\\[[\s\S]+\\\]$/)) {
+      const mathContent = section.trim().replace(/^\\\[([\s\S]+)\\\]$/, '$1').trim();
+      blocks.push({
+        type: 'math',
+        content: mathContent,
+        displayMode: true
+      });
+      i++;
+      continue;
+    }
+    
     // Handle headings
     if (section.startsWith('##')) {
       const headingText = section.replace(/^#+\s*/, '');
@@ -100,19 +112,58 @@ export function parseSimpleContent(content: string) {
       continue;
     }
     
-    // Handle bullet lists
+    // Handle bullet lists (with nested support)
     if (section.includes('\n•') || section.includes('\n-') || section.startsWith('•') || section.startsWith('-')) {
-      const items = section
-        .split('\n')
-        .filter(line => line.trim().startsWith('•') || line.trim().startsWith('-'))
-        .map(line => {
-          const cleaned = line.replace(/^[•-]\s*/, '').trim();
-          const { text: processedText, math } = extractMathExpressions(cleaned);
-          return {
+      const lines = section.split('\n').filter(line => {
+        const trimmed = line.trim();
+        return trimmed.startsWith('•') || trimmed.startsWith('-');
+      });
+      
+      // Parse nested structure based on indentation
+      const parseNestedList = (lines: string[], startIndex = 0): any => {
+        const items: any[] = [];
+        let i = startIndex;
+        
+        while (i < lines.length) {
+          const line = lines[i];
+          const indent = line.search(/[•-]/);
+          const content = line.replace(/^[\s]*[•-]\s*/, '').trim();
+          const { text: processedText, math } = extractMathExpressions(content);
+          
+          const item: any = {
             content: parseMarkdownLinks(processedText),
-            math: math
+            math: math,
+            indent: indent
           };
-        });
+          
+          // Check if next line is more indented (nested)
+          if (i + 1 < lines.length) {
+            const nextIndent = lines[i + 1].search(/[•-]/);
+            if (nextIndent > indent) {
+              // Collect all nested items
+              const nestedLines: string[] = [];
+              let j = i + 1;
+              while (j < lines.length && lines[j].search(/[•-]/) > indent) {
+                nestedLines.push(lines[j]);
+                j++;
+              }
+              if (nestedLines.length > 0) {
+                item.nested = parseNestedList(nestedLines, 0).items;
+              }
+              i = j;
+              items.push(item);
+              continue;
+            }
+          }
+          
+          items.push(item);
+          i++;
+        }
+        
+        return { items };
+      };
+      
+      const { items } = parseNestedList(lines);
       
       blocks.push({
         type: 'list',
@@ -130,10 +181,15 @@ export function parseSimpleContent(content: string) {
         .filter(line => line.match(/^\d+\./))
         .map(line => {
           const match = line.match(/^(\d+)\.\s*(.+)/);
-          return match ? {
-            number: match[1],
-            content: match[2]
-          } : null;
+          if (match) {
+            const { text: processedText, math } = extractMathExpressions(match[2]);
+            return {
+              number: match[1],
+              content: parseMarkdownLinks(processedText),
+              math: math
+            };
+          }
+          return null;
         })
         .filter(Boolean);
       

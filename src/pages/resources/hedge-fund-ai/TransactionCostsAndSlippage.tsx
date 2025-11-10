@@ -5,12 +5,15 @@ const TransactionCostsAndSlippage = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Transaction Costs Matter](#why-transaction-costs-matter)
 - [Types of Trading Costs](#types-of-trading-costs)
 - [The Square-Root Law](#the-square-root-law)
 - [Market Impact Models](#market-impact-models)
 - [Machine Learning for Cost Prediction](#machine-learning-for-cost-prediction)
 - [Incorporating Costs into Backtests](#incorporating-costs-into-backtests)
+
+## Overview
 
 Even the best strategy can fail if it ignores the true cost of trading. Transaction costs, including spreads, fees, and market impact, often turn theoretical alpha into real-world losses.
 
@@ -21,6 +24,7 @@ Even the best strategy can fail if it ignores the true cost of trading. Transact
 Strategy backtest (no costs): 25% annual return
 
 Add realistic costs:
+
 - Bid-ask spread (5 bps per trade): Return drops to 18%
 - Exchange fees (2 bps): Return drops to 16%
 - Market impact (3 bps): Return drops to 13%
@@ -30,61 +34,46 @@ Your 25% strategy is actually an 11% strategy. Still good, but very different fr
 
 **Why strategies fail from costs:**
 
-**High turnover**: Trading 10x per day multiplies costs by 10x
+- **High turnover**: Trading 10x per day multiplies costs by 10x
 
-**Large positions**: Market impact scales nonlinearly with size
+- **Large positions**: Market im- pact scales nonlinearly with size
 
-**Illiquid assets**: Small-cap stocks have 50+ bps spreads vs 1 bps for large caps
+- **Illiquid assets**: Small-cap stocks have 50+ bps spreads vs 1 bps for large caps
 
-**Poor timing**: Trading during volatile periods increases all costs
+- **Poor timing**: Trading during volatile periods increases all costs
 
 ## Types of Trading Costs
 
 The main types of costs are:
 
-**Explicit costs:** Broker commissions, exchange fees, and taxes.
+- **Explicit costs:** Broker commissions, exchange fees, and taxes.
+- **Implicit costs:** The bid-ask spread and slippage, the difference between your intended price and the actual execution price.
+- **Market impact:** The price move caused by your own order. 
+- **Broker commissions**: $0.001 to $0.005 per share (depends on volume tier)
+- **Exchange fees**: Vary by exchange and order type
+  - Maker: -$0.0025 per share (rebate for providing liquidity)
+  - Taker: +$0.0030 per share (pay for taking liquidity)
+- **SEC fees**: $0.0000278 per dollar of sales (US equities)
+- **Taxes**: Varies by jurisdiction
+- **Total explicit**: Typically 1 to 5 basis points per trade
 
-**Implicit costs:** The bid-ask spread and slippage, the difference between your intended price and the actual execution price.
-
-**Market impact:** The price move caused by your own order.
-
-**Explicit costs:**
-
-**Broker commissions**: $0.001 to $0.005 per share (depends on volume tier)
-
-**Exchange fees**: Vary by exchange and order type
-- Maker: -$0.0025 per share (rebate for providing liquidity)
-- Taker: +$0.0030 per share (pay for taking liquidity)
-
-**SEC fees**: $0.0000278 per dollar of sales (US equities)
-
-**Taxes**: Varies by jurisdiction
-
-**Total explicit**: Typically 1 to 5 basis points per trade
-
-**Implicit costs:**
-
-**Bid-ask spread**: Difference between best bid and best ask
+- **Bid-ask spread**: Difference between best bid and best ask
 
 \\[\\text{Spread Cost} = \\frac{\\text{Ask} - \\text{Bid}}{\\text{Mid}} \\times 10000 \\text{ (bps)}\\]
 
 Examples:
-- Large-cap stocks: 1-3 bps
-- Mid-cap stocks: 5-15 bps
-- Small-cap stocks: 20-100 bps
-- Illiquid stocks: 100-500 bps
 
-**Slippage**: Price movement between decision and execution
-
-You decide to buy at $100.00. By the time your order arrives, best ask is $100.05. You pay 5 cents more than expected.
-
-**Market impact:**
-
-Your own order moves the price against you:
-
-**Temporary impact**: Price moves while you're trading, then recovers
-
-**Permanent impact**: Lasting price shift after you're done (you revealed information)
+  - Large-cap stocks: 1-3 bps
+  - Mid-cap stocks: 5-15 bps
+  - Small-cap stocks: 20-100 bps
+  - Illiquid stocks: 100-500 bps
+  
+- **Slippage**: Price movement between decision and execution
+  - You decide to buy at $100.00. By the time your order arrives, best ask is $100.05. You pay 5 cents more than expected.
+- **Market impact:**
+  - Your own order moves the price against you:
+    - **Temporary impact**: Price moves while you're trading, then recovers
+    - **Permanent impact**: Lasting price shift after you're done (you revealed information)
 
 ## The Square-Root Law
 
@@ -97,6 +86,7 @@ A common formula is the **square-root law of market impact**, which says that co
 \\[\\text{Impact (bps)} = \\sigma \\sqrt{\\frac{Q}{V}}\\]
 
 Where:
+
 - \\(\\sigma\\) = daily volatility (in percent)
 - \\(Q\\) = shares you want to trade
 - \\(V\\) = average daily volume
@@ -126,11 +116,13 @@ Funds build **market impact models** that capture both temporary impact (price m
 **Temporary vs permanent impact:**
 
 **Temporary impact:**
+
 - Price moves as you trade
 - Partially recovers after you finish
 - Caused by order flow imbalance and liquidity consumption
 
 **Permanent impact:**
+
 - Lasting price change
 - Does not recover
 - Caused by information revelation (others infer you know something)
@@ -146,6 +138,7 @@ Sophisticated framework that decomposes impact:
 \\[\\text{Cost} = \\frac{1}{2}\\gamma \\sigma X + \\eta \\frac{v}{V}\\]
 
 Where:
+
 - \\(\\gamma\\) = temporary impact coefficient
 - \\(\\sigma\\) = volatility
 - \\(X\\) = total shares to trade
@@ -179,18 +172,21 @@ Modern approaches use **machine learning regression** to predict execution cost 
 **Features for ML cost model:**
 
 **Market features:**
+
 - Current volatility (realized and implied)
 - Bid-ask spread
 - Order book depth at multiple levels
 - Recent trade volume
 
 **Order features:**
+
 - Order size relative to daily volume
 - Urgency (how fast you need to execute)
 - Time of day
 - Order type (market vs limit)
 
 **Historical features:**
+
 - Recent price momentum
 - Trade imbalance (more buys or sells?)
 - Number of trades (activity level)
@@ -205,11 +201,9 @@ Actual execution cost:
 
 **Model types:**
 
-**Linear regression**: Simple baseline
-
-**Gradient boosting** (XGBoost, LightGBM): Captures nonlinear relationships
-
-**Neural networks**: Can model complex interactions
+- **Linear regression**: Simple baseline
+- **Gradient boosting** (XGBoost, LightGBM): Captures nonlinear relationships
+- **Neural networks**: Can model complex interactions
 
 **Example workflow:**
 
@@ -224,13 +218,14 @@ Some firms use **reinforcement learning** to train adaptive execution agents tha
 
 **RL setup:**
 
-**State**: Order book, volatility, remaining quantity
+- **State**: Order book, volatility, remaining quantity
 
-**Action**: How aggressive to trade (market order vs passive limit)
+- **Action**: How aggressive to trade (market order vs passive limit)
 
-**Reward**: Negative cost (minimize cost = maximize reward)
+- **Reward**: Negative cost (minimize cost = maximize reward)
 
 The agent learns:
+
 "When spreads are tight and volatility low, trade aggressively"
 "When spreads are wide and volatility high, trade passively and wait"
 
@@ -243,16 +238,8 @@ By incorporating these costs into backtests, funds get a more honest picture of 
 For each trade in backtest:
 
 1. **Decision**: Model says "buy 10,000 shares"
-
-2. **Look up costs**:
-   - Spread: 5 bps
-   - Commission: 1 bp
-   - Market impact: \\(2\\% \\times \\sqrt{10K/100K} = 0.63\\% = 63 bps\\)
-   - Total: 69 bps
-
-3. **Adjust execution price**:
-   \\[\\text{Fill Price} = \\text{Mid Price} \\times (1 + 0.0069)\\]
-
+2. **Look up costs**: Spread: 5 bps, Commission: 1 bp, Market impact: \\(2\\% \\times \\sqrt{10K/100K} = 0.63\\% = 63 bps\\), Total: 69 bps
+3. **Adjust execution price**: \\[\\text{Fill Price} = \\text{Mid Price} \\times (1 + 0.0069)\\]
 4. **Calculate P&L using adjusted price**
 
 **Portfolio-level costs:**
@@ -266,6 +253,7 @@ Report: "Strategy generated 15% return before costs, 9% after costs. Annual cost
 **Cost-aware strategy optimization:**
 
 Modify strategy to reduce costs:
+
 - Trade less frequently (lower turnover)
 - Use larger buffers before rebalancing (avoid small trades)
 - Concentrate in liquid names (lower impact)

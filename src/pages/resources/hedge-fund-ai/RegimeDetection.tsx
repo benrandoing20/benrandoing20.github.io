@@ -5,6 +5,7 @@ const RegimeDetection = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [What Are Market Regimes](#what-are-market-regimes)
 - [Hidden Markov Models](#hidden-markov-models)
 - [Unsupervised Clustering](#unsupervised-clustering)
@@ -12,7 +13,9 @@ const RegimeDetection = () => {
 - [Modern Dimensionality Reduction](#modern-dimensionality-reduction)
 - [Using Regimes in Practice](#using-regimes-in-practice)
 
-Markets do not move in a single, continuous state — they shift between distinct regimes. Sometimes markets are calm and trending; other times, they are volatile, illiquid, or risk-averse. Recognizing which regime you are in can completely change how strategies behave.
+## Overview
+
+Markets do not move in a single, continuous state, they shift between distinct regimes. Sometimes markets are calm and trending; other times, they are volatile, illiquid, or risk-averse. Recognizing which regime you are in can completely change how strategies behave.
 
 ## What Are Market Regimes
 
@@ -20,38 +23,15 @@ A **market regime** is a distinct state of market behavior characterized by spec
 
 **Common regimes:**
 
-**Bull Market / Risk-On:**
-- Steady upward trends
-- Low volatility
-- High correlations among risky assets
-- Credit spreads narrow
-- Momentum and growth strategies work well
+In **bull markets** or **risk-on** environments, markets exhibit steady upward trends with low volatility. Risky assets move together with high correlations, credit spreads narrow as investors embrace risk, and momentum and growth strategies tend to work well. These are the periods when optimism dominates and capital flows freely into equities and other risk assets.
 
-**Bear Market / Risk-Off:**
-- Sharp declines or choppy sideways action
-- High volatility
-- Flight to safety (bonds, gold rally)
-- Credit spreads widen
-- Defensive and value strategies outperform
+**Bear markets** or **risk-off** regimes are characterized by sharp declines or choppy sideways action. Volatility spikes as uncertainty rises, and investors flee to safety—bonds and gold rally while equities sell off. Credit spreads widen as default risk increases, and defensive and value strategies typically outperform as investors prioritize capital preservation over growth.
 
-**High Volatility / Crisis:**
-- Extreme price swings
-- Liquidity evaporates
-- Correlations spike to 1 (everything moves together)
-- Market makers widen spreads
-- Mean-reversion and arbitrage strategies struggle
+**High volatility** or **crisis** regimes represent the most extreme market conditions. Price swings become violent and unpredictable, liquidity evaporates as market participants pull back, and correlations spike toward 1 as everything moves together in panic. Market makers widen their spreads dramatically, and strategies that rely on mean-reversion or arbitrage often struggle as normal relationships break down.
 
-**Low Volatility / Quiet Markets:**
-- Small daily moves
-- High liquidity
-- Predictable patterns
-- Technical strategies work well
-- Options are cheap
+In **low volatility** or **quiet market** regimes, daily price movements are small and predictable. Liquidity is abundant, patterns are stable, and technical strategies tend to work well. Options become cheap as implied volatility compresses, creating opportunities for volatility buyers but challenging environments for sellers.
 
-**Trending vs Mean-Reverting:**
-- Some periods favor momentum (trend-following)
-- Others favor mean reversion (contrarian)
-- Regime detection identifies which is dominant now
+Markets also alternate between **trending** and **mean-reverting** regimes. Some periods strongly favor momentum strategies that ride trends, while others favor contrarian approaches that bet on reversals. Regime detection helps identify which dynamic is currently dominant, allowing traders to adapt their strategies accordingly rather than fighting the prevailing market character.
 
 ## Hidden Markov Models
 
@@ -92,6 +72,7 @@ A two-state HMM for volatility regimes:
 When the market suddenly drops 3% in a day, the model infers: "We likely transitioned to State 2 (High Vol)."
 
 **Applications:**
+
 - Adjust leverage based on detected state
 - Switch between trend-following and mean-reversion strategies
 - Increase hedging when transitioning to crisis state
@@ -133,24 +114,29 @@ Example:
 The choice of features determines what regimes you detect:
 
 **Return-based:**
+
 - Average daily return
 - Return skewness (are big moves up or down?)
 - Kurtosis (fat tails?)
 
 **Volatility-based:**
+
 - Realized volatility (standard deviation of returns)
 - Volatility of volatility (how unstable is volatility itself?)
 
 **Correlation-based:**
+
 - Average cross-asset correlation
 - Dispersion (how much individual stocks differ from index)
 
 **Liquidity/Microstructure:**
+
 - Bid-ask spreads
 - Volume and turnover
 - Order book depth
 
 **Macro:**
+
 - VIX level
 - Credit spreads (high yield vs investment grade)
 - Yield curve slope
@@ -179,11 +165,13 @@ Suddenly, returns shift to \\(N(-0.2\\%, 2.5\\%)\\) (stressed regime).
 Change-point detection identifies: "A regime shift likely occurred 3 days ago with 85% confidence."
 
 **Advantages:**
+
 - Detects shifts quickly
 - Doesn't require pre-defined states
 - Provides confidence estimates
 
 **Applications:**
+
 - Alert traders when market character changes
 - Trigger automatic portfolio rebalancing
 - Pause strategies that are regime-dependent
@@ -197,6 +185,7 @@ High-dimensional market data (prices, volumes, spreads across hundreds of assets
 Maps high-dimensional data to 2D or 3D space, preserving local structure. Useful for **visualizing** clusters.
 
 **Process:**
+
 1. Compute features for each day: returns, volatility, correlations
 2. Apply t-SNE to reduce to 2 dimensions
 3. Plot each day as a point
@@ -212,6 +201,7 @@ Similar to t-SNE but faster and better at preserving global structure. Gaining p
 Neural networks that compress data into a low-dimensional latent space and then reconstruct it.
 
 **Regime detection workflow:**
+
 1. Train autoencoder on historical market data
 2. Extract latent representations (e.g., 3 latent factors)
 3. Cluster the latent space using k-means or GMM
@@ -224,6 +214,7 @@ Neural networks that compress data into a low-dimensional latent space and then 
 Neural networks that learn a 2D grid representation of high-dimensional data. Each grid cell represents a prototype market state.
 
 Useful for:
+
 - Visualizing regime structure
 - Identifying rare or extreme regimes
 - Tracking regime transitions over time
@@ -243,6 +234,7 @@ Different strategies work in different regimes:
 **Volatility arbitrage**: Works in calm regimes with predictable vol, fails in crisis
 
 By detecting regimes, funds can:
+
 - Activate or deactivate specific strategies
 - Blend strategies dynamically based on current regime
 - Weight strategies by recent regime-specific performance
@@ -250,6 +242,7 @@ By detecting regimes, funds can:
 **Dynamic Leverage:**
 
 Adjust portfolio leverage based on regime:
+
 - **Calm regime**: Increase leverage (low risk, stable returns)
 - **Volatile regime**: Reduce leverage (high risk, protect capital)
 - **Crisis regime**: Cut leverage dramatically or go to cash
@@ -257,6 +250,7 @@ Adjust portfolio leverage based on regime:
 **Risk Management:**
 
 Set position limits and stop-losses based on regime:
+
 - In calm markets: Tolerate 2% daily loss
 - In volatile markets: Cut positions at 1% daily loss
 - In crisis: Implement strict risk limits and increase liquidity
@@ -264,6 +258,7 @@ Set position limits and stop-losses based on regime:
 **Portfolio Rotation:**
 
 Rotate exposures based on regime:
+
 - **Risk-on**: Overweight equities, emerging markets, high yield
 - **Risk-off**: Overweight bonds, gold, defensive sectors
 - **High vol**: Shift to cash, short vol products, tail hedges

@@ -5,6 +5,7 @@ const TradingExecutionAgents = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Beyond Static Algorithms](#beyond-static-algorithms)
 - [Reinforcement Learning for Execution](#reinforcement-learning-for-execution)
 - [Adaptive Market Behavior](#adaptive-market-behavior)
@@ -12,6 +13,8 @@ const TradingExecutionAgents = () => {
 - [Guardrails and Control](#guardrails-and-control)
 - [Portfolio Rebalancing Agents](#portfolio-rebalancing-agents)
 - [Agent Collaboration](#agent-collaboration)
+
+## Overview
 
 Trading and execution agents represent the next leap in autonomous finance. They don't just predict price movements, they plan and act in the market, adapting to conditions in real time.
 
@@ -22,9 +25,10 @@ Trading and execution agents represent the next leap in autonomous finance. They
 Portfolio manager decides: "Buy 100,000 shares of AAPL"
 
 Algorithm follows fixed rule:
-- TWAP: Split evenly over 4 hours
-- VWAP: Match historical volume pattern
-- POV: Trade fixed percentage of market volume
+
+- Time-Weighted Average Price (TWAP): Split evenly over 4 hours
+- Volume-Weighted Average Price (VWAP): Match historical volume pattern
+- Percentage of Volume (POV): Trade fixed percentage of market volume
 
 **Problem**: Market conditions change, but algorithm doesn't adapt.
 
@@ -33,6 +37,7 @@ Algorithm follows fixed rule:
 Agent receives objective: "Acquire 100,000 share position with minimal market impact"
 
 Agent continuously:
+
 - Monitors order book depth
 - Assesses spread and volatility
 - Predicts near-term liquidity
@@ -45,6 +50,7 @@ Algorithms follow rules. Agents reason about goals.
 **Example scenario:**
 
 \`\`\`
+
 Time: 10:00 AM
 Task: Buy 50,000 shares
 Market: Spread 2 cents, volume healthy
@@ -103,13 +109,10 @@ Minimize implementation shortfall:
 
 **What the agent learns:**
 
-**Liquidity timing**: Trade aggressively when liquidity is deep, patiently when thin
-
-**Spread dynamics**: Place limit orders when spreads are wide, take liquidity when tight
-
-**Adverse selection**: Detect informed traders and adjust (wider spreads, smaller sizes)
-
-**End-of-day urgency**: Accelerate if time running out, slow down if ahead of schedule
+- **Liquidity timing**: Trade aggressively when liquidity is deep, patiently when thin
+- **Spread dynamics**: Place limit orders when spreads are wide, take liquidity when tight
+- **Adverse selection**: Detect informed traders and adjust (wider spreads, smaller sizes)
+- **End-of-day urgency**: Accelerate if time running out, slow down if ahead of schedule
 
 **Training process:**
 
@@ -134,6 +137,7 @@ Imagine an agent tasked with executing a $10 million order. It monitors live dat
 **Which venue offers the best fill probability?**
 
 Agent observes:
+
 - NYSE: 50,000 shares at best bid
 - NASDAQ: 30,000 shares at best bid  
 - Dark pool: Unknown but historically good fills for large size
@@ -143,6 +147,7 @@ Agent reasoning: Split 60% to NYSE (best displayed liquidity), 30% to dark pool 
 **How should it slice the order to minimize impact?**
 
 Agent considers:
+
 - Order size relative to average daily volume
 - Square-root market impact law
 - Current volatility regime
@@ -152,6 +157,7 @@ Decision: Split into 50 child orders ranging from 200 to 2,000 shares each, size
 **Should it wait for liquidity to recover or act before others move?**
 
 Agent detects:
+
 - Unusual buying pressure from another institution
 - Order book thinning on the offer side
 - Price starting to move up
@@ -165,6 +171,7 @@ Action: Increase urgency, use more aggressive order types (IOC, market orders).
 Agent doesn't just react, it plans ahead:
 
 \`\`\`
+
 Current state: 60% of order complete, spread widening
 Forecast: If I keep trading, spread will widen further (my impact)
 Alternative plan: Pause for 5 minutes, let market calm down
@@ -181,25 +188,23 @@ Modern markets are fragmented across dozens of venues: NYSE, NASDAQ, BATS, dark 
 **Routing challenge:**
 
 For each child order, decide:
+
 - Which venue(s) to use
 - What order type
 - How to split if using multiple venues
 
 **Agent considerations:**
 
-**Liquidity**: Where is depth best right now?
-
-**Fill probability**: Historical fill rates by venue and order type
-
-**Adverse selection**: Some venues attract informed traders (higher risk)
-
-**Fees**: Maker vs taker fees, exchange rebates
-
-**Information leakage**: Visible orders reveal your intent
+- **Liquidity**: Where is depth best right now?
+- **Fill probability**: Historical fill rates by venue and order type
+- **Adverse selection**: Some venues attract informed traders (higher risk)
+- **Fees**: Maker vs taker fees, exchange rebates
+- **Information leakage**: Visible orders reveal your intent
 
 **Agent strategy:**
 
 \`\`\`
+
 Order: Buy 1,000 shares
 
 Agent analysis:
@@ -232,6 +237,7 @@ These agents operate within strict guardrails. Human traders define their object
 **Defined boundaries:**
 
 **Hard limits:**
+
 - Maximum position size
 - Maximum order size
 - Price collar (don't execute more than X% away from reference price)
@@ -239,6 +245,7 @@ These agents operate within strict guardrails. Human traders define their object
 - Approved venues only
 
 **Soft limits (warnings):**
+
 - Execution pace (flag if too fast or slow)
 - Slippage thresholds (alert if exceeding expectations)
 - Fill rate targets (warn if too many cancellations)
@@ -246,6 +253,7 @@ These agents operate within strict guardrails. Human traders define their object
 **Example constraint system:**
 
 \`\`\`
+
 Agent objective: Buy 50,000 shares TSLA
 
 Human-defined constraints:
@@ -263,15 +271,14 @@ Agent operates within bounds:
 
 **Human oversight:**
 
-**Real-time monitoring**: Dashboard shows agent decisions, current progress, and metrics
-
-**Intervention**: Human can pause, modify objectives, or take manual control anytime
-
-**Post-trade review**: Every decision logged with reasoning for audit
+- **Real-time monitoring**: Dashboard shows agent decisions, current progress, and metrics
+- **Intervention**: Human can pause, modify objectives, or take manual control anytime
+- **Post-trade review**: Every decision logged with reasoning for audit
 
 **Approval for edge cases**:
 
 \`\`\`
+
 Agent: "Current execution pace is slow due to thin liquidity. 
        Recommend extending time horizon from 2 hours to 3 hours. 
        Alternative: Accept higher slippage and accelerate. 
@@ -295,6 +302,7 @@ Portfolio has 100 positions. Model signals new target weights. Need to execute t
 **Step 1: Prioritize**
 
 Which positions most urgent to adjust?
+
 - Large tracking error → high priority
 - Illiquid names → start early
 - Correlated pairs → coordinate timing
@@ -304,6 +312,7 @@ Which positions most urgent to adjust?
 Can't trade everything at once (market impact, capital constraints)
 
 Agent decides order of operations:
+
 1. Execute liquid large-caps first (fast, low impact)
 2. Start working illiquid small-caps (need time)
 3. Adjust hedges and factor exposures
@@ -331,17 +340,15 @@ In advanced systems, multiple specialized agents work together.
 
 **Agent specialization:**
 
-**Forecasting Agent**: Predicts short-term price moves
-
-**Execution Agent**: Decides how to trade
-
-**Routing Agent**: Determines venue allocation
-
-**Risk Agent**: Monitors exposure and flags issues
+- **Forecasting Agent**: Predicts short-term price moves
+- **Execution Agent**: Decides how to trade
+- **Routing Agent**: Determines venue allocation
+- **Risk Agent**: Monitors exposure and flags issues
 
 **Example collaborative workflow:**
 
 \`\`\`
+
 Forecasting Agent: "AAPL has positive short-term signal (next 30 min)"
 
 Execution Agent: "Received. Increasing urgency for AAPL order"
@@ -363,7 +370,8 @@ Execution Agent: "Adjusting pace accordingly"
 
 Agents exchange structured messages:
 
-\`\`\`json
+\`\`\`
+
 {
   "from": "forecast_agent",
   "to": "execution_agent",
@@ -380,13 +388,10 @@ Agents exchange structured messages:
 
 **Coordination benefits:**
 
-**Shared context**: All agents see same market state
-
-**Consistent objectives**: Aligned toward same goals
-
-**Graceful degradation**: If one agent fails, others continue
-
-**Auditability**: Full message log for post-trade analysis
+- **Shared context**: All agents see same market state
+- **Consistent objectives**: Aligned toward same goals
+- **Graceful degradation**: If one agent fails, others continue
+- **Auditability**: Full message log for post-trade analysis
 
 **The future of execution:**
 

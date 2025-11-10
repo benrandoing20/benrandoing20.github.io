@@ -5,12 +5,15 @@ const FactorModels = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Understanding What Drives Returns](#understanding-what-drives-returns)
 - [The Market Model](#the-market-model)
 - [Fama-French Three-Factor Model](#fama-french-three-factor-model)
 - [Extended Factor Models](#extended-factor-models)
 - [Custom Factors for Hedge Funds](#custom-factors-for-hedge-funds)
 - [Using Factors for Risk Management](#using-factors-for-risk-management)
+
+## Overview
 
 The final layer of risk management is understanding what actually drives your returns. Hedge funds use factor models to decompose portfolio risk into systematic components (the broad themes that explain most market movements).
 
@@ -27,13 +30,10 @@ Factor models answer these questions by breaking down returns into components.
 
 **Why this matters:**
 
-**Identify unintended bets**: You might think you're market neutral but actually have hidden growth exposure
-
-**Better attribution**: Understand which parts of performance came from skill vs factor exposure
-
-**Improve hedging**: Neutralize unwanted factor risks
-
-**Explain volatility**: Know which factors drive your portfolio's ups and downs
+- **Identify unintended bets**: You might think you're market neutral but actually have hidden growth exposure
+- **Better attribution**: Understand which parts of performance came from skill vs factor exposure
+- **Improve hedging**: Neutralize unwanted factor risks
+- **Explain volatility**: Know which factors drive your portfolio's ups and downs
 
 ## The Market Model
 
@@ -44,6 +44,7 @@ The simplest factor model is the **market model**, which splits total return int
 \\[r_i = \\alpha_i + \\beta_i r_m + \\epsilon_i\\]
 
 Where:
+
 - \\(r_i\\) = return of asset (or portfolio) \\(i\\)
 - \\(r_m\\) = market return (e.g., S&P 500)
 - \\(\\beta_i\\) = sensitivity to market moves
@@ -52,21 +53,21 @@ Where:
 
 **Interpretation:**
 
-**Beta**: If \\(\\beta = 1.2\\), when market goes up 10%, this asset goes up 12%
-
-**Alpha**: If \\(\\alpha = 5\\%\\) annually, the asset beats the market by 5% after adjusting for beta
+- **Beta**: If \\(\\beta = 1.2\\), when market goes up 10%, this asset goes up 12%
+- **Alpha**: If \\(\\alpha = 5\\%\\) annually, the asset beats the market by 5% after adjusting for beta
 
 **Example:**
 
 Hedge fund returns: 15%
-Market returns: 10%
-Estimated beta: 0.8
+
+- Market returns: 10%
+- Estimated beta: 0.8
 
 Expected return based on beta: \\(0.8 \\times 10\\% = 8\\%\\)
 
-Alpha: \\(15\\% - 8\\% = 7\\%\\)
+- Alpha: \\(15\\% - 8\\% = 7\\%\\)
 
-The fund generated 7% of true outperformance beyond market exposure.
+- The fund generated 7% of true outperformance beyond market exposure.
 
 ## Fama-French Three-Factor Model
 
@@ -78,34 +79,34 @@ In reality, there are many sources of systematic risk beyond the market itself. 
 
 **Three factors:**
 
-**MKT (Market)**: Excess return of the market over risk-free rate
-
-**SMB (Small Minus Big)**: Return of small-cap stocks minus large-cap stocks
-
-**HML (High Minus Low)**: Return of value stocks (high book-to-market) minus growth stocks
+- **MKT (Market)**: Excess return of the market over risk-free rate
+- **SMB (Small Minus Big)**: Return of small-cap stocks minus large-cap stocks
+- **HML (High Minus Low)**: Return of value stocks (high book-to-market) minus growth stocks
 
 **Interpretation:**
 
-\\(\\beta^{\\text{SMB}} = 0.5\\): Portfolio is tilted toward small caps
-
-\\(\\beta^{\\text{HML}} = -0.3\\): Portfolio is tilted toward growth (negative value exposure)
+- \\(\\beta^{\\text{SMB}} = 0.5\\): Portfolio is tilted toward small caps
+- \\(\\beta^{\\text{HML}} = -0.3\\): Portfolio is tilted toward growth (negative value exposure)
 
 **Example:**
 
 Fund returns: 18%
 
 Regression results:
+
 - \\(\\beta^{\\text{MKT}} = 0.9\\)
 - \\(\\beta^{\\text{SMB}} = 0.4\\)
 - \\(\\beta^{\\text{HML}} = -0.2\\)
 - \\(\\alpha = 6\\%\\)
 
 Factor returns over the period:
+
 - MKT: 10%
 - SMB: 5%
 - HML: 3%
 
 Expected return from factors:
+
 \\[0.9(10\\%) + 0.4(5\\%) - 0.2(3\\%) = 9\\% + 2\\% - 0.6\\% = 10.4\\%\\]
 
 Alpha: \\(18\\% - 10.4\\% = 7.6\\%\\)
@@ -133,13 +134,10 @@ Adds profitability (RMW: Robust Minus Weak) and investment (CMA: Conservative Mi
 
 **Other common factors:**
 
-**Quality**: High quality (stable earnings, low debt) minus low quality
-
-**Low volatility**: Low vol stocks minus high vol stocks
-
-**Liquidity**: Liquid stocks minus illiquid stocks
-
-**Carry**: Assets with high carry (interest, dividends) minus low carry
+- **Quality**: High quality (stable earnings, low debt) minus low quality
+- **Low volatility**: Low vol stocks minus high vol stocks
+- **Liquidity**: Liquid stocks minus illiquid stocks
+- **Carry**: Assets with high carry (interest, dividends) minus low carry
 
 ## Custom Factors for Hedge Funds
 
@@ -147,15 +145,11 @@ Hedge funds often build **custom factor models** tailored to their universe. A g
 
 **Example custom factors:**
 
-**Credit spread factor**: Investment-grade spreads vs high-yield spreads
-
-**Curve factor**: Slope of yield curve (long rates minus short rates)
-
-**Commodity factor**: Energy vs metals
-
-**FX factor**: Dollar strength vs emerging market currencies
-
-**Volatility factor**: VIX level
+- **Credit spread factor**: Investment-grade spreads vs high-yield spreads
+- **Curve factor**: Slope of yield curve (long rates minus short rates)
+- **Commodity factor**: Energy vs metals
+- **FX factor**: Dollar strength vs emerging market currencies
+- **Volatility factor**: VIX level
 
 **Estimating exposures:**
 
@@ -252,15 +246,13 @@ Ultimately, factor models turn risk into something measurable and manageable. Th
 
 **Key insights:**
 
-**Returns have structure**: Most assets move together along common factors
-
-**Alpha is rare**: After adjusting for factor exposures, true skill is hard to find
-
-**Risk is decomposable**: You can measure and control each source of risk independently
-
-**Hedging is precise**: Neutralize specific risks without disturbing others
+- **Returns have structure**: Most assets move together along common factors
+- **Alpha is rare**: After adjusting for factor exposures, true skill is hard to find
+- **Risk is decomposable**: You can measure and control each source of risk independently
+- **Hedging is precise**: Neutralize specific risks without disturbing others
 
 A hedge fund that understands its factor exposures can:
+
 - Take intentional risks and hedge unintended ones
 - Communicate sources of return clearly
 - Survive regime changes by adjusting factor tilts

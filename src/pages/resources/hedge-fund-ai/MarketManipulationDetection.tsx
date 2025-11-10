@@ -5,6 +5,7 @@ const MarketManipulationDetection = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Manipulation Detection Matters](#why-manipulation-detection-matters)
 - [Types of Market Manipulation](#types-of-market-manipulation)
 - [Sequence Modeling for Detection](#sequence-modeling-for-detection)
@@ -14,33 +15,30 @@ const MarketManipulationDetection = () => {
 - [Alert Generation and Case Management](#alert-generation-and-case-management)
 - [Regulatory Reporting](#regulatory-reporting)
 
+## Overview
+
 Market manipulation threatens the integrity of financial systems, and even unintentional activity can appear manipulative if not carefully monitored.
 
 ## Why Manipulation Detection Matters
 
 **The stakes:**
 
-**Legal risk**: Manipulation is a serious crime (Securities Exchange Act Section 9, 10b)
-
-**Reputational damage**: Being accused destroys credibility with investors and counterparties
-
-**Market integrity**: Manipulation harms price discovery and liquidity
-
-**Systemic risk**: Coordinated manipulation can destabilize markets
-
-**Regulatory scrutiny**: Violations bring fines, trading bans, criminal charges
+- **Legal risk**: Manipulation is a serious crime (Securities Exchange Act Section 9, 10b)
+- **Reputational damage**: Being accused destroys credibility with investors and counterparties
+- **Market integrity**: Manipulation harms price discovery and liquidity
+- **Systemic risk**: Coordinated manipulation can destabilize markets
+- **Regulatory scrutiny**: Violations bring fines, trading bans, criminal charges
 
 **Historical cases:**
 
-**Navinder Sarao (2015)**: Spoofing contributed to Flash Crash; sentenced to prison and $38M fine
-
-**JP Morgan (2020)**: $920M fine for precious metals and Treasury spoofing
-
-**Multiple traders (ongoing)**: Regular enforcement actions for layering, wash trading, and quote stuffing
+- **Navinder Sarao (2015)**: Spoofing contributed to Flash Crash; sentenced to prison and $38M fine
+- **JP Morgan (2020)**: $920M fine for precious metals and Treasury spoofing
+- **Multiple traders (ongoing)**: Regular enforcement actions for layering, wash trading, and quote stuffing
 
 **The defense:**
 
 Even legitimate trading can look suspicious if analyzed out of context. Hedge funds must proactively monitor their activity to:
+
 - Catch accidental violations before regulators do
 - Prove good faith if questioned
 - Identify rogue employees
@@ -64,12 +62,9 @@ Placing fake orders to move prices, then canceling them before execution.
 
 **Characteristics:**
 
-**High cancel rate**: Most orders canceled, not executed
-
-**Time pattern**: Orders placed and canceled within seconds
-
-**Price impact**: Orders move market but don't trade
-
+- **High cancel rate**: Most orders canceled, not executed
+- **Time pattern**: Orders placed and canceled within seconds
+- **Price impact**: Orders move market but don't trade
 **Repetitive behavior**: Same pattern repeated many times
 
 **Example:**
@@ -99,11 +94,13 @@ Submitting multiple levels of deceptive orders to create false depth.
 **Example:**
 
 Layer structure:
+
 - Sell 5,000 shares at $100.10
 - Sell 5,000 shares at $100.15
 - Sell 5,000 shares at $100.20
 
 Real intent:
+
 - Buy 500 shares at $99.95 (hidden small order)
 
 Market sees selling pressure, price drops, buy order fills, cancel sell orders.
@@ -114,21 +111,16 @@ Buying and selling the same asset to inflate volume or mislead others.
 
 **Forms:**
 
-**Self-trading**: Same account buys and sells
-
-**Cross-account**: Coordinated between related accounts
-
-**Purpose**: Create false appearance of activity or interest
+- **Self-trading**: Same account buys and sells
+- **Cross-account**: Coordinated between related accounts
+- **Purpose**: Create false appearance of activity or interest
 
 **Characteristics:**
 
-**No economic transfer**: Net position unchanged
-
-**Volume inflation**: Artificially high trading volume
-
-**Simultaneous or near-simultaneous**: Offsetting trades close together
-
-**Pattern repetition**: Repeated wash cycles
+- **No economic transfer**: Net position unchanged
+- **Volume inflation**: Artificially high trading volume
+- **Simultaneous or near-simultaneous**: Offsetting trades close together
+- **Pattern repetition**: Repeated wash cycles
 
 **Regulatory definition:**
 
@@ -148,13 +140,10 @@ Flooding the market with orders to slow down competitors.
 
 **Characteristics:**
 
-**Extreme message rate**: 1,000+ orders/second
-
-**Very high cancel ratio**: > 95% canceled
-
-**No intent to execute**: Orders priced away from market
-
-**Timing advantage**: Create latency for others while you trade
+- **Extreme message rate**: 1,000+ orders/second
+- **Very high cancel ratio**: > 95% canceled
+- **No intent to execute**: Orders priced away from market
+- **Timing advantage**: Create latency for others while you trade
 
 **Harmful effects:**
 
@@ -169,6 +158,7 @@ Modern systems rely on **sequence modeling** and **anomaly detection** to flag s
 **Why sequence matters:**
 
 Manipulation is defined by **patterns over time**, not individual orders. You must model:
+
 - Order placement → modification → cancellation sequences
 - Timing between events
 - Price movements correlated with orders
@@ -181,6 +171,7 @@ Manipulation is defined by **patterns over time**, not individual orders. You mu
 Input: Sequence of order events (place, modify, cancel, execute)
 
 Each event encoded as vector:
+
 - Event type
 - Order size
 - Price level
@@ -204,6 +195,7 @@ Output: Probability of manipulation
 **LSTM formulation:**
 
 \\[h_t = \\text{LSTM}(x_t, h_{t-1})\\]
+
 \\[p_t = \\text{sigmoid}(W h_t + b)\\]
 
 Where \\(p_t\\) is probability of manipulation at time \\(t\\).
@@ -212,15 +204,14 @@ Where \\(p_t\\) is probability of manipulation at time \\(t\\).
 
 **Advantages over RNN:**
 
-**Parallel computation**: Faster training and inference
-
-**Long memory**: Dilated convolutions capture long-range dependencies
-
-**Stable gradients**: Avoids vanishing gradient problem
+- **Parallel computation**: Faster training and inference
+- **Long memory**: Dilated convolutions capture long-range dependencies
+- **Stable gradients**: Avoids vanishing gradient problem
 
 **Architecture:**
 
 Stacked convolutional layers with increasing dilation:
+
 - Layer 1: Dilation 1 (looks at adjacent events)
 - Layer 2: Dilation 2 (looks 2 steps back)
 - Layer 3: Dilation 4 (looks 4 steps back)
@@ -231,18 +222,21 @@ This allows the model to see patterns across different timescales.
 **Features for sequence models:**
 
 **Order features:**
+
 - Size relative to average
 - Price relative to best bid/offer
 - Time in book before cancel
 - Number of modifications
 
 **Market context:**
+
 - Spread
 - Volatility
 - Volume
 - Order book imbalance
 
 **Historical patterns:**
+
 - Recent cancel rate
 - Previous similar sequences
 - Trader's typical behavior
@@ -254,6 +248,7 @@ Some firms use **graph analytics** to map relationships between traders, venues,
 **Why graphs matter:**
 
 Sophisticated manipulation involves:
+
 - Multiple accounts
 - Different instruments
 - Cross-venue coordination
@@ -264,12 +259,14 @@ Traditional rules analyze each order independently. Graph analytics see the conn
 **Graph construction:**
 
 **Nodes:**
+
 - Traders (accounts)
 - Instruments (stocks, futures)
 - Venues (exchanges)
 - Orders
 
 **Edges:**
+
 - Trader → Order (who placed it)
 - Order → Instrument (what was traded)
 - Order → Venue (where it was sent)
@@ -277,13 +274,10 @@ Traditional rules analyze each order independently. Graph analytics see the conn
 
 **Graph features:**
 
-**Connectivity**: How many related accounts?
-
-**Clustering coefficient**: How tightly interconnected?
-
-**Centrality**: Which nodes are most influential?
-
-**Temporal patterns**: Orders from connected nodes happening simultaneously?
+- **Connectivity**: How many related accounts?
+- **Clustering coefficient**: How tightly interconnected?
+- **Centrality**: Which nodes are most influential?
+- **Temporal patterns**: Orders from connected nodes happening simultaneously?
 
 **Detection algorithms:**
 
@@ -304,6 +298,7 @@ Louvain algorithm, modularity optimization
 **Pattern**: Wash trading across accounts
 
 **Graph signal**:
+
 - Account A and Account B trade same instrument
 - Orders are offsetting (buys match sells)
 - Timing is synchronized (< 1 second apart)
@@ -367,17 +362,20 @@ Where \\(h(x)\\) is average path length for point \\(x\\), and \\(c(n)\\) is nor
 **Features for anomaly detection:**
 
 **Order statistics:**
+
 - Cancel rate (orders canceled / total orders)
 - Order-to-trade ratio
 - Average time in book
 - Message rate
 
 **Timing features:**
+
 - Time between orders
 - Clustering of activity
 - Correlation with price moves
 
 **Economic features:**
+
 - P&L from each strategy
 - Position turnover
 - Fill rate
@@ -389,28 +387,33 @@ Beyond detection, **real-time trade surveillance platforms** aggregate alerts, v
 **Surveillance architecture:**
 
 **Data ingestion layer:**
+
 - Real-time order feed
 - Execution feed
 - Market data
 - Position updates
 
 **Processing layer:**
+
 - Rule engine (pattern matching)
 - ML models (sequence, graph, anomaly)
 - Feature engineering
 
 **Alert generation:**
+
 - Score each trading pattern
 - Threshold-based triggers
 - Prioritize by risk level
 
 **Visualization layer:**
+
 - Dashboards for compliance officers
 - Order sequence timelines
 - Graph visualizations
 - Statistical summaries
 
 **Case management:**
+
 - Alert triage and assignment
 - Investigation workflow
 - Evidence collection
@@ -441,18 +444,21 @@ Low score → logged for analysis
 **Dashboard features:**
 
 **Real-time metrics:**
+
 - Alerts per hour
 - Open investigations
 - High-priority cases
 - Compliance coverage
 
 **Historical trends:**
+
 - Alert volume over time
 - Resolution rates
 - Common patterns
 - Repeat offenders
 
 **Drill down:**
+
 - Click alert to see full order sequence
 - View trader's complete activity
 - Compare to normal behavior baseline
@@ -464,44 +470,22 @@ These systems log all flagged activity for audit and potential regulator handoff
 
 **Alert lifecycle:**
 
-1. **Generation**: Automated detection creates alert
-
-2. **Triage**: Compliance officer reviews priority and assigns
-
-3. **Investigation**: Analyst examines evidence
-   - Order sequences
-   - Market context
-   - Trader intent
-   - Economic rationale
-
-4. **Disposition**:
-   - **False positive**: Normal trading, close alert
-   - **True positive**: Violation confirmed, escalate
-   - **Uncertain**: Requires further monitoring
-
-5. **Escalation** (if true positive):
-   - Management notification
-   - Legal review
-   - Potential disciplinary action
-   - Regulatory filing if required
-
-6. **Documentation**: Full record of investigation and decision
+1. **Generation**: Automated detection creates alert with metadata (time, trader, instrument, pattern type) and initial severity score
+2. **Triage**: Compliance officer reviews alert queue sorted by priority, assesses severity, assigns to analyst, and sets investigation deadline
+3. **Investigation**: Analyst examines evidence including order sequences, market context, trader intent, and economic rationale
+4. **Disposition**: Analyst determines outcome: **False positive** (normal trading, close alert), **True positive** (violation confirmed, escalate), or **Uncertain** (requires further monitoring)
+5. **Escalation** (if true positive): Management notification, legal review, potential disciplinary action, and regulatory filing if required
+6. **Documentation**: Full record of investigation and decision with complete audit trail, evidence package, and rationale for future reference
 
 **Case documentation requirements:**
 
-**Alert details**: What triggered it, when, which trader
-
-**Evidence**: Order logs, timing analysis, market data
-
-**Analysis**: Why this looks suspicious (or doesn't)
-
-**Disposition rationale**: Why case was closed or escalated
-
-**Actions taken**: Warnings, training, penalties, reporting
-
-**Reviewer signatures**: Who investigated, who approved
-
-**Retention**: Maintain for 6+ years per regulations
+- **Alert details**: What triggered it, when, which trader
+- **Evidence**: Order logs, timing analysis, market data
+- **Analysis**: **Why this looks suspicious (or doesn't)**
+- **Disposition rationale**: **Why case was closed or escalated**
+- **Actions taken**: **Warnings, training, penalties, reporting**
+- **Reviewer signatures**: **Who investigated, who approved**
+- **Retention**: **Maintain for 6+ years per regulations**
 
 ## Regulatory Reporting
 
@@ -512,6 +496,7 @@ The goal is twofold: prevent intentional abuse and catch unintentional patterns 
 **Suspicious Activity Reports (SARs):**
 
 Required when:
+
 - Manipulation is detected or suspected
 - Activity has no reasonable business purpose
 - Patterns consistent with known manipulation
@@ -524,33 +509,31 @@ Required when:
 
 Detailed trading records requested by regulators during investigations.
 
-**Content**: Every order and execution with timestamps, accounts, strategies
-
-**Format**: Standardized electronic submission
-
-**Response time**: Days to weeks depending on scope
+- **Content**: Every order and execution with timestamps, accounts, strategies
+- **Format**: Standardized electronic submission
+- **Response time**: Days to weeks depending on scope
 
 **OATS/CAT (Consolidated Audit Trail):**
 
 Automated reporting of all orders to regulators.
 
-**Data**: Every order, modification, cancellation, execution
-
-**Frequency**: Real-time or end-of-day
-
-**Purpose**: Regulators can reconstruct market events and detect manipulation
+- **Data**: Every order, modification, cancellation, execution
+- **Frequency**: Real-time or end-of-day
+- **Purpose**: Regulators can reconstruct market events and detect manipulation
 
 **Voluntary disclosure:**
 
 When internal systems detect potential violations:
 
 **Benefits of self-reporting:**
+
 - Reduced penalties
 - Demonstrates good faith
 - Shows effective controls
 - Builds regulatory trust
 
 **Process:**
+
 1. Discover potential violation
 2. Conduct internal investigation
 3. Determine if reporting required
@@ -564,15 +547,11 @@ Maintaining this vigilance keeps the fund's trading clean and credible, which, i
 
 Effective manipulation detection requires:
 
-**Technology**: Advanced models and surveillance systems
-
-**Process**: Clear escalation and investigation procedures
-
-**People**: Trained compliance staff who understand markets
-
-**Culture**: Emphasis on integrity, not just profit
-
-**Leadership**: Management commitment to doing things right
+- **Technology**: Advanced models and surveillance systems
+- **Process**: Clear escalation and investigation procedures
+- **People**: Trained compliance staff who understand markets
+- **Culture**: Emphasis on integrity, not just profit
+- **Leadership**: Management commitment to doing things right
 
 The best hedge funds treat compliance not as overhead but as competitive advantage. Clean trading records open doors with investors, counterparties, and prime brokers. Manipulation scandals close them permanently.
 

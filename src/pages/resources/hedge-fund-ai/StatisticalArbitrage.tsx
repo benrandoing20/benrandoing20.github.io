@@ -5,12 +5,15 @@ const StatisticalArbitrage = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [What is Statistical Arbitrage](#what-is-statistical-arbitrage)
 - [Pairs Trading](#pairs-trading)
 - [Cointegration and Mean Reversion](#cointegration-and-mean-reversion)
 - [Portfolio-Level Stat-Arb](#portfolio-level-stat-arb)
 - [Machine Learning Enhancements](#machine-learning-enhancements)
 - [Execution and Risk Control](#execution-and-risk-control)
+
+## Overview
 
 Statistical arbitrage, often shortened to stat-arb, is about finding relationships between assets that usually move together and trading when that relationship temporarily breaks. The bet is that prices will eventually converge again.
 
@@ -20,13 +23,13 @@ At its core, stat-arb exploits **temporary deviations from equilibrium**. When a
 
 **Key principles:**
 
-**Mean reversion**: Spreads between related assets tend to return to their historical average
+- **Mean reversion**: Spreads between related assets tend to return to their historical average
 
-**Market neutrality**: Positions are hedged so that overall market direction doesn't matter
+- **Market neutrality**: Positions are hedged so that overall market direction doesn't matter
 
-**Statistical significance**: Trades are based on measurable deviations, not subjective judgment
+- **Statistical significance**: Trades are based on measurable deviations, not subjective judgment
 
-**High frequency**: Many small trades, each with modest expected profit, aggregated into consistent returns
+- **High frequency**: Many small trades, each with modest expected profit, aggregated into consistent returns
 
 Unlike directional strategies that bet on market moves, stat-arb aims to be **market neutral**, profiting from relative value rather than absolute price changes.
 
@@ -37,17 +40,11 @@ The simplest version is **pairs trading**. Suppose two airline stocks historical
 **Classic pairs trading workflow:**
 
 1. **Identify correlated pairs**: Screen universe for stocks with high correlation (e.g., > 0.8)
-
 2. **Test for cointegration**: Verify that the relationship is stable over time
-
-3. **Calculate spread**: \\(S_t = P_1(t) - \\beta P_2(t)\\), where \\(\\beta\\) is the hedge ratio
-
+3. **Calculate spread**: \\(S_t = P_1(t) - \\beta P_2(t)\\), where \\(\\beta\\) is the hedge ratio that determines how many shares of stock 2 to trade for each share of stock 1, ensuring the position is hedged against common market movements. The hedge ratio is typically estimated from historical regression of \\(P_1\\) on \\(P_2\\), and is influenced by the relative volatilities of the two assets, their correlation strength, and their fundamental business similarities
 4. **Model spread dynamics**: Estimate mean and standard deviation of \\(S_t\\)
-
 5. **Define entry rules**: Enter when \\(|S_t - \\mu| > 2\\sigma\\) (spread deviates 2 standard deviations)
-
 6. **Define exit rules**: Exit when spread reverts to mean or hits stop loss
-
 7. **Execute**: Short expensive stock, long cheap stock, in ratio \\(\\beta\\)
 
 **Example:**
@@ -92,6 +89,7 @@ Once cointegration is established, the spread is modeled as a **mean-reverting p
 \\[dS_t = \\theta(\\mu - S_t)dt + \\sigma dW_t\\]
 
 Where:
+
 - \\(\\theta\\) = speed of mean reversion (how fast spread returns to mean)
 - \\(\\mu\\) = long-term mean of spread
 - \\(\\sigma\\) = volatility of spread
@@ -112,6 +110,7 @@ More sophisticated approaches look at **groups or portfolios** of correlated ass
 **Basket trading:**
 
 Instead of pairing individual stocks, create baskets:
+
 - Long basket: 10 undervalued stocks in a sector
 - Short basket: 10 overvalued stocks in the same sector
 - Hedge ratio adjusts for sector beta and volatility
@@ -130,6 +129,7 @@ Decompose a universe of stocks into orthogonal factors (principal components) re
 **Example:**
 
 PCA on tech stocks reveals:
+
 - PC1: Overall tech sector movement (70% of variance)
 - PC2: Growth vs value split (15% of variance)
 - PC3: Hardware vs software (8% of variance)
@@ -151,11 +151,13 @@ Modern stat-arb systems integrate machine learning to enhance signal quality bey
 **Gradient Boosting for Spread Prediction:**
 
 Instead of assuming constant mean reversion speed, train XGBoost or LightGBM to predict:
+
 - How fast will this spread revert?
 - What's the probability of hitting the target?
 - What features (volatility, volume, regime) affect reversion?
 
 **Features:**
+
 - Current spread level
 - Spread volatility (how noisy has it been?)
 - Volume imbalance between the two stocks
@@ -188,6 +190,7 @@ Instead of manually selecting pairs, use clustering:
 **Reinforcement Learning for Position Sizing:**
 
 Train an RL agent to decide:
+
 - How large should the position be given the current spread?
 - When should we exit early (before mean reversion completes)?
 - How should we adjust for market regime?
@@ -200,39 +203,35 @@ Execution speed and risk control matter immensely. Spreads can widen further bef
 
 **Execution considerations:**
 
-**Market impact**: Entering large positions can move prices against you. Use algorithms like VWAP to minimize impact.
-
-**Timing**: Spreads may widen before reverting. Enter gradually rather than all at once.
-
-**Liquidity**: Ensure both legs of the trade have sufficient liquidity to enter and exit cleanly.
-
-**Borrowing costs**: Shorting stocks incurs borrow fees. Some stocks are expensive or impossible to borrow.
+- **Market impact**: Entering large positions can move prices against you. Use algorithms like VWAP to minimize impact.
+- **Timing**: Spreads may widen before reverting. Enter gradually rather than all at once.
+- **Liquidity**: Ensure both legs of the trade have sufficient liquidity to enter and exit cleanly.
+- **Borrowing costs**: Shorting stocks incurs borrow fees. Some stocks are expensive or impossible to borrow.
 
 **Risk management:**
 
-**Stop losses**: Exit if spread widens beyond a threshold (e.g., 4 standard deviations). Don't wait for convergence if the relationship has broken.
-
-**Position limits**: Cap exposure to any single pair or sector to prevent concentration risk.
-
-**Volatility targeting**: Scale position size inversely with spread volatility. When spreads are noisy, trade smaller.
-
-**Correlation monitoring**: Continuously track correlations. If they drop suddenly, the pair may no longer be cointegrated.
-
-**Regime awareness**: Mean reversion works best in calm markets. During crises, correlations spike and spreads can stay wide for extended periods.
+- **Stop losses**: Exit if spread widens beyond a threshold (e.g., 4 standard deviations). Don't wait for convergence if the relationship has broken.
+- **Position limits**: Cap exposure to any single pair or sector to prevent concentration risk.
+- **Volatility targeting**: Scale position size inversely with spread volatility. When spreads are noisy, trade smaller.
+- **Correlation monitoring**: Continuously track correlations. If they drop suddenly, the pair may no longer be cointegrated.
+- **Regime awareness**: Mean reversion works best in calm markets. During crises, correlations spike and spreads can stay wide for extended periods.
 
 **Cross-factor hedging**: Ensure the portfolio is neutral to:
-- Market beta (insulated from broad market moves)
-- Sector exposure (no concentration in tech, energy, etc.)
-- Style factors (value, momentum, size)
+
+- **Market beta**: Insulated from broad market moves
+- **Sector exposure**: No concentration in tech, energy, etc.
+- **Style factors**: Value, momentum, size
 
 **Example risk controls:**
 
 If spread volatility doubles:
+
 - Cut position size in half
 - Widen stop-loss levels
 - Reduce leverage
 
 If correlation between pairs drops below 0.6:
+
 - Close the position
 - Remove the pair from the trading universe
 - Re-test for cointegration after market stabilizes
@@ -243,15 +242,11 @@ At its heart, statistical arbitrage is about exploiting **small inefficiencies**
 
 **The edge comes from:**
 
-**Speed**: Detecting and trading mispricings before others
-
-**Data**: Access to high-quality, low-latency market data
-
-**Models**: Better prediction of reversion speed and probability
-
-**Execution**: Minimizing costs and impact
-
-**Discipline**: Sticking to rules even when spreads widen temporarily
+- **Speed**: Detecting and trading mispricings before others
+- **Data**: Access to high-quality, low-latency market data
+- **Models**: Better prediction of reversion speed and probability
+- **Execution**: Minimizing costs and impact
+- **Discipline**: Sticking to rules even when spreads widen temporarily
 
 Stat-arb doesn't try to predict market direction. It assumes markets are mostly efficient but occasionally deviate in predictable ways. By systematically harvesting these small deviations, funds generate steady, uncorrelated returns.
 `;

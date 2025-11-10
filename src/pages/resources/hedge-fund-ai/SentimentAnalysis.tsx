@@ -5,6 +5,7 @@ const SentimentAnalysis = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Sentiment Matters](#why-sentiment-matters)
 - [Data Sources](#data-sources)
 - [NLP Techniques](#nlp-techniques)
@@ -14,6 +15,8 @@ const SentimentAnalysis = () => {
 - [Validation and Testing](#validation-and-testing)
 - [Integration with Other Signals](#integration-with-other-signals)
 
+## Overview
+
 Markets are driven as much by emotion and narrative as by numbers. Sentiment analysis tries to measure that, to turn the language of news, earnings calls, and social media into quantitative signals.
 
 ## Why Sentiment Matters
@@ -22,15 +25,11 @@ Price movements often precede fundamental changes because markets are forward lo
 
 **What sentiment reveals:**
 
-**Confidence shifts**: When management language becomes more cautious
-
-**Risk perception**: How investors interpret uncertainty or threats
-
-**Narrative changes**: When the market story about a stock or sector evolves
-
-**Crowd behavior**: Momentum, fear, greed, panic
-
-**Early warning signs**: Problems detected in language before they appear in numbers
+- **Confidence shifts**: When management language becomes more cautious
+- **Risk perception**: How investors interpret uncertainty or threats
+- **Narrative changes**: When the market story about a stock or sector evolves
+- **Crowd behavior**: Momentum, fear, greed, panic
+- **Early warning signs**: Problems detected in language before they appear in numbers
 
 **Example:**
 
@@ -46,43 +45,43 @@ In practice, hedge funds process vast streams of text data. This includes:
 
 **News headlines and full articles:**
 
-**Speed**: News moves markets within seconds of release
-**Sources**: Bloomberg, Reuters, Dow Jones, Financial Times
-**Volume**: Thousands of articles per day
-**Challenge**: Distinguishing signal (real news) from noise (speculation)
+- **Speed**: News moves markets within seconds of release
+- **Sources**: Bloomberg, Reuters, Dow Jones, Financial Times
+- **Volume**: Thousands of articles per day
+- **Challenge**: Distinguishing signal (real news) from noise (speculation)
 
 **Earnings call transcripts:**
 
-**Insight**: Management tone, word choice, and hesitation reveal confidence
-**Format**: Prepared remarks + Q&A session
-**Analysis**: Compare language quarter over quarter
-**Red flags**: Increased hedging language, vague answers, defensive tone
+- **Insight**: Management tone, word choice, and hesitation reveal confidence
+- **Format**: Prepared remarks + Q&A session
+- **Analysis**: Compare language quarter over quarter
+- **Red flags**: Increased hedging language, vague answers, defensive tone
 
 **SEC filings:**
 
-**Types**: 10-K, 10-Q, 8-K, proxy statements
-**Signals**: Changes in risk factors, legal language, MD&A (management discussion)
-**Method**: Diff successive filings to detect what changed
-**Example**: Sudden addition of new risk factors or increased legal reserves
+- **Types**: 10-K, 10-Q, 8-K, proxy statements
+- **Signals**: Changes in risk factors, legal language, MD&A (management discussion)
+- **Method**: Diff successive filings to detect what changed
+- **Example**: Sudden addition of new risk factors or increased legal reserves
 
 **Social media:**
 
-**Platforms**: X (Twitter), Reddit (especially r/WallStreetBets), StockTwits
-**Advantage**: Real-time crowd mood, retail sentiment
-**Disadvantage**: Noisy, prone to manipulation, bots
-**Use case**: Contrarian signals (extreme sentiment often reverses)
+- **Platforms**: X (Twitter), Reddit (especially r/WallStreetBets), StockTwits
+- **Advantage**: Real-time crowd mood, retail sentiment
+- **Disadvantage**: Noisy, prone to manipulation, bots
+- **Use case**: Contrarian signals (extreme sentiment often reverses)
 
 **Analyst reports:**
 
-**Content**: Ratings, price targets, thesis changes
-**Timing**: Often lag price moves but influence flows
-**Analysis**: Track sentiment drift across analyst community
+- **Content**: Ratings, price targets, thesis changes
+- **Timing**: Often lag price moves but influence flows
+- **Analysis**: Track sentiment drift across analyst community
 
 **Company reviews and forums:**
 
-**Employee reviews** (Glassdoor): Internal morale and culture
-**Customer reviews**: Product satisfaction and brand health
-**Industry forums**: Technical discussions, insider perspectives
+- **Employee reviews** (Glassdoor): Internal morale and culture
+- **Customer reviews**: Product satisfaction and brand health
+- **Industry forums**: Technical discussions, insider perspectives
 
 ## NLP Techniques
 
@@ -123,6 +122,7 @@ Weights words by how unique they are to a document.
 \\[\\text{TF-IDF}(w, d) = \\text{TF}(w, d) \\times \\log\\left(\\frac{N}{\\text{DF}(w)}\\right)\\]
 
 Where:
+
 - \\(\\text{TF}(w, d)\\) = frequency of word \\(w\\) in document \\(d\\)
 - \\(N\\) = total number of documents
 - \\(\\text{DF}(w)\\) = number of documents containing word \\(w\\)
@@ -131,16 +131,18 @@ Where:
 
 **Machine learning approaches:**
 
-**Naive Bayes**: Probabilistic classifier
-**Logistic Regression**: Linear model for binary sentiment
-**Support Vector Machines**: Find optimal separation boundary
-**Random Forests**: Ensemble of decision trees
+- **Naive Bayes**: Probabilistic classifier
+- **Logistic Regression**: Linear model for binary sentiment
+- **Support Vector Machines**: Find optimal separation boundary
+- **Random Forests**: Ensemble of decision trees
 
 These methods require labeled training data (text marked as positive or negative).
 
 ## Large Language Models
 
-But modern funds increasingly use large language models (LLMs) such as GPT style transformers that understand context and nuance, distinguishing between "earnings beat expectations" and "earnings beat low expectations."
+Despite knowledge and specific potential sue cases of NLP techniques, cutting edge models (large and small) are increasingly used. 
+
+It is common to use large language models (LLMs) such as GPT style transformers that understand context and nuance, distinguishing between "earnings beat expectations" and "earnings beat low expectations."
 
 **Transformer architecture:**
 
@@ -155,10 +157,12 @@ This lets the model understand that "not" before "good" changes meaning.
 **Pretrained models:**
 
 **BERT** (Bidirectional Encoder Representations from Transformers):
+
 - Understands context from both directions
 - Fine-tuned on financial text for FinBERT
 
 **GPT models** (Generative Pretrained Transformer):
+
 - Autoregressive, good for generation and completion
 - Can be prompted to extract sentiment without retraining
 
@@ -184,13 +188,10 @@ Traditional lexicon: Might miss nuance of "despite" and "remains"
 
 **Advantages of LLMs:**
 
-**Context awareness**: Understands negations, qualifiers, conditionals
-
-**Nuance**: Distinguishes "great quarter" from "great quarter, but"
-
-**Entity understanding**: Knows which sentiment applies to which company
-
-**Multitask**: Can simultaneously extract sentiment, topics, and entities
+- **Context awareness**: Understands negations, qualifiers, conditionals
+- **Nuance**: Distinguishes "great quarter" from "great quarter, but"
+- **Entity understanding**: Knows which sentiment applies to which company
+- **Multitask**: Can simultaneously extract sentiment, topics, and entities
 
 ## Entity Level Sentiment
 
@@ -220,6 +221,7 @@ Document: "Tesla's delivery numbers disappointed investors [negative for Tesla],
 **Sector and regional sentiment:**
 
 Track sentiment at different aggregation levels:
+
 - Company: Apple
 - Sector: Technology
 - Industry: Semiconductors
@@ -232,32 +234,31 @@ This allows portfolio managers to understand if negative sentiment is idiosyncra
 
 **Event types:**
 
-**Earnings surprises**: Beat, miss, in line
-
-**Management changes**: CEO departure, new CFO
-
-**M&A activity**: Acquisition rumors, deal announcements
-
-**Product launches**: New releases, recalls
-
-**Regulatory events**: Investigations, approvals
-
-**Macro shocks**: Fed announcements, geopolitical events
+- **Earnings surprises**: Beat, miss, in line
+- **Management changes**: CEO departure, new CFO
+- **M&A activity**: Acquisition rumors, deal announcements
+- **Product launches**: New releases, recalls
+- **Regulatory events**: Investigations, approvals
+- **Macro shocks**: Fed announcements, geopolitical events
 
 **Detection methods:**
 
 **Keyword matching**: Look for specific phrases
+
 - "beat expectations," "missed estimates," "announced acquisition"
 
 **Topic modeling**: Unsupervised discovery of themes
+
 - Latent Dirichlet Allocation (LDA)
 - Non-negative Matrix Factorization (NMF)
 
 **Anomaly detection**: Identify unusual spikes in mention volume
+
 - Z-score of daily mentions
 - Change point detection
 
 **LLM extraction**: Prompt model to identify events
+
 - "List all major events mentioned in this article."
 - "Classify this text as: earnings, M&A, regulatory, or other."
 
@@ -268,36 +269,23 @@ The challenge is validation: sentiment often moves faster than fundamentals and 
 **Testing framework:**
 
 1. **Extract sentiment** from historical corpus (5 years of news)
-
-2. **Align with prices** at different lags:
-   - \\(t\\): Sentiment score
-   - \\(t+1\\) hour: Immediate price impact
-   - \\(t+1\\) day: Next day return
-   - \\(t+1\\) week: Medium term drift
-
-3. **Measure predictive power**:
-
-   \\[\\text{IC (Information Coefficient)} = \\text{Corr}(\\text{Sentiment}_t, \\text{Return}_{t+1})\\]
-
-4. **Statistical significance**:
-   - T-statistic > 2.0 (p-value < 0.05)
-   - Consistent across subperiods
+2. **Align with prices** at different lags (\\(t\\): sentiment score, \\(t+1\\) hour: immediate price impact, \\(t+1\\) day: next day return, \\(t+1\\) week: medium term drift)
+3. **Measure predictive power**: \\[\\text{IC (Information Coefficient)} = \\text{Corr}(\\text{Sentiment}_t, \\text{Return}_{t+1})\\]
+4. **Statistical significance**: T-statistic > 2.0 (p-value < 0.05), consistent across subperiods
 
 **Common findings:**
 
-**News sentiment**: Predictive for 1 hour to 1 day, then reverses
-
-**Earnings call tone**: Predictive for 1-3 months
-
-**Social media**: Often contrarian (extreme optimism = reversal)
-
-**SEC filing changes**: Slow to be priced, predictive for weeks
+- **News sentiment**: Predictive for 1 hour to 1 day, then reverses
+- **Earnings call tone**: Predictive for 1-3 months
+- **Social media**: Often contrarian (extreme optimism = reversal)
+- **SEC filing changes**: Slow to be priced, predictive for weeks
 
 **Signal decay:**
 
 Sentiment predictiveness decays as information gets priced in.
 
 Half-life (time for signal to lose 50% of predictive power):
+
 - News: 2-6 hours
 - Earnings calls: 2-4 weeks
 - Filings: 1-2 months
@@ -310,25 +298,23 @@ Sentiment is most powerful when combined with other features to filter out false
 
 **Sentiment + Momentum:**
 
-Positive sentiment + positive momentum = Strong buy signal
-
-Positive sentiment + negative momentum = Potential reversal
+- **Positive sentiment + positive momentum**: Strong buy signal
+- **Positive sentiment + negative momentum**: Potential reversal
 
 **Sentiment + Options Activity:**
 
-Positive sentiment + rising put volume = Mixed signal (hedging or skepticism)
-
-Negative sentiment + rising call volume = Contrarian opportunity
+- **Positive sentiment + rising put volume**: Mixed signal (hedging or skepticism)
+- **Negative sentiment + rising call volume**: Contrarian opportunity
 
 **Sentiment + Fundamentals:**
 
-Negative sentiment + strong fundamentals = Overreaction, mean reversion opportunity
-
-Positive sentiment + weak fundamentals = Momentum chase, potential bubble
+- **Negative sentiment + strong fundamentals**: Overreaction, mean reversion opportunity
+- **Positive sentiment + weak fundamentals**: Momentum chase, potential bubble
 
 **Multi horizon sentiment:**
 
 Track sentiment across timeframes:
+
 - Real-time: Social media
 - Daily: News
 - Quarterly: Earnings calls
@@ -341,6 +327,7 @@ When they diverge → caution, potential regime change
 **Portfolio construction:**
 
 Use sentiment as:
+
 - **Alpha signal**: Trade on sentiment changes
 - **Risk signal**: Reduce exposure when negative sentiment rises
 - **Timing signal**: When to enter or exit positions

@@ -5,6 +5,7 @@ const VolatilityModeling = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Volatility Matters](#why-volatility-matters)
 - [Classical GARCH Models](#classical-garch-models)
 - [Implied vs Realized Volatility](#implied-vs-realized-volatility)
@@ -12,21 +13,23 @@ const VolatilityModeling = () => {
 - [Hybrid Approaches](#hybrid-approaches)
 - [Applications in Trading](#applications-in-trading)
 
+## Overview
+
 While predicting prices is notoriously hard, forecasting volatility — how much prices are likely to move — is far more tractable and equally valuable. Hedge funds model volatility to adjust position sizing, set risk limits, and price derivatives.
 
 ## Why Volatility Matters
 
 Volatility forecasting is central to risk management and portfolio construction:
 
-**Position Sizing**: Allocate more capital to low-volatility strategies, less to high-volatility ones
+- **Position Sizing**: Allocate more capital to low-volatility strategies, less to high-volatility ones
 
-**Risk Limits**: Set stop-losses and drawdown thresholds based on expected volatility
+- **Risk Limits**: Set stop-losses and drawdown thresholds based on expected volatility
 
-**Options Trading**: Price options accurately requires volatility estimates
+- **Options Trading**: Price options accurately requires volatility estimates
 
-**Volatility Targeting**: Keep portfolio risk constant by scaling positions inversely with volatility
+- **Volatility Targeting**: Keep portfolio risk constant by scaling positions inversely with volatility
 
-**Regime Detection**: Sudden volatility spikes often signal regime changes
+- **Regime Detection**: Sudden volatility spikes often signal regime changes
 
 Unlike price prediction, volatility is **persistent** — high volatility tends to follow high volatility. This makes it more predictable than returns themselves.
 
@@ -41,6 +44,7 @@ The classical approach uses **GARCH** (Generalized Autoregressive Conditional He
 \\[\\sigma_t^2 = \\omega + \\alpha r_{t-1}^2 + \\beta \\sigma_{t-1}^2\\]
 
 Where:
+
 - \\(\\sigma_t^2\\) = variance at time \\(t\\)
 - \\(r_{t-1}^2\\) = squared return from previous period (recent shock)
 - \\(\\sigma_{t-1}^2\\) = previous variance forecast (long-term trend)
@@ -49,11 +53,12 @@ Where:
 **Interpretation:**
 
 Tomorrow's volatility depends on:
-1. A baseline level (\\(\\omega\\))
-2. How much recent market movements matter (\\(\\alpha\\))
-3. How much past volatility persists (\\(\\beta\\))
 
-If \\(\\alpha + \\beta\\) is close to 1, volatility is highly persistent — shocks last a long time.
+- A baseline level (\\(\\omega\\))
+- How much recent market movements matter (\\(\\alpha\\))
+- How much past volatility persists (\\(\\beta\\))
+
+If \\(\\alpha + \\beta\\) is close to 1, volatility is highly persistent, shocks last a long time.
 
 **Variations:**
 
@@ -61,7 +66,7 @@ If \\(\\alpha + \\beta\\) is close to 1, volatility is highly persistent — sho
 
 Allows volatility to respond asymmetrically to positive vs negative returns. **Leverage effect**: Bad news increases volatility more than good news.
 
-\\[\\log(\\sigma_t^2) = \\omega + \\alpha \\frac{r_{t-1}}{\\sigma_{t-1}} + \\gamma \\left|\\frac{r_{t-1}}{\\sigma_{t-1}}\\right| + \\beta \\log(\\sigma_{t-1}^2)\\]
+\\[\\log(\\sigma_t^2) = \\omega + \\alpha \\frac{r_{t-1}}{\\sigma_{t-1}} + \\gamma \\left(\\frac{r_{t-1}}{\\sigma_{t-1}}\\right) + \\beta \\log(\\sigma_{t-1}^2)\\]
 
 **GJR-GARCH:**
 
@@ -73,7 +78,7 @@ Where \\(I_{t-1} = 1\\) if \\(r_{t-1} < 0\\) (negative return) and 0 otherwise.
 
 **GARCH-M (GARCH in Mean):**
 
-Models the **risk premium** — returns depend on volatility:
+Models the **risk premium**, returns depend on volatility:
 
 \\[r_t = \\mu + \\lambda \\sigma_t^2 + \\epsilon_t\\]
 
@@ -82,30 +87,27 @@ When volatility is high, expected returns increase (compensation for risk).
 ## Implied vs Realized Volatility
 
 In options and derivatives trading, **implied volatility** from the market's option prices provides another signal.
+**Realized Volatility** is measured from historical price movements:
 
-**Realized Volatility**: Measured from historical price movements
+  \\[\\text{Realized Vol} = \\sqrt{\\frac{252}{n} \\sum_{i=1}^{n} r_i^2}\\]
 
-\\[\\text{Realized Vol} = \\sqrt{\\frac{252}{n} \\sum_{i=1}^{n} r_i^2}\\]
+This is the annualized standard deviation of returns.
 
-Annualized standard deviation of returns.
-
-**Implied Volatility**: Backed out from option prices using the Black-Scholes model or similar
-
-The market's **expectation** of future volatility embedded in option premiums.
+**Implied Volatility** is backed out from option prices using the Black-Scholes model or similar frameworks. It represents the market's **expectation** of future volatility embedded in option premiums.
 
 **Trading the Spread:**
 
-Comparing implied vs realized helps detect whether the market is over- or underpricing risk:
+Comparing implied vs realized volatility helps detect whether the market is over- or underpricing risk:
 
-**Implied > Realized**: Options are expensive → sell volatility (short straddles, covered calls)
-
-**Implied < Realized**: Options are cheap → buy volatility (long straddles, protective puts)
+- **Implied > Realized**: Options are expensive → sell volatility (short straddles, covered calls)
+- **Implied < Realized**: Options are cheap → buy volatility (long straddles, protective puts)
 
 **VIX and Volatility Indices:**
 
-The **VIX** (CBOE Volatility Index) measures 30-day implied volatility on S&P 500 options. It's often called the "fear gauge" because it spikes during market stress.
+The **VIX** (CBOE Volatility Index) measures 30-day implied volatility on S&P 500 options. Often called the "fear gauge," it spikes during market stress.
 
 Hedge funds trade VIX futures, options, and ETPs to:
+
 - Hedge portfolio risk
 - Express views on market uncertainty
 - Arbitrage volatility mispricings
@@ -119,6 +121,7 @@ Modern approaches combine classical ideas with machine learning to capture nonli
 Instead of assuming a fixed GARCH structure, neural networks learn flexible relationships between volatility and market features.
 
 **Input features:**
+
 - Lagged returns and squared returns
 - Trading volume and volume imbalance
 - Bid-ask spread and liquidity measures
@@ -132,6 +135,7 @@ A feedforward network or LSTM that outputs volatility forecast:
 \\[\\sigma_t = f_{NN}(r_{t-1}, r_{t-2}, ..., \\text{VIX}_{t-1}, \\text{volume}_{t-1}, ...)\\]
 
 **Advantages:**
+
 - Captures complex, nonlinear patterns
 - Integrates diverse data sources
 - No need to specify functional form
@@ -190,6 +194,7 @@ Allocate capital across assets based on their volatility, so each contributes eq
 **Options Pricing:**
 
 Accurate volatility forecasts are essential for:
+
 - Pricing exotic options
 - Determining fair value for straddles and strangles
 - Calibrating volatility surfaces
@@ -197,6 +202,7 @@ Accurate volatility forecasts are essential for:
 **Stress Testing:**
 
 Simulate extreme volatility scenarios to measure portfolio resilience:
+
 - What happens if VIX spikes to 50?
 - How does the portfolio perform if bond volatility doubles?
 - Can we survive a 2008-style liquidity crisis?
@@ -204,6 +210,7 @@ Simulate extreme volatility scenarios to measure portfolio resilience:
 **Tail-Risk Hedging:**
 
 When volatility is forecasted to increase, funds can:
+
 - Buy out-of-the-money puts
 - Reduce leverage
 - Shift to more liquid, less correlated assets
@@ -217,6 +224,7 @@ For options market makers, volatility forecasts inform **delta and gamma hedging
 The key is not to predict exact volatility but to model **how uncertainty itself changes through time**.
 
 Volatility forecasts tell you:
+
 - **When to play offense**: Low volatility → stable markets → increase leverage, take directional bets
 - **When to play defense**: High volatility → uncertain markets → reduce leverage, hedge tail risk, focus on liquidity
 

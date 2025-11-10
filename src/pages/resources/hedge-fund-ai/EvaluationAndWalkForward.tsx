@@ -5,12 +5,15 @@ const EvaluationAndWalkForward = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Making Tests Leak-Safe](#making-tests-leak-safe)
 - [Purged K-Fold Cross-Validation](#purged-k-fold-cross-validation)
 - [Walk-Forward Analysis](#walk-forward-analysis)
 - [Detecting Model Decay](#detecting-model-decay)
 - [Performance Attribution](#performance-attribution)
 - [The Skeptical Framework](#the-skeptical-framework)
+
+## Overview
 
 Once a strategy has been simulated with realistic market and cost assumptions, it still needs to be evaluated properly. This is where most backtests fail, not because the model is bad, but because the testing process leaks information or overfits to the past.
 
@@ -23,6 +26,7 @@ The first principle is to make tests **leak-safe**. You must ensure that your mo
 **Look-ahead bias:**
 
 Using data that wouldn't have been available at the time:
+
 - Adjusted prices (splits, dividends) before adjustment happened
 - Restated financial data (use point-in-time values)
 - End-of-day data for intraday decisions
@@ -68,6 +72,7 @@ Quant researchers use **purged k-fold cross-validation** to solve this. It split
 **Purging process:**
 
 If features use a 30-day lookback:
+
 - Test fold: Days 181-210
 - Purge from training: Days 151-180 (before test)
 - Purge from training: Days 211-240 (after test, if using them)
@@ -115,6 +120,7 @@ The second principle is to test strategies out of sample using **walk-forward an
 **Anchored vs rolling window:**
 
 **Anchored**: Training window grows over time
+
 - Train on months 1-12, test on 13
 - Train on months 1-13, test on 14
 - Train on months 1-14, test on 15
@@ -123,6 +129,7 @@ Advantage: Uses all available data
 Disadvantage: Old data may not be relevant anymore
 
 **Rolling**: Training window size is fixed
+
 - Train on months 1-12, test on 13
 - Train on months 2-13, test on 14
 - Train on months 3-14, test on 15
@@ -154,21 +161,25 @@ Walk-forward tests reveal how quickly models decay as market conditions change.
 **Types of drift:**
 
 **Covariate drift**: Input feature distributions change
+
 - Volatility was 15% during training, now it's 30%
 - Stock universe composition changed
 
 **Concept drift**: Relationship between features and target changes
+
 - Momentum worked during training, stopped working now
 - Correlations between assets shifted
 
 **Signs of model decay:**
 
 **Performance degradation:**
+
 - Sharpe ratio drops from 2.0 to 0.5
 - Win rate decreases
 - Maximum drawdown increases
 
 **Feature importance shift:**
+
 - Features that were predictive become irrelevant
 - New patterns emerge that the model doesn't capture
 
@@ -191,6 +202,7 @@ Funds monitor model decay using **rolling Sharpe ratios**, **performance attribu
 **Monitoring dashboard:**
 
 Track over time:
+
 - Rolling 30-day Sharpe ratio
 - Feature importance from recent predictions
 - Prediction error (increasing = decay)
@@ -198,11 +210,9 @@ Track over time:
 
 **Automated alerts:**
 
-If Sharpe drops below 1.0 for 30 days → Flag for review
-
-If feature distribution shifts beyond threshold → Retrain model
-
-If prediction error doubles → Pause strategy
+- If Sharpe drops below 1.0 for 30 days → Flag for review
+- If feature distribution shifts beyond threshold → Retrain model
+- If prediction error doubles → Pause strategy
 
 ## Performance Attribution
 
@@ -213,6 +223,7 @@ Evaluation doesn't stop at performance metrics like Sharpe or Sortino ratio. Hed
 \\[r_p = \\alpha + \\sum_i \\beta_i f_i + \\epsilon\\]
 
 Where:
+
 - \\(r_p\\) = portfolio return
 - \\(\\alpha\\) = skill-based return
 - \\(\\beta_i f_i\\) = return from exposure to factor \\(i\\)
@@ -223,6 +234,7 @@ Where:
 Monthly return: +5%
 
 Breakdown:
+
 - Market factor (\\(\\beta = 0.8\\), market returned 4%): +3.2%
 - Momentum factor (\\(\\beta = 0.5\\), momentum returned 2%): +1.0%
 - Alpha: +0.8%
@@ -273,35 +285,23 @@ A robust evaluation framework is both skeptical and empirical. It treats every b
 
 **The skeptic's checklist:**
 
-✓ Is the test leak-safe? (No future data used)
-
-✓ Are costs realistic? (Spread, fees, impact included)
-
-✓ Is the sample size sufficient? (Enough trades to be statistical)
-
-✓ Does it work out of sample? (Walk-forward results positive)
-
-✓ Is performance consistent? (Not driven by a few lucky trades)
-
-✓ Do features make economic sense? (Explainable, not spurious)
-
-✓ Does it survive stress tests? (Works across regimes)
-
-✓ Is alpha statistically significant? (Not just noise)
+- **Is the test leak-safe?** (No future data used)
+- **Are costs realistic?** (Spread, fees, impact included)
+- **Is the sample size sufficient?** (Enough trades to be statistical)
+- **Does it work out of sample?** (Walk-forward results positive)
+- **Is performance consistent?** (Not driven by a few lucky trades)
+- **Do features make economic sense?** (Explainable, not spurious)
+- **Does it survive stress tests?** (Works across regimes)
+- **Is alpha statistically significant?** (Not just noise)
 
 **Red flags:**
 
-❌ Sharpe ratio > 3 (too good to be true)
-
-❌ No losing months in 5 years (overfitted)
-
-❌ Performance degrades immediately out of sample (leakage)
-
-❌ Works perfectly in training, fails in validation (overfitting)
-
-❌ Features include future data (look-ahead bias)
-
-❌ Returns concentrated in a few trades (luck, not skill)
+- **Sharpe ratio > 3** (too good to be true)
+- **No losing months in 5 years** (overfitted)
+- **Performance degrades immediately out of sample** (leakage)
+- **Works perfectly in training, fails in validation** (overfitting)
+- **Features include future data** (look-ahead bias)
+- **Returns concentrated in a few trades** (luck, not skill)
 
 If a strategy survives these filters (leak-safe validation, realistic costs, and walk-forward robustness), it has earned the right to go live.
 

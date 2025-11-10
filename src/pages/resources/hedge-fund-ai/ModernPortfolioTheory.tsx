@@ -5,12 +5,15 @@ const ModernPortfolioTheory = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [The Foundation of Portfolio Construction](#the-foundation-of-portfolio-construction)
 - [The Efficient Frontier](#the-efficient-frontier)
 - [Quadratic Programming](#quadratic-programming)
 - [Practical Refinements](#practical-refinements)
 - [Robust Covariance Estimation](#robust-covariance-estimation)
 - [Constraints and Reality](#constraints-and-reality)
+
+## Overview
 
 Modern Portfolio Theory, often abbreviated as MPT, is the foundation of all portfolio construction. It was developed by Harry Markowitz in the 1950s and remains one of the most practical tools for turning forecasts into portfolios.
 
@@ -57,18 +60,23 @@ The portfolio with the highest Sharpe ratio lies on the efficient frontier and r
 
 ## Quadratic Programming
 
-Mathematically, MPT minimizes portfolio variance subject to achieving a certain expected return. This can be written as a **quadratic programming problem**, since variance depends on the covariance matrix between assets.
+Mathematically, MPT minimizes portfolio variance subject to achieving a certain expected return. This is solved using **quadratic programming**, an optimization technique where the objective function is quadratic (in this case, portfolio variance depends on the squared weights multiplied by the covariance matrix) while the constraints are linear (target return, weights sum to one, position limits).
 
 **Optimization problem:**
+The optimization finds the portfolio weights \\(w\\) that minimize variance (risk) while meeting specific constraints.
+
+**The objective function:**
 
 \\[\\min_{w} \\quad \\frac{1}{2} w^T \\Sigma w\\]
 
 Subject to:
+
 - \\(w^T \\mu = \\mu_p\\) (target return)
 - \\(w^T \\mathbf{1} = 1\\) (weights sum to 1)
 - \\(w_i \\geq 0\\) (no shorts, if applicable)
 
 Where:
+
 - \\(w\\) = vector of portfolio weights
 - \\(\\Sigma\\) = covariance matrix
 - \\(\\mu\\) = vector of expected returns
@@ -80,8 +88,8 @@ The optimizer will naturally reduce exposure to assets that are highly correlate
 
 1. Identifies assets with high expected returns
 2. Reduces exposure to highly volatile assets
-3. Favors assets with low correlation (diversification benefit)
-4. Balances these factors to minimize risk for a given return target
+3. Favors assets with low correlation (diversification benefit) — when two assets move independently, losses in one can be offset by gains in another, which is why the covariance matrix \\(\\Sigma\\) penalizes high correlations
+4. Balances these factors to minimize risk for a given return target — the optimizer trades off expected return against variance, accepting lower returns if diversification significantly reduces risk, positioning the portfolio on the efficient frontier
 
 ## Practical Refinements
 
@@ -109,11 +117,12 @@ They use **robust covariance estimation** to stabilize the optimization, because
 
 **Problems with sample covariance:**
 
-The standard covariance estimator:
+The standard covariance estimator (where \\(r_{it}\\) is the return of asset \\(i\\) at time \\(t\\), \\(\\bar{r}_i\\) is the mean return of asset \\(i\\), and \\(T\\) is the number of time periods):
 
 \\[\\Sigma_{ij} = \\frac{1}{T} \\sum_{t=1}^{T} (r_{it} - \\bar{r}_i)(r_{jt} - \\bar{r}_j)\\]
 
 is noisy, especially when:
+
 - Number of assets is large relative to time periods
 - Data includes outliers or structural breaks
 - Correlations are time-varying
@@ -132,19 +141,37 @@ Give more weight to recent observations:
 
 \\[\\Sigma_t = \\lambda \\Sigma_{t-1} + (1-\\lambda) r_t r_t^T\\]
 
+Where \\(r_t\\) is the vector of asset returns at time \\(t\\), and \\(r_t r_t^T\\) is the outer product that gives the instantaneous covariance estimate.
+
 This makes the covariance matrix more responsive to changing market conditions.
 
 **Factor models:**
 
-Instead of estimating all pairwise correlations, decompose returns into factors:
+Instead of estimating all pairwise correlations directly, decompose returns into common factors:
 
 \\[r_i = \\beta_i^T f_t + \\epsilon_i\\]
+
+Where \\(\\beta_i\\) are the factor loadings for asset \\(i\\), \\(f_t\\) are the factor returns, and \\(\\epsilon_i\\) is the idiosyncratic (asset-specific) return.
 
 Then covariance becomes:
 
 \\[\\Sigma = B F B^T + D\\]
 
-Where \\(F\\) is factor covariance and \\(D\\) is idiosyncratic variance. This dramatically reduces the number of parameters to estimate.
+Where:
+- \\(B\\) = matrix of factor loadings (how each asset responds to each factor)
+- \\(F\\) = covariance matrix of factors
+- \\(D\\) = diagonal matrix of idiosyncratic variances
+
+**Why this is more stable:**
+
+For 100 assets, the sample covariance approach requires estimating \\(\\frac{100 \\times 101}{2} = 5,050\\) unique parameters. With 5 factors, you only need:
+
+- \\(100 \\times 5 = 500\\) factor loadings
+- \\(\\frac{5 \\times 6}{2} = 15\\) factor covariances
+- \\(100\\) idiosyncratic variances
+- **Total: 615 parameters** (vs. 5,050)
+
+This dramatic reduction makes the covariance matrix far more stable and less prone to estimation error, especially when you have limited historical data.
 
 ## Constraints and Reality
 
@@ -173,6 +200,10 @@ Caps total leverage.
 \\[\\sum_{i=1}^{N} w_i = \\beta_{\\text{target}}\\]
 
 Controls market beta (often set to 0 for market neutral).
+
+**Market beta** measures how much the portfolio moves with the overall market. A beta of 1 means the portfolio moves in lockstep with the market (e.g., S&P 500). A beta of 0 means the portfolio is uncorrelated with market movements—it makes money (or loses it) independently of whether the market goes up or down.
+
+Setting \\(\\beta_{\\text{target}} = 0\\) creates a **market-neutral** portfolio: you're betting on relative performance (stock A vs. stock B), not on whether the market rises or falls. This isolates alpha (skill) from beta (market exposure).
 
 **Factor neutrality:**
 
@@ -205,15 +236,12 @@ The beauty of MPT is that it gives a clear, quantitative framework for sizing. I
 
 **Key insights:**
 
-**Diversification works**: Uncorrelated assets reduce portfolio risk without sacrificing return
+- **Diversification works**: Uncorrelated assets reduce portfolio risk without sacrificing return
+- **Risk can be managed mathematically**: You don't need intuition; you can quantify and optimize
+- **Returns aren't everything**: A volatile asset with high return may contribute less to the portfolio than a stable asset with moderate return
+- **Constraints shape reality**: Real portfolios must respect limits, liquidity, and costs
 
-**Risk can be managed mathematically**: You don't need intuition; you can quantify and optimize
-
-**Returns aren't everything**: A volatile asset with high return may contribute less to the portfolio than a stable asset with moderate return
-
-**Constraints shape reality**: Real portfolios must respect limits, liquidity, and costs
-
-MPT transforms subjective conviction ("I like this stock") into objective allocation ("I should put 3.2% of capital here given my beliefs about all other assets").
+MPT transforms subjective conviction ("I like this stock") into objective allocation ("I should put \\(w_i\\)% of capital here given my beliefs about all other assets").
 
 It's the foundation that every other optimization method builds upon.
 `;

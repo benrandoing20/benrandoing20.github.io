@@ -5,12 +5,15 @@ const MomentumAndTrendFollowing = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [The Momentum Anomaly](#the-momentum-anomaly)
 - [Cross-Sectional Momentum](#cross-sectional-momentum)
 - [Time-Series Momentum](#time-series-momentum)
 - [Traditional Technical Approaches](#traditional-technical-approaches)
 - [Machine Learning for Momentum](#machine-learning-for-momentum)
 - [Risk Management and Regime Awareness](#risk-management-and-regime-awareness)
+
+## Overview
 
 Momentum strategies take the opposite view of mean reversion: what's moving tends to keep moving. This concept has been documented for over a century and remains one of the strongest and most persistent effects in financial markets.
 
@@ -20,13 +23,10 @@ Momentum is one of the most robust empirical findings in finance. Assets that ha
 
 **Why momentum exists:**
 
-**Behavioral factors**: Investors underreact to new information initially, then overreact as momentum builds. This creates trends.
-
-**Herding**: As prices rise, more investors buy, pushing prices higher. Success attracts capital.
-
-**Institutional flows**: Mutual funds and pension funds rebalance slowly, creating sustained buying or selling pressure.
-
-**Risk premia**: Momentum may compensate for taking on crash risk. Momentum strategies tend to suffer sharp reversals during market crises.
+- **Behavioral factors**: Investors underreact to new information initially, then overreact as momentum builds. This creates trends.
+- **Herding**: As prices rise, more investors buy, pushing prices higher. Success attracts capital.
+- **Institutional flows**: Mutual funds and pension funds rebalance slowly, creating sustained buying or selling pressure.
+- **Risk premia**: Momentum may compensate for taking on crash risk. Momentum strategies tend to suffer sharp reversals during market crises.
 
 Despite decades of academic research and widespread adoption, momentum persists. It's one of the few anomalies that hasn't been arbitraged away, likely because it requires discipline to hold winners and cut losers, which goes against human instinct.
 
@@ -37,16 +37,13 @@ Despite decades of academic research and widespread adoption, momentum persists.
 **Strategy mechanics:**
 
 1. **Universe**: Define asset universe (e.g., S&P 500, global equities, futures)
-
 2. **Look-back period**: Measure returns over past N months (typically 3, 6, or 12 months)
-
 3. **Ranking**: Sort all assets by their returns
-
 4. **Long portfolio**: Buy top decile (top 10%)
-
 5. **Short portfolio**: Short bottom decile (bottom 10%)
-
 6. **Rebalance**: Monthly or quarterly
+
+The portfolio is market-neutral, meaning the long and short positions are equal in value.
 
 **Example:**
 
@@ -64,11 +61,9 @@ Result: Market-neutral exposure capturing momentum spread
 
 **Variations:**
 
-**Equal weight**: Each position gets same dollar allocation
-
-**Volatility-weighted**: Scale by inverse volatility (larger positions in stable stocks)
-
-**Risk parity**: Allocate so each position contributes equal risk
+- **Equal weight**: Each position gets same dollar allocation
+- **Volatility-weighted**: Scale by inverse volatility (larger positions in stable stocks)
+- **Risk parity**: Allocate so each position contributes equal risk
 
 **The 52-week high effect:**
 
@@ -85,11 +80,8 @@ Stocks with scores near 1.0 (close to highs) get long exposure; stocks with scor
 **Strategy mechanics:**
 
 1. **For each asset separately**: Calculate return over past N months
-
 2. **Signal**: If return > 0, go long. If return < 0, go short.
-
 3. **Position size**: Scale by volatility (larger positions in less volatile assets)
-
 4. **Rebalance**: Monthly
 
 **Example:**
@@ -108,13 +100,10 @@ This strategy is **trend-following** at its simplest. It captures the persistenc
 
 **Advantages over cross-sectional:**
 
-**Diversification**: Can be applied across uncorrelated markets (equities, bonds, commodities, FX)
-
-**Flexibility**: Works even with a single asset
-
-**Crisis performance**: Often profits during extreme market moves (up or down), providing tail hedge
-
-**Global macro funds** use time-series momentum across dozens of futures contracts, creating a diversified trend-following portfolio.
+- **Diversification**: Can be applied across uncorrelated markets (equities, bonds, commodities, FX)
+- **Flexibility**: Works even with a single asset
+- **Crisis performance**: Often profits during extreme market moves (up or down), providing tail hedge
+- **Global macro funds** use time-series momentum across dozens of futures contracts, creating a diversified trend-following portfolio.
 
 ## Traditional Technical Approaches
 
@@ -122,9 +111,8 @@ Traditional techniques use simple rules to define trend direction.
 
 **Moving average crossovers:**
 
-**Golden cross**: 50-day MA crosses above 200-day MA → Buy signal
-
-**Death cross**: 50-day MA crosses below 200-day MA → Sell signal
+- **Golden cross**: 50-day MA crosses above 200-day MA → Buy signal
+- **Death cross**: 50-day MA crosses below 200-day MA → Sell signal
 
 More generally:
 
@@ -153,6 +141,7 @@ The Kalman filter estimates the true trend by optimally weighting recent observa
 Model the market as switching between hidden states (trending vs mean-reverting).
 
 **States**:
+
 - State 1: Trending (momentum works)
 - State 2: Mean-reverting (momentum fails)
 
@@ -214,39 +203,32 @@ Momentum strategies thrive on clarity and discipline. They usually perform well 
 
 **When momentum works:**
 
-**Trending markets**: Clear uptrends or downtrends with low noise
-
-**Low volatility**: Stable conditions allow trends to develop
-
-**Risk-on environments**: Investors chase performance, amplifying momentum
+- **Trending markets**: Clear uptrends or downtrends with low noise
+- **Low volatility**: Stable conditions allow trends to develop
+- **Risk-on environments**: Investors chase performance, amplifying momentum
 
 **When momentum fails:**
 
-**Choppy markets**: Frequent reversals create whipsaws (buy high, sell low repeatedly)
-
-**High volatility**: Noise overwhelms signal
-
-**Crisis moments**: Momentum strategies can suffer sharp reversals as winners become losers overnight
+- **Choppy markets**: Frequent reversals create whipsaws (buy high, sell low repeatedly)
+- **High volatility**: Noise overwhelms signal
+- **Crisis moments**: Momentum strategies can suffer sharp reversals as winners become losers overnight
 
 **Risk management techniques:**
 
-**Stop losses**: Exit positions if trends reverse beyond a threshold
-
-**Volatility scaling**: Reduce position size when volatility increases
+- **Stop losses**: Exit positions if trends reverse beyond a threshold
+- **Volatility scaling**: Reduce position size when volatility increases
 
 \\[\\text{Position Size} = \\frac{\\text{Target Vol}}{\\text{Realized Vol}}\\]
 
-**Regime filters**: Use regime detection models to identify when momentum is likely to work
+- **Regime filters**: Use regime detection models to identify when momentum is likely to work.
+  - If regime = "choppy/mean-reverting", pause momentum strategy
+  - If regime = "trending", activate momentum strategy
 
-If regime = "choppy/mean-reverting", pause momentum strategy
+- **Diversification across assets**: Run momentum strategies across equities, bonds, commodities, and currencies. These markets trend at different times, smoothing overall returns.
 
-If regime = "trending", activate momentum strategy
+- **Time diversification**: Use multiple look-back periods (1 month, 3 months, 12 months) and combine signals. This reduces sensitivity to any single timeframe.
 
-**Diversification across assets**: Run momentum strategies across equities, bonds, commodities, and currencies. These markets trend at different times, smoothing overall returns.
-
-**Time diversification**: Use multiple look-back periods (1 month, 3 months, 12 months) and combine signals. This reduces sensitivity to any single timeframe.
-
-**Correlation monitoring**: Track how correlated momentum positions are. If all positions move together, portfolio is concentrated. Diversify into uncorrelated trends.
+- **Correlation monitoring**: Track how correlated momentum positions are. If all positions move together, portfolio is concentrated. Diversify into uncorrelated trends.
 
 **Example risk scenario:**
 
@@ -255,6 +237,7 @@ Market regime shifts from trending to choppy.
 **Old approach**: Keep running momentum, suffer whipsaws
 
 **Regime-aware approach**:
+
 1. Detect regime change via HMM or volatility spike
 2. Reduce momentum exposure by 50%
 3. Tighten stop losses
@@ -266,13 +249,10 @@ Momentum captures the **behavioral core** of markets: the tendency of investors 
 
 **The edge comes from:**
 
-**Discipline**: Following rules when emotions say to do the opposite
-
-**Diversification**: Trading momentum across many assets and timeframes
-
-**Adaptation**: Adjusting to regimes and volatility
-
-**Risk control**: Cutting losses quickly when trends reverse
+- **Discipline**: Following rules when emotions say to do the opposite
+- **Diversification**: Trading momentum across many assets and timeframes
+- **Adaptation**: Adjusting to regimes and volatility
+- **Risk control**: Cutting losses quickly when trends reverse
 
 Many global macro and managed futures funds run trend-following systems across equities, bonds, commodities, and currencies, letting diversification smooth out individual noise.
 

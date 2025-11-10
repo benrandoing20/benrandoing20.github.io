@@ -5,6 +5,7 @@ const OperationsComplianceAgents = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [The Invisible Safety Layer](#the-invisible-safety-layer)
 - [Trade Surveillance Agents](#trade-surveillance-agents)
 - [NLP Based Compliance](#nlp-based-compliance)
@@ -13,6 +14,8 @@ const OperationsComplianceAgents = () => {
 - [Anomaly Detection in Operations](#anomaly-detection-in-operations)
 - [Continuous Oversight](#continuous-oversight)
 
+## Overview
+
 While front-office agents handle research and trading, operations and compliance agents quietly keep the fund safe, organized, and within the rules. These agents monitor thousands of live processes, trades, communications, filings, and system logs, to detect anomalies or compliance risks in real time.
 
 ## The Invisible Safety Layer
@@ -20,6 +23,7 @@ While front-office agents handle research and trading, operations and compliance
 **Traditional compliance:**
 
 Compliance officers review samples:
+
 - Check 10% of trades manually
 - Read flagged emails weekly
 - Run reports monthly
@@ -57,6 +61,7 @@ Agent understands context and reasoning:
 **Example 1: High cancel rate**
 
 \`\`\`
+
 Observation: Trader canceled 95 of 100 orders
 
 Rule system: FLAG - Potential spoofing
@@ -92,13 +97,10 @@ Action: HIGH PRIORITY ALERT - Investigate timing and information access
 
 **What agents detect better:**
 
-**Contextual anomalies**: Behavior unusual for this trader, even if normal for others
-
-**Sequence patterns**: Complex multi-step manipulation schemes
-
-**Cross-asset coordination**: Suspicious trading across related instruments
-
-**Timing correlations**: Trades suspiciously aligned with information events
+- **Contextual anomalies**: Behavior unusual for this trader, even if normal for others
+- **Sequence patterns**: Complex multi-step manipulation schemes
+- **Cross-asset coordination**: Suspicious trading across related instruments
+- **Timing correlations**: Trades suspiciously aligned with information events
 
 ## NLP Based Compliance
 
@@ -150,15 +152,11 @@ Action: No alert
 
 **What NLP agents detect:**
 
-**MNPI exposure**: Discussions of insider information
-
-**Market manipulation**: Coordination between traders
-
-**Conflicts of interest**: Personal trading or relationships
-
-**Policy violations**: Trades outside approved mandate
-
-**Tone and sentiment**: Unusually aggressive or evasive language
+- **MNPI exposure**: Discussions of insider information
+- **Market manipulation**: Coordination between traders
+- **Conflicts of interest**: Personal trading or relationships
+- **Policy violations**: Trades outside approved mandate
+- **Tone and sentiment**: Unusually aggressive or evasive language
 
 ## Automated Regulatory Reporting
 
@@ -167,6 +165,7 @@ Preparing and filing trade reports, risk summaries, and regulatory disclosures a
 **Traditional reporting:**
 
 Operations team:
+
 1. Exports data from multiple systems
 2. Reconciles in spreadsheets
 3. Calculates metrics manually
@@ -180,6 +179,7 @@ Operations team:
 **Agentic reporting:**
 
 Agent automatically:
+
 1. Pulls data from all systems
 2. Validates and reconciles
 3. Computes required metrics
@@ -193,6 +193,7 @@ Agent automatically:
 **Example: Form PF filing**
 
 \`\`\`
+
 Agent workflow:
 
 Step 1: Data collection
@@ -234,13 +235,10 @@ Step 6: Submit
 
 **Reports agents automate:**
 
-**SEC filings**: Form PF, 13F, Form ADV
-
-**Trade reporting**: OATS, CAT, MiFID II transaction reports
-
-**Investor reports**: Monthly letters, quarterly reviews, annual audits
-
-**Internal reports**: Risk dashboards, attribution analysis, position summaries
+- **SEC filings**: Form PF, 13F, Form ADV
+- **Trade reporting**: OATS, CAT, MiFID II transaction reports
+- **Investor reports**: Monthly letters, quarterly reviews, annual audits
+- **Internal reports**: Risk dashboards, attribution analysis, position summaries
 
 ## Intelligent Alerting
 
@@ -249,6 +247,7 @@ Flagging deviations from policy or performance drift, then summarizing the issue
 **Traditional alerting:**
 
 \`\`\`
+
 ALERT: Risk limit exceeded
 Value-at-Risk: $12.5M
 Limit: $10M
@@ -260,6 +259,7 @@ Compliance officer must investigate cause and determine action.
 **Intelligent alerting:**
 
 \`\`\`
+
 ALERT: Risk limit exceeded
 
 Summary:
@@ -287,15 +287,13 @@ Awaiting approval to proceed.
 
 **What makes this intelligent:**
 
-**Root cause**: Agent diagnosed why limit was breached
-
-**Context**: Explained market vs portfolio-driven factors
-
-**Options**: Generated multiple remediation paths
-
-**Trade-offs**: Assessed costs and benefits of each
-
-**Actionable**: Compliance officer can decide quickly
+- **Root cause**: Agent diagnosed why limit was breached
+- **Context**: Explained market vs portfolio-driven factors
+- **Options**: Generated multiple remediation paths
+- **Trade-offs**: Assessed costs and benefits of each
+- **Actionable**: Compliance officer can decide quickly
+- **Trade-offs**: Assessed costs and benefits of each
+- **Actionable**: Compliance officer can decide quickly
 
 ## Anomaly Detection in Operations
 
@@ -306,6 +304,7 @@ Agents learn normal patterns and flag deviations:
 **Example 1: Trade size**
 
 \`\`\`
+
 Normal: Avg trade size 1,000 shares (σ = 500)
 Observed: Trade of 50,000 shares
 Z-score: (50,000 - 1,000) / 500 = 98
@@ -320,6 +319,7 @@ Trade is being held for review."
 **Example 2: P&L swing**
 
 \`\`\`
+
 Normal: Daily P&L volatility $50K
 Observed: P&L +$800K today
 Z-score: 16
@@ -337,6 +337,7 @@ Action: Log but do not escalate
 **Sequence anomalies:**
 
 \`\`\`
+
 Normal pattern: Place → Partial fill → Modify → Fill
 
 Observed pattern: 
@@ -350,6 +351,7 @@ Action: Halt trading for this strategy, investigate
 **Cross-system anomalies:**
 
 \`\`\`
+
 Observation 1: Position reconciliation shows +10,000 shares TSLA
 Observation 2: No executed trades for TSLA today
 Observation 3: Trade feed from broker shows 10,000 share fill
@@ -369,6 +371,7 @@ If a trading model starts exceeding a pre-defined risk limit or placing abnormal
 **Real-time monitoring:**
 
 \`\`\`
+
 Time: 2:15 PM
 
 Agent observes: Trading algorithm XYZ behavior change
@@ -412,31 +415,24 @@ By handling repetitive oversight work, compliance agents give risk officers more
 
 **What agents handle:**
 
-**Routine checks**: Thousands per day, instant evaluation
-
-**Data processing**: Aggregating, validating, reconciling
-
-**Pattern recognition**: Spotting anomalies in massive data streams
-
-**Report generation**: Standardized filings and summaries
-
-**Alert triage**: Filtering noise, escalating real issues
+- **Routine checks**: Thousands per day, instant evaluation
+- **Data processing**: Aggregating, validating, reconciling
+- **Pattern recognition**: Spotting anomalies in massive data streams
+- **Report generation**: Standardized filings and summaries
+- **Alert triage**: Filtering noise, escalating real issues
 
 **What humans focus on:**
 
-**Judgment calls**: Gray areas requiring interpretation
-
-**Policy decisions**: Updating rules as markets evolve
-
-**Relationship management**: Communicating with regulators
-
-**Strategic oversight**: Assessing emerging risks
-
-**Crisis response**: Handling novel or severe incidents
+- **Judgment calls**: Gray areas requiring interpretation
+- **Policy decisions**: Updating rules as markets evolve
+- **Relationship management**: Communicating with regulators
+- **Strategic oversight**: Assessing emerging risks
+- **Crisis response**: Handling novel or severe incidents
 
 **Example division of labor:**
 
 \`\`\`
+
 Agent: Monitors 500,000 orders per day
       Flags 50 potential issues
       Auto-resolves 45 as false positives

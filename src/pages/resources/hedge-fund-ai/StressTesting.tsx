@@ -5,12 +5,15 @@ const StressTesting = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Beyond Normal Conditions](#beyond-normal-conditions)
 - [Historical Scenario Replay](#historical-scenario-replay)
 - [Hypothetical Stress Scenarios](#hypothetical-stress-scenarios)
 - [Correlation and Liquidity Stress](#correlation-and-liquidity-stress)
 - [Adversarial Machine Learning](#adversarial-machine-learning)
 - [Practical Stress Testing](#practical-stress-testing)
+
+## Overview
 
 If VaR asks "how bad could a normal day get?", stress testing asks "what if nothing is normal at all?"
 
@@ -25,10 +28,12 @@ Real stress often comes from **correlation breakdown**. Assets that usually offs
 **Example:**
 
 Normal market:
+
 - Equities and bonds negatively correlated (bonds hedge equity risk)
 - Portfolio 60/40 stocks/bonds has moderate volatility
 
 Crisis (2022 rate shock):
+
 - Both equities and bonds fall together
 - Correlations spike to +0.8
 - Portfolio loses 20% with nowhere to hide
@@ -42,6 +47,7 @@ The most direct approach is to replay historical crises and see how the current 
 **Major scenarios hedge funds test:**
 
 **2008 Financial Crisis:**
+
 - Equities: -50%
 - Credit spreads: +600 bps
 - VIX: 80+
@@ -49,22 +55,26 @@ The most direct approach is to replay historical crises and see how the current 
 - Correlations: All risky assets fell together
 
 **COVID Crash (March 2020):**
+
 - Equities: -35% in 3 weeks
 - Oil: -70%
 - VIX: 85
 - Unprecedented volatility and circuit breakers
 
 **2022 Rate Shock:**
+
 - Bonds: -15% (worst year in history)
 - Equities: -20%
 - Both fell together (correlation breakdown)
 
 **LTCM / Russian Default (1998):**
+
 - Flight to quality
 - Liquidity disappeared
 - Spreads widened massively
 
 **Flash Crash (2010):**
+
 - Market dropped 9% in minutes
 - Liquidity vanished
 - Many orders executed at terrible prices
@@ -91,31 +101,37 @@ They also design **hypothetical scenarios**, such as a sudden 20% drop in equiti
 **Common hypothetical scenarios:**
 
 **Equity crash + vol spike:**
+
 - S&P 500: -30%
 - VIX: 70
 - Credit spreads: +400 bps
 
 **Interest rate shock:**
+
 - 10-year yield: +200 bps in one month
 - Bond prices: -15%
 - Dollar strengthens
 
 **Commodity shock:**
+
 - Oil: +50%
 - Natural gas: +100%
 - Inflation expectations spike
 
 **Currency crisis:**
+
 - Emerging market currencies: -30%
 - Flight to dollar
 - Cross-border flows freeze
 
 **Systematic deleveraging:**
+
 - All hedge funds forced to cut risk simultaneously
 - Crowded trades unwind
 - Liquidity disappears
 
 **Pandemic 2.0:**
+
 - Global lockdowns return
 - Supply chains break
 - Credit markets freeze
