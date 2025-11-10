@@ -5,12 +5,16 @@ const LimitOrderBookSimulation = () => {
 ## Overview
 
 **In this section:**
+
+- [Overview](#overview)
 - [Why Order Book Simulation Matters](#why-order-book-simulation-matters)
 - [Historical Replay](#historical-replay)
 - [Synthetic Simulation](#synthetic-simulation)
 - [Queue Position Modeling](#queue-position-modeling)
 - [Latency and Priority Rules](#latency-and-priority-rules)
 - [Applications and Use Cases](#applications-and-use-cases)
+
+## Overview
 
 Every trade you place interacts with the limit order book (LOB), the constantly updating list of buy and sell orders at different price levels. Understanding how your orders would have been filled in the past is essential for realistic backtesting.
 
@@ -20,15 +24,11 @@ In basic backtests, trades are often assumed to happen instantly at historical p
 
 **What gets missed in simple backtests:**
 
-**Queue dynamics**: Your order sits behind others at the same price level
-
-**Partial fills**: Only part of your order executes before the level moves
-
-**Order cancellations**: Liquidity disappears before you get filled
-
-**Adverse selection**: You get filled precisely when the market is about to move against you
-
-**Latency**: Delays between decision and execution
+- **Queue dynamics**: Your order sits behind others at the same price level
+- **Partial fills**: Only part of your order executes before the level moves
+- **Order cancellations**: Liquidity disappears before you get filled
+- **Adverse selection**: You get filled precisely when the market is about to move against you
+- **Latency**: Delays between decision and execution
 
 These details can make the difference between a strategy that looks profitable (20% returns) and one that actually is (5% returns after realistic execution).
 
@@ -38,32 +38,26 @@ This method uses recorded order book data, often millisecond by millisecond, to 
 
 **Data requirements:**
 
-**Full order book snapshots**: Best bid/ask and multiple levels of depth
-
-**All order events**: New orders, cancellations, modifications, executions
-
-**Timestamps**: Microsecond precision
-
-**Trade tape**: Actual executions with prices and sizes
+- **Full order book snapshots**: Best bid/ask and multiple levels of depth
+- **All order events**: New orders, cancellations, modifications, executions
+- **Timestamps**: Microsecond precision
+- **Trade tape**: Actual executions with prices and sizes
 
 **Simulation process:**
 
 1. **Initialize**: Start with order book state at time \\(t_0\\)
-
 2. **Stream events**: Process each order book update sequentially
-
 3. **Track queue position**: When you place an order, record your position in the queue
-
 4. **Simulate fills**: When trades occur at your price level, estimate fill probability based on queue position
-
 5. **Update P&L**: Record execution prices and calculate realized returns
 
 **Queue position mechanics:**
 
-If there are 10,000 shares bid at $100 and you add 1,000 shares, you're at the back of the queue.
+If there are 10,000 shares bid at $100 and you add 1,000 shares, you're at the back of the queue (position 10,001-11,000).
 
 When trades happen at $100, shares are filled in order:
-- First 5,000 shares → earlier orders get filled
+
+- First 10,000 shares → earlier orders get filled
 - Next 1,000 shares → you get filled
 - Market moves before more fills → you're partially filled (only got 500 shares)
 
@@ -72,27 +66,23 @@ When trades happen at $100, shares are filled in order:
 \\[P(\\text{fill}) = \\min\\left(1, \\frac{V_{\\text{traded}}}{Q_{\\text{ahead}} + \\frac{Q_{\\text{yours}}}{2}}\\right)\\]
 
 Where:
+
 - \\(V_{\\text{traded}}\\) = volume executed at your price level
 - \\(Q_{\\text{ahead}}\\) = shares ahead of you in queue
 - \\(Q_{\\text{yours}}\\) = your order size
 
 **Advantages:**
 
-**Highly accurate**: Uses actual market data
-
-**Realistic**: Captures true liquidity constraints
-
-**Detailed**: Models exact execution dynamics
+- **Highly accurate**: Uses actual market data
+- **Realistic**: Captures true liquidity constraints
+- **Detailed**: Models exact execution dynamics
 
 **Challenges:**
 
-**Data intensive**: Terabytes of order book data
-
-**Computationally expensive**: Processing millions of events
-
-**Storage**: Requires specialized time-series databases
-
-**Cost**: Order book data is expensive to acquire
+- **Data intensive**: Terabytes of order book data
+- **Computationally expensive**: Processing millions of events
+- **Storage**: Requires specialized time-series databases
+- **Cost**: Order book data is expensive to acquire
 
 This produces highly accurate execution results, though it requires massive data and compute resources.
 
@@ -103,29 +93,34 @@ When full LOB data isn't available, funds build **agent-based models** to genera
 **Agent types:**
 
 **Market makers:**
+
 - Post quotes on both sides
 - Adjust spreads based on volatility and inventory
 - Cancel when adverse information arrives
 - Repost after price moves
 
 **Momentum traders:**
+
 - Buy when price rises
 - Sell when price falls
 - Use market orders (take liquidity)
 - Create short-term trends
 
 **Mean reversion traders:**
+
 - Buy when price drops below moving average
 - Sell when price rises above
 - Use limit orders
 - Provide counter-trend liquidity
 
 **Noise traders:**
+
 - Trade randomly
 - Create baseline liquidity
 - Represent uninformed flow
 
 **Informed traders:**
+
 - Have advance information about fundamentals
 - Trade aggressively
 - Cause price discovery
@@ -134,21 +129,15 @@ When full LOB data isn't available, funds build **agent-based models** to genera
 **Simulation algorithm:**
 
 1. **Initialize order book**: Set initial bid/ask and depth
-
-2. **Agent decision loop**:
-   - Each agent observes current state (price, spread, volume)
-   - Decides whether to place, cancel, or modify orders
-   - Executes action
-
+2. **Agent decision loop**: Each agent observes current state (price, spread, volume), decides whether to place, cancel, or modify orders, and executes action
 3. **Matching engine**: Process orders using price-time priority
-
 4. **Update state**: Recalculate bid/ask, spread, depth
-
 5. **Repeat**: Continue for desired simulation period
 
 **Calibration:**
 
 Tune agent parameters so that simulated market statistics match real data:
+
 - Bid-ask spread distribution
 - Order arrival rates
 - Trade size distribution
@@ -168,9 +157,11 @@ More advanced systems include **queue position modeling**, where your order's pr
 **Priority rules vary by exchange:**
 
 **Price-time priority** (most common):
+
 Orders matched first by price, then by arrival time
 
 **Pro-rata matching**:
+
 Volume distributed proportionally among orders at same price level
 
 \\[\\text{Fill}_i = V_{\\text{traded}} \\times \\frac{Q_i}{\\sum_j Q_j}\\]
@@ -181,6 +172,7 @@ Larger orders get filled first (rare)
 **Queue position dynamics:**
 
 Your position changes when:
+
 - New orders arrive ahead of you (push you back)
 - Orders ahead cancel (move you forward)
 - Price level is partially filled (you move up if ahead orders get filled)
@@ -199,21 +191,16 @@ Some funds even simulate **latency effects**, how delays in receiving or sending
 
 **Types of latency:**
 
-**Market data latency**: Time between exchange event and you seeing it
-
-**Processing latency**: Time to make trading decision
-
-**Order submission latency**: Time between decision and order arriving at exchange
-
-**Total latency**: Sum of all delays (typically 1-50 milliseconds)
+- **Market data latency**: Time between exchange event and you seeing it
+- **Processing latency**: Time to make trading decision
+- **Order submission latency**: Time between decision and order arriving at exchange
+- **Total latency**: Sum of all delays (typically 1-50 milliseconds)
 
 **Impact on strategy:**
 
-**High-frequency strategies**: 1ms latency can be fatal
-
-**Medium-frequency**: 10-50ms matters for execution quality
-
-**Low-frequency**: Latency less important but still affects fills
+- **High-frequency strategies**: 1ms latency can be fatal (1ms latency can be fatal)
+- **Medium-frequency**: 10-50ms matters for execution quality
+- **Low-frequency**: Latency less important but still affects fills
 
 **Modeling latency:**
 
@@ -222,6 +209,7 @@ Add random delay between decision and execution:
 \\[t_{\\text{execution}} = t_{\\text{decision}} + \\text{Latency}\\]
 
 Where Latency can be:
+
 - Constant (deterministic)
 - Random (Gaussian or exponential distribution)
 - Time-varying (worse during market stress)
@@ -231,6 +219,7 @@ Where Latency can be:
 Your model says "buy at $100.00" at time \\(t\\).
 
 With 10ms latency:
+
 - Order arrives at \\(t + 10\\)ms
 - Best ask is now $100.02 (market moved)
 - You get filled at worse price or not at all
@@ -244,6 +233,7 @@ These simulations can test everything from execution algorithms (like VWAP or ad
 **Execution algorithm testing:**
 
 Test TWAP, VWAP, or custom algorithms under realistic conditions:
+
 - How much slippage occurs?
 - What's the fill rate?
 - How often do orders sit unfilled?
@@ -251,6 +241,7 @@ Test TWAP, VWAP, or custom algorithms under realistic conditions:
 **Market-making strategy:**
 
 Test different quoting strategies:
+
 - Tight spreads vs wide spreads
 - Aggressive posting vs passive
 - Inventory skewing effectiveness
@@ -258,18 +249,21 @@ Test different quoting strategies:
 **Arbitrage strategies:**
 
 Model race conditions:
+
 - Can you capture the arbitrage before others?
 - How often do you get picked off by faster traders?
 
 **Liquidity stress scenarios:**
 
 Simulate flash crashes or liquidity evaporation:
+
 - Can you exit positions?
 - How much slippage during panic selling?
 
 **Strategic order placement:**
 
 Test different order types:
+
 - Limit orders vs market orders
 - Immediate-or-cancel vs good-till-cancel
 - Hidden orders vs displayed

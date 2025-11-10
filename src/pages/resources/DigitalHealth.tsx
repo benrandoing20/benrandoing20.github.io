@@ -8,19 +8,6 @@ import { digitalHealthGraphData } from '@/data/graphs/digitalHealthGraph';
 
 const DigitalHealth = () => {
   const [view, setView] = useState<'list' | 'graph'>('graph');
-  const [expandedSections, setExpandedSections] = useState<Set<number>>(new Set());
-  
-  const toggleSection = (index: number) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(index)) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
-      return newSet;
-    });
-  };
   
   const sections = [
     // 1) Clinical AI & Decision Support
@@ -263,42 +250,54 @@ const DigitalHealth = () => {
               <KnowledgeGraph3D data={digitalHealthGraphData} />
             </div>
           ) : (
-            <div className="space-y-20">
+            <div className="space-y-24">
             {sections.map((section, index) => (
-              <div key={index} className="border-l-2 border-black/5 pl-8">
-                <button 
-                  onClick={() => toggleSection(index)}
-                  className="w-full flex items-center justify-between text-left mb-12 group hover:opacity-70 transition-opacity duration-300"
-                >
+              <div key={index}>
+                <div className="mb-8">
                   <h2 className="text-3xl font-light tracking-tight">
                     {section.title}
                   </h2>
-                  <span className="text-2xl font-light text-black/40 transition-transform duration-300" style={{ transform: expandedSections.has(index) ? 'rotate(90deg)' : 'rotate(0deg)' }}>
-                    →
-                  </span>
-                </button>
-                {expandedSections.has(index) && (
-                  <div className="space-y-10">
-                    {section.content.map((item, itemIndex) => (
-                    <Link 
-                      key={itemIndex} 
-                      to={`/resources/digital-health/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[(),]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
-                      state={{ title: item.subtitle }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
-                    >
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
-                        {item.subtitle}
-                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-                      </h3>
-                      <p className="text-base font-light text-black/60 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </Link>
-                    ))}
+                </div>
+                
+                {/* Horizontal Scroll Container */}
+                <div className="relative">
+                  <div className="overflow-x-auto pb-8 scrollbar-hide -mx-8 px-8">
+                    <div className="flex gap-6 min-w-max">
+                      {section.content.map((item, itemIndex) => (
+                        <Link
+                          key={itemIndex}
+                          to={`/resources/digital-health/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[(),]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
+                          state={{ title: item.subtitle }}
+                          className="group w-80 flex-shrink-0 border border-black/10 hover:border-black/30 transition-all duration-300 bg-white cursor-pointer overflow-hidden"
+                        >
+                          {/* Image with hover overlay for description */}
+                          <div className="relative w-full h-48 overflow-hidden border-b border-black/5 bg-black/90 group-hover:bg-black transition-colors duration-300">
+                            {/* Sleek title display */}
+                            <div className="absolute inset-0 flex items-center justify-center p-8">
+                              <h4 className="text-2xl font-extralight text-white/90 text-center leading-tight tracking-tight">
+                                {item.subtitle}
+                              </h4>
+                            </div>
+                            
+                            {/* Description overlay on hover */}
+                            <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-5 overflow-y-auto">
+                              <p className="text-xs font-light text-white/90 leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                )}
+                  
+                  {/* Scroll Indicator */}
+                  <div className="text-center mt-2">
+                    <p className="text-xs font-light text-black/40 tracking-wide">
+                      ← Scroll to explore →
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
             </div>

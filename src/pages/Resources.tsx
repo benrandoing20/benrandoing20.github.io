@@ -17,17 +17,17 @@ const Resources = () => {
       topics: ["• Edge AI & embedded systems", "• Sensor fusion & data processing", "• Wearable technology", "• Smart device architectures", "• Hardware-software co-design"]
     },
     {
-      title: "Digital Health Concepts",
+      title: "Digital Health",
       description: "The intersection of artificial intelligence and healthcare—transforming diagnostics, treatment, and patient care",
       href: "/resources/digital-health",
       topics: ["• Medical imaging & diagnostics", "• Clinical decision support", "• Personalized medicine", "• Remote patient monitoring", "• Healthcare operations AI"]
     },
-    {
-      title: "Applied AI",
-      description: "Comprehensive guide to practical AI implementation, from foundational theory to production deployment",
-      href: "/resources/applied-ai",
-      topics: ["• Machine learning fundamentals", "• Deep learning architectures", "• Natural language processing", "• Computer vision systems", "• MLOps & deployment"]
-    },
+    // {
+    //   title: "Applied AI",
+    //   description: "Comprehensive guide to practical AI implementation, from foundational theory to production deployment",
+    //   href: "/resources/applied-ai",
+    //   topics: ["• Machine learning fundamentals", "• Deep learning architectures", "• Natural language processing", "• Computer vision systems", "• MLOps & deployment"]
+    // },
     {
       title: "Hedge Fund AI",
       description: "AI-driven strategies for quantitative finance, algorithmic trading, and market intelligence systems",

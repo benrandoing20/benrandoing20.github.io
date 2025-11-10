@@ -5,6 +5,7 @@ const BlackLittermanModel = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [The Problem with MPT](#the-problem-with-mpt)
 - [Market Equilibrium as a Prior](#market-equilibrium-as-a-prior)
 - [Expressing Your Views](#expressing-your-views)
@@ -12,11 +13,33 @@ const BlackLittermanModel = () => {
 - [The Mathematics](#the-mathematics)
 - [Practical Example](#practical-example)
 
+## Overview
+
 While MPT is elegant, it has one big weakness: it depends heavily on the expected returns you feed it. Even small changes can lead to completely different allocations. The Black-Litterman model was developed by Fischer Black and Robert Litterman at Goldman Sachs to fix that problem.
 
 ## The Problem with MPT
 
 Standard mean-variance optimization is extremely sensitive to expected return estimates. Change one stock's expected return by 0.5%, and the optimal portfolio might flip completely.
+
+**Example:**
+
+Suppose you have two assets with:
+
+- Expected returns: \\(\\mu_1 = 10\\%\\), \\(\\mu_2 = 9.5\\%\\)
+- Standard deviations: \\(\\sigma_1 = 15\\%\\), \\(\\sigma_2 = 15\\%\\)
+- Correlation: \\(\\rho = 0.3\\)
+
+The mean-variance optimizer might allocate 70% to Asset 1 and 30% to Asset 2.
+
+Now change \\(\\mu_1\\) from 10% to 10.5% (a tiny 0.5% increase):
+
+The new optimal allocation might become 90% in Asset 1 and 10% in Asset 2 — a dramatic shift from a small input change.
+
+This happens because the optimizer maximizes the Sharpe ratio:
+
+\\[\\text{Sharpe} = \\frac{w^T \\mu - r_f}{\\sqrt{w^T \\Sigma w}}\\]
+
+Small changes in \\(\\mu\\) can drastically change which portfolio maximizes this ratio, especially when assets have similar risk profiles.
 
 **Why this happens:**
 
@@ -35,7 +58,56 @@ The Black-Litterman model starts from the assumption that markets are roughly in
 
 **Reverse optimization:**
 
-If markets are efficient, then the market portfolio (how capital is actually allocated globally) must be optimal for *some* set of expected returns. We can back those out:
+If markets are efficient, then the market portfolio (how capital is actually allocated globally) must be optimal for *some* set of expected returns. We can reverse-engineer those returns.
+
+**Where do market weights come from?**
+
+Market weights (\\(w_{\\text{mkt}}\\)) represent how capital is actually distributed across assets in the global market. For equities, this is typically market capitalization weighting:
+
+\\[w_i = \\frac{\\text{Market Cap}_i}{\\sum_j \\text{Market Cap}_j}\\]
+
+For example, if Apple has a $3 trillion market cap and the total market is $50 trillion, Apple's weight is 6%.
+
+**Finding the covariance matrix (\\(\\Sigma\\)):**
+
+The covariance matrix captures how assets move together. It's estimated from historical returns:
+
+\\[\\Sigma_{ij} = \\text{Cov}(r_i, r_j) = E[(r_i - \\mu_i)(r_j - \\mu_j)]\\]
+
+In practice:
+
+- Use historical daily or monthly returns (typically 1-5 years of data)
+- Calculate sample covariance: \\(\\Sigma_{ij} = \\frac{1}{T-1} \\sum_{t=1}^{T} (r_{i,t} - \\bar{r}_i)(r_{j,t} - \\bar{r}_j)\\)
+- Apply shrinkage methods (like Ledoit-Wolf) to improve stability and reduce estimation error
+- Some funds use factor models (e.g., Fama-French) to decompose covariance into systematic and idiosyncratic components
+
+**Finding the risk aversion parameter (\\(\\lambda\\)):**
+
+The risk aversion parameter represents how much investors dislike risk relative to return. Higher \\(\\lambda\\) means more risk-averse.
+
+**Common approaches:**
+
+**Market-implied calibration:**
+Use the market Sharpe ratio to back out \\(\\lambda\\):
+
+\\[\\lambda = \\frac{E[r_{\\text{mkt}}] - r_f}{\\sigma_{\\text{mkt}}^2}\\]
+
+Where \\(E[r_{\\text{mkt}}] - r_f\\) is the equity risk premium (historically ~5-7% annually) and \\(\\sigma_{\\text{mkt}}^2\\) is market variance.
+
+**Example:** If the equity risk premium is 6% and market variance is 0.04 (20% volatility), then \\(\\lambda = 0.06 / 0.04 = 1.5\\).
+
+**Typical values:**
+- \\(\\lambda = 2.5\\) is a common default (moderate risk aversion)
+- \\(\\lambda = 1-2\\) for aggressive investors
+- \\(\\lambda = 3-5\\) for conservative investors
+
+**Sensitivity:** The exact value of \\(\\lambda\\) matters less than you'd think — it scales all equilibrium returns proportionally, so relative rankings stay similar. What matters more is consistency across time.
+
+
+
+**Reverse optimization:**
+
+Given these market weights and the covariance matrix \\(\\Sigma\\), we can solve for the implied expected returns that would make this portfolio optimal:
 
 \\[\\mu_{\\text{eq}} = \\lambda \\Sigma w_{\\text{mkt}}\\]
 
@@ -213,15 +285,11 @@ And letting math find the right balance.
 
 **Key advantages:**
 
-**Stability**: Small changes in views produce small changes in portfolio
-
-**Diversification**: Prevents over-concentration
-
-**Transparency**: You explicitly state your views and confidence
-
-**Bayesian rigor**: Incorporates uncertainty properly
-
-**Market grounding**: Starts from a sensible baseline (equilibrium)
+- **Stability**: Small changes in views produce small changes in portfolio
+- **Diversification**: Prevents over-concentration
+- **Transparency**: You explicitly state your views and confidence
+- **Bayesian rigor**: Incorporates uncertainty properly 
+- **Market grounding**: Starts from a sensible baseline (equilibrium)
 
 Black-Litterman turns subjective views into systematic, disciplined allocations. It's why it became the industry standard for institutional portfolio construction.
 `;

@@ -4,23 +4,13 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ViewToggle from '@/components/ViewToggle';
 import KnowledgeGraph3D from '@/components/KnowledgeGraph3D';
+import IndustryTimeline from '@/components/IndustryTimeline';
+import AIUsageTypes from '@/components/AIUsageTypes';
+import PortfolioExamplePanel from '@/components/PortfolioExamplePanel';
 import { hedgeFundAIGraphData } from '@/data/graphs/hedgeFundAIGraph';
 
 const HedgeFundAI = () => {
   const [view, setView] = useState<'list' | 'graph'>('graph');
-  const [expandedSections, setExpandedSections] = useState<Set<number>>(new Set());
-  
-  const toggleSection = (index: number) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(index)) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
-      return newSet;
-    });
-  };
   
   const sections = [
     {
@@ -223,6 +213,212 @@ const HedgeFundAI = () => {
     }
   ];
 
+  // Recent Industry Developments - Product Launches & Adoption
+  const timelineEvents = [
+    {
+      date: "January 2025",
+      year: 2025,
+      title: "Bloomberg GPT Integration",
+      description: "Bloomberg announces enterprise integration of their fine-tuned 50B parameter BloombergGPT model into Terminal, enabling natural language queries across decades of financial data and real-time market analytics.",
+      category: 'technology' as const,
+      url: "https://www.bloomberg.com/company/press/bloomberggpt-50-billion-parameter-llm-tuned-finance/"
+    },
+    {
+      date: "December 2024",
+      year: 2024,
+      title: "Man Group Deploys AHL Dimension",
+      description: "Man Group's AHL launches Dimension, a fully autonomous agent-based trading system using multi-agent reinforcement learning for systematic macro strategies—first institutional deployment at scale.",
+      category: 'innovation' as const,
+      url: "https://www.man.com/ahl-dimension"
+    },
+    {
+      date: "November 2024",
+      year: 2024,
+      title: "Two Sigma Code Analysis Tool",
+      description: "Two Sigma open-sources their internal LLM-powered code analysis tool that automatically detects backtesting errors, achieving 94% accuracy in identifying look-ahead bias and data leakage.",
+      category: 'innovation' as const,
+      url: "https://www.twosigma.com"
+    }
+  ];
+
+  // Companies and Funds Market Map
+  const companyMarketMap = [
+    {
+      name: "Quant Hedge Funds",
+      companies: [
+        { name: "Renaissance Technologies", url: "https://www.rentec.com" },
+        { name: "Two Sigma", url: "https://www.twosigma.com" },
+        { name: "Citadel", url: "https://www.citadel.com" },
+        { name: "D.E. Shaw", url: "https://www.deshaw.com" },
+        { name: "AQR Capital", url: "https://www.aqr.com" },
+        { name: "Millennium Management", url: "https://www.mlp.com" },
+        { name: "Point72", url: "https://www.point72.com" },
+        { name: "Bridgewater Associates", url: "https://www.bridgewater.com" },
+        { name: "WorldQuant", url: "https://www.worldquant.com" },
+        { name: "PDT Partners", url: "https://www.pdtpartners.com" }
+      ]
+    },
+    {
+      name: "Market Data Providers",
+      companies: [
+        { name: "Bloomberg", url: "https://www.bloomberg.com/professional/solution/bloomberg-terminal/" },
+        { name: "Refinitiv (LSEG)", url: "https://www.refinitiv.com" },
+        { name: "FactSet", url: "https://www.factset.com" },
+        { name: "S&P Global Market Intelligence", url: "https://www.spglobal.com/marketintelligence" },
+        { name: "IEX Cloud", url: "https://iexcloud.io" },
+        { name: "Polygon.io", url: "https://polygon.io" },
+        { name: "Databento", url: "https://databento.com" },
+        { name: "Alpaca Markets", url: "https://alpaca.markets" }
+      ]
+    },
+    {
+      name: "Alternative Data",
+      companies: [
+        { name: "Thinknum", url: "https://www.thinknum.com" },
+        { name: "Orbital Insight", url: "https://orbitalinsight.com" },
+        { name: "Quandl (Nasdaq)", url: "https://data.nasdaq.com" },
+        { name: "YipitData", url: "https://www.yipitdata.com" },
+        { name: "Earnest Research", url: "https://www.earnestresearch.com" },
+        { name: "M Science", url: "https://mscience.com" },
+        { name: "RS Metrics", url: "https://www.rsmetrics.com" },
+        { name: "SafeGraph", url: "https://www.safegraph.com" },
+        { name: "Dataminr", url: "https://www.dataminr.com" }
+      ]
+    },
+    {
+      name: "Trading Infrastructure",
+      companies: [
+        { name: "QuantConnect", url: "https://www.quantconnect.com" },
+        { name: "Alpaca", url: "https://alpaca.markets" },
+        { name: "TradeStation", url: "https://www.tradestation.com" },
+        { name: "Interactive Brokers", url: "https://www.interactivebrokers.com" },
+        { name: "FlexTrade", url: "https://flextrade.com" },
+        { name: "Trading Technologies", url: "https://www.tradingtechnologies.com" },
+        { name: "Lime Brokerage", url: "https://www.lime.co" },
+        { name: "Hudson River Trading", url: "https://www.hudsonrivertrading.com" }
+      ]
+    },
+    {
+      name: "ML/AI Platforms",
+      companies: [
+        { name: "Databricks", url: "https://www.databricks.com" },
+        { name: "H2O.ai", url: "https://h2o.ai" },
+        { name: "DataRobot", url: "https://www.datarobot.com" },
+        { name: "Domino Data Lab", url: "https://www.dominodatalab.com" },
+        { name: "Tecton", url: "https://www.tecton.ai" },
+        { name: "Weights & Biases", url: "https://wandb.ai" },
+        { name: "Feast", url: "https://feast.dev" },
+        { name: "MLflow", url: "https://mlflow.org" }
+      ]
+    },
+    {
+      name: "Risk & Analytics",
+      companies: [
+        { name: "Axioma (SimCorp)", url: "https://www.simcorp.com/en/solutions/axioma" },
+        { name: "MSCI Barra", url: "https://www.msci.com/factor-models" },
+        { name: "RiskMetrics", url: "https://www.msci.com/riskmetrics" },
+        { name: "Numerix", url: "https://www.numerix.com" },
+        { name: "SS&C Algorithmics", url: "https://www.algorithmics.com" },
+        { name: "FINCAD", url: "https://fincad.com" },
+        { name: "Murex", url: "https://www.murex.com" }
+      ]
+    },
+    {
+      name: "Backtesting & Research",
+      companies: [
+        { name: "QuantConnect", url: "https://www.quantconnect.com" },
+        { name: "Quantopian (archived)", url: "https://github.com/quantopian" },
+        { name: "Zipline", url: "https://github.com/quantopian/zipline" },
+        { name: "Backtrader", url: "https://www.backtrader.com" },
+        { name: "QuantLib", url: "https://www.quantlib.org" },
+        { name: "Portfolio123", url: "https://www.portfolio123.com" },
+        { name: "Quantopian's Alphalens", url: "https://github.com/quantopian/alphalens" }
+      ]
+    },
+    {
+      name: "Execution Management",
+      companies: [
+        { name: "Bloomberg AIM", url: "https://www.bloomberg.com/professional/product/execution-management-system/" },
+        { name: "Charles River IMS", url: "https://www.crd.com" },
+        { name: "Fidessa", url: "https://iongroup.com/markets/fidessa/" },
+        { name: "Eze Software (SS&C)", url: "https://www.ssctech.com/products/eze-software-suite" },
+        { name: "FlexTrade", url: "https://flextrade.com" },
+        { name: "ITG (Virtu)", url: "https://www.virtu.com" },
+        { name: "Clearpool", url: "https://clearpool.com" }
+      ]
+    },
+    {
+      name: "Sentiment & NLP",
+      companies: [
+        { name: "RavenPack", url: "https://www.ravenpack.com" },
+        { name: "Accern", url: "https://accern.com" },
+        { name: "Amenity Analytics", url: "https://www.amenityanalytics.com" },
+        { name: "Sentifi (acquired)", url: "https://www.sentifi.com" },
+        { name: "StockTwits", url: "https://stocktwits.com" },
+        { name: "Social Market Analytics", url: "https://www.socialmarketanalytics.com" },
+        { name: "Prattle Analytics", url: "https://www.prattle.co" }
+      ]
+    },
+    {
+      name: "HFT & Low-Latency",
+      companies: [
+        { name: "Jump Trading", url: "https://www.jumptrading.com" },
+        { name: "Virtu Financial", url: "https://www.virtu.com" },
+        { name: "Tower Research", url: "https://www.tower-research.com" },
+        { name: "IMC Trading", url: "https://www.imc.com" },
+        { name: "Jane Street", url: "https://www.janestreet.com" },
+        { name: "DRW Trading", url: "https://drw.com" },
+        { name: "Flow Traders", url: "https://www.flowtraders.com" },
+        { name: "Optiver", url: "https://www.optiver.com" }
+      ]
+    }
+  ];
+
+  // AI Applications Market Map - Tech + Application Combos by Category
+  const aiApplications = [
+    // Retrieval-Augmented Generation (RAG) - Red shades
+    { name: "RAG Historical Context Retrieval", description: "Use retrieval-augmented generation to find similar historical market conditions by embedding and retrieving analogous periods.", color: "#EF4444", category: "Retrieval-Augmented Generation (RAG)" },
+    { name: "RAG Fact Verification", description: "Implement RAG to cross-check investment thesis claims against your entire database of filings and research documents.", color: "#DC2626", category: "Retrieval-Augmented Generation (RAG)" },
+    { name: "Embedding Semantic Company Search", description: "Use embedding models to search for 'companies disrupting payments' by meaning rather than exact keyword matching.", color: "#B91C1C", category: "Retrieval-Augmented Generation (RAG)" },
+    { name: "Embedding Alternative Data Fusion", description: "Use embeddings to combine web scraping, satellite imagery, and social media into unified vector representations for trading signals.", color: "#F87171", category: "Retrieval-Augmented Generation (RAG)" },
+    
+    // Prompt Engineering - Purple shades
+    { name: "LLM Text-to-SQL for Portfolio Screening", description: "Use large language models to convert natural language queries like 'tech stocks with P/E < 15' into SQL that queries your financial database.", color: "#8B5CF6", category: "Prompt Engineering" },
+    { name: "LLM Earnings Call Q&A", description: "Ask LLMs questions about earnings calls and get exact quotes with surrounding context from the transcript.", color: "#9333EA", category: "Prompt Engineering" },
+    { name: "LLM Multi-Report Synthesis", description: "Use LLMs to read 50+ analyst reports and synthesize consensus views, contrarian positions, and key disagreements.", color: "#A855F7", category: "Prompt Engineering" },
+    { name: "Prompt Engineering for Financial Analysis", description: "Use chain-of-thought prompting techniques to make LLMs break down complex investment questions into logical reasoning steps.", color: "#7C3AED", category: "Prompt Engineering" },
+    { name: "LLM 10-K Reading Agent", description: "Deploy an LLM agent that reads entire 10-K filings and answers specific questions with exact citations from the document.", color: "#6D28D9", category: "Prompt Engineering" },
+    
+    // Agentic AI Systems - Orange shades
+    { name: "Agent Autonomous Portfolio Rebalancing", description: "Deploy an autonomous agent that monitors your portfolio and decides when to rebalance based on risk targets without human intervention.", color: "#F59E0B", category: "Agentic AI Systems" },
+    { name: "Multi-Agent Trading Coordination", description: "Run multiple specialized agents where one researches opportunities, another executes orders, and a third monitors risk—coordinating automatically.", color: "#D97706", category: "Agentic AI Systems" },
+    { name: "Agent Web Scraping Automation", description: "Use an autonomous agent to continuously scrape competitor websites, job postings, and pricing data for alternative trading signals.", color: "#B45309", category: "Agentic AI Systems" },
+    { name: "Agent SEC Filing Monitor", description: "Deploy an agent that watches all SEC filings in real-time and alerts on material changes or unusual language patterns.", color: "#FBBF24", category: "Agentic AI Systems" },
+    
+    // Generative AI Models - Blue shades
+    { name: "LLM Code Generation for Trading Strategies", description: "Describe a trading strategy in plain English and have an LLM generate complete Python backtesting code with proper risk controls.", color: "#3B82F6", category: "Generative AI Models" },
+    { name: "LLM SQL Generation for Data Queries", description: "Use LLMs to automatically generate complex SQL queries from natural language descriptions of what data you need.", color: "#2563EB", category: "Generative AI Models" },
+    { name: "LLM Bug Detection in Backtests", description: "Have LLMs review backtesting code to automatically identify look-ahead bias, data leakage, and other common errors.", color: "#1D4ED8", category: "Generative AI Models" },
+    { name: "GAN Synthetic Market Scenarios", description: "Use generative adversarial networks to create realistic market scenarios that never historically occurred for stress testing portfolios.", color: "#60A5FA", category: "Generative AI Models" },
+    { name: "GAN Rare Event Augmentation", description: "Train GANs to synthesize more examples of rare events like flash crashes to improve model robustness.", color: "#93C5FD", category: "Generative AI Models" },
+    
+    // Vision Transformers - Green shades
+    { name: "Vision Transformer Chart Analysis", description: "Use vision transformers to analyze stock chart images and detect technical patterns like head-and-shoulders or breakouts.", color: "#10B981", category: "Vision Transformers" },
+    { name: "Vision Transformer Satellite Imagery", description: "Apply vision transformers to satellite images of parking lots to count cars for retail traffic estimation.", color: "#059669", category: "Vision Transformers" },
+    { name: "Vision Transformer PDF Extraction", description: "Use vision transformers to extract tables and charts from complex PDF layouts that traditional parsers miss.", color: "#047857", category: "Vision Transformers" },
+    { name: "Multimodal Chart + News Fusion", description: "Combine vision models analyzing chart patterns with NLP models analyzing news sentiment to generate unified trading signals.", color: "#34D399", category: "Vision Transformers" },
+    { name: "Multimodal Satellite + Credit Card Data", description: "Fuse computer vision analysis of satellite parking lot images with credit card transaction data for retail sales nowcasting.", color: "#6EE7B7", category: "Vision Transformers" },
+    
+    // Model Fine-Tuning - Violet shades
+    { name: "LoRA Fine-Tuned Financial LLM", description: "Use LoRA (Low-Rank Adaptation) to fine-tune large language models on 20 years of internal research for domain-specific understanding.", color: "#A855F7", category: "Model Fine-Tuning" },
+    { name: "Domain-Specific BERT for Finance", description: "Fine-tune BERT models on financial documents to improve named entity recognition of companies, metrics, and events.", color: "#9333EA", category: "Model Fine-Tuning" },
+    
+    // Audio & Speech Transformers - Teal shades
+    { name: "Transformer Live Earnings Call Transcription", description: "Apply transformers for real-time speech-to-text transcription of earnings calls combined with instant sentiment analysis.", color: "#14B8A6", category: "Audio & Speech Transformers" },
+    { name: "Audio Transformer Voice Sentiment", description: "Use audio transformers to analyze CEO tone, confidence, and vocal patterns during earnings calls beyond just transcript text.", color: "#0D9488", category: "Audio & Speech Transformers" },
+    { name: "Transformer Real-Time News Classification", description: "Use transformer models to classify breaking news (M&A, earnings, regulatory) and assess market impact in real-time.", color: "#0F766E", category: "Audio & Speech Transformers" }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -257,45 +453,107 @@ const HedgeFundAI = () => {
               <KnowledgeGraph3D data={hedgeFundAIGraphData} />
             </div>
           ) : (
-            <div className="space-y-20">
+            <div className="space-y-24">
+            {/* High-level overview section */}
+            <div className="mb-16">
+              <h2 className="text-3xl font-light tracking-tight mb-3">
+                Industry Overview
+              </h2>
+              <p className="text-base font-light text-black/60 leading-relaxed mb-16">
+                Before diving into specific topics, explore how generative AI and modern machine learning are transforming hedge funds—from LLMs analyzing documents to agentic systems executing trades autonomously.
+              </p>
+
+              {/* Two overview sections with smaller titles */}
+              <div className="space-y-16">
+                <IndustryTimeline events={timelineEvents} />
+                
+                <AIUsageTypes 
+                  applications={aiApplications}
+                  title="AI Applications Market Map"
+                  subtitle="How AI is being used across hedge funds"
+                />
+              </div>
+            </div>
+
+            {/* Divider before main content */}
+            <div className="w-full h-px bg-black/10 my-16"></div>
+            
+            {/* Main topic sections */}
+            <div className="mb-12">
+              <h2 className="text-3xl font-light tracking-tight mb-3">
+                Deep Dive Topics
+              </h2>
+              <p className="text-base font-light text-black/60 leading-relaxed">
+                Comprehensive guides covering the technical details, strategies, and implementation approaches across all aspects of hedge fund AI.
+              </p>
+            </div>
             {sections.map((section, index) => (
-              <div key={index} className="border-l-2 border-black/5 pl-8">
-                <button 
-                  onClick={() => toggleSection(index)}
-                  className="w-full flex items-center justify-between text-left mb-4 group hover:opacity-70 transition-opacity duration-300"
-                >
-                  <h2 className="text-3xl font-light tracking-tight">
+              <div key={index}>
+                <div className="mb-8">
+                  <h3 className="text-xl font-light tracking-tight mb-2">
                     {section.title}
-                  </h2>
-                  <span className="text-2xl font-light text-black/40 transition-transform duration-300" style={{ transform: expandedSections.has(index) ? 'rotate(90deg)' : 'rotate(0deg)' }}>
-                    →
-                  </span>
-                </button>
-                <p className="text-base font-light text-black/60 mb-12 leading-relaxed">
-                  {section.description}
-                </p>
-                {expandedSections.has(index) && (
-                  <div className="space-y-10">
-                    {section.content.map((item, itemIndex) => (
-                    <Link 
-                      key={itemIndex} 
-                      to={`/resources/hedge-fund-ai/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[(),]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
-                      state={{ title: item.subtitle }}
-                      className="group block hover:bg-black/2 p-4 -m-4 rounded-lg transition-all duration-300"
-                    >
-                      <h3 className="text-xl font-light mb-3 group-hover:text-black transition-colors duration-300 flex items-center">
-                        {item.subtitle}
-                        <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-                      </h3>
-                      <p className="text-base font-light text-black/60 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </Link>
-                    ))}
+                  </h3>
+                  <p className="text-sm font-light text-black/60 leading-relaxed">
+                    {section.description}
+                  </p>
+                </div>
+                
+                {/* Horizontal Scroll Container */}
+                <div className="relative">
+                  <div className="overflow-x-auto pb-8 scrollbar-hide -mx-8 px-8">
+                    <div className="flex gap-6 min-w-max">
+                      {section.content.map((item, itemIndex) => (
+                        <Link
+                          key={itemIndex}
+                          to={`/resources/hedge-fund-ai/${section.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${item.subtitle.toLowerCase().replace(/\s+/g, '-').replace(/[(),]/g, '').replace(/&/g, 'and').replace(/\//g, '-')}`}
+                          state={{ title: item.subtitle }}
+                          className="group w-80 flex-shrink-0 border border-black/10 hover:border-black/30 transition-all duration-300 bg-white cursor-pointer overflow-hidden"
+                        >
+                          {/* Image with hover overlay for description */}
+                          <div className="relative w-full h-48 overflow-hidden border-b border-black/5 bg-black/90 group-hover:bg-black transition-colors duration-300">
+                            {/* Sleek title display */}
+                            <div className="absolute inset-0 flex items-center justify-center p-8">
+                              <h4 className="text-2xl font-extralight text-white/90 text-center leading-tight tracking-tight">
+                                {item.subtitle}
+                              </h4>
+                            </div>
+                            
+                            {/* Description overlay on hover */}
+                            <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-5 overflow-y-auto">
+                              <p className="text-xs font-light text-white/90 leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                )}
+                  
+                  {/* Scroll Indicator */}
+                  <div className="text-center mt-2">
+                    <p className="text-xs font-light text-black/40 tracking-wide">
+                      ← Scroll to explore →
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
+            
+            {/* Divider */}
+            <div className="w-full h-px bg-black/10 my-16"></div>
+            
+            {/* Portfolio Construction Example - After Deep Dives */}
+            <div className="mb-16">
+              <h2 className="text-3xl font-light tracking-tight mb-3">
+                How It All Connects
+              </h2>
+              <p className="text-base font-light text-black/60 leading-relaxed mb-8">
+                Now that you've seen the individual concepts, here's how they all work together in practice—from investment thesis to final portfolio positions.
+              </p>
+              
+              <PortfolioExamplePanel />
+            </div>
             </div>
           )}
         </div>

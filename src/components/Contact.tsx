@@ -9,7 +9,8 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'validation'>('idle');
+  const [validationMessage, setValidationMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -17,12 +18,46 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+    // Clear validation error when user starts typing
+    if (submitStatus === 'validation') {
+      setSubmitStatus('idle');
+      setValidationMessage('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields are filled
+    if (!formData.name.trim()) {
+      setSubmitStatus('validation');
+      setValidationMessage('Please enter your name');
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      setSubmitStatus('validation');
+      setValidationMessage('Please enter your email address');
+      return;
+    }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus('validation');
+      setValidationMessage('Please enter a valid email address');
+      return;
+    }
+    
+    if (!formData.message.trim()) {
+      setSubmitStatus('validation');
+      setValidationMessage('Please enter a message');
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setValidationMessage('');
 
     try {
       // EmailJS configuration - get these from https://www.emailjs.com/
@@ -34,9 +69,9 @@ const Contact = () => {
         serviceId,
         templateId,
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          message: formData.message.trim(),
           to_email: 'benrandoing20@gmail.com', // Your email
         },
         publicKey
@@ -153,6 +188,12 @@ const Contact = () => {
               {submitStatus === 'error' && (
                 <div className="text-red-600 text-sm font-light">
                   Failed to send message. Please try again or email me directly.
+                </div>
+              )}
+              
+              {submitStatus === 'validation' && (
+                <div className="text-red-600 text-sm font-light">
+                  {validationMessage}
                 </div>
               )}
               

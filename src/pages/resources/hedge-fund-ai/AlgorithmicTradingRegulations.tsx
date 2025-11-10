@@ -5,6 +5,7 @@ const AlgorithmicTradingRegulations = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Regulations Exist](#why-regulations-exist)
 - [SEC Rule 15c3-5 Market Access Rule](#sec-rule-15c3-5-market-access-rule)
 - [MiFID II Requirements](#mifid-ii-requirements)
@@ -14,6 +15,8 @@ const AlgorithmicTradingRegulations = () => {
 - [Real-Time Surveillance Systems](#real-time-surveillance-systems)
 - [Testing and Validation Requirements](#testing-and-validation-requirements)
 
+## Overview
+
 Algorithmic trading rules exist to protect markets from runaway code and systemic risk. Since hedge funds operate at high speed and scale, even a small software bug can create enormous disruption.
 
 ## Why Regulations Exist
@@ -22,23 +25,17 @@ The 2010 Flash Crash demonstrated what can happen when algorithmic systems inter
 
 **Key risks regulators aim to prevent:**
 
-**Erroneous orders**: "Fat finger" mistakes where wrong quantities or prices are entered
-
-**Runaway algorithms**: Code that keeps trading even when conditions change or errors occur
-
-**Cascading failures**: One firm's problem triggering systemic instability
-
-**Market manipulation**: Algorithms designed to deceive or disrupt
-
-**Systemic risk**: High-speed trading amplifying volatility during stress
+- **Erroneous orders**: "Fat finger" mistakes where wrong quantities or prices are entered
+- **Runaway algorithms**: Code that keeps trading even when conditions change or errors occur
+- **Cascading failures**: One firm's problem triggering systemic instability
+- **Market manipulation**: Algorithms designed to deceive or disrupt
+- **Systemic risk**: High-speed trading amplifying volatility during stress
 
 **Historical incidents:**
 
-**Knight Capital (2012)**: Software glitch caused $440 million loss in 45 minutes
-
-**Flash Crash (2010)**: Algorithmic interactions caused temporary market collapse
-
-**Navinder Sarao (2015)**: Spoofing algorithms contributed to Flash Crash conditions
+- **Knight Capital (2012)**: Software glitch caused $440 million loss in 45 minutes
+- **Flash Crash (2010)**: Algorithmic interactions caused temporary market collapse
+- **Navinder Sarao (2015)**: Spoofing algorithms contributed to Flash Crash conditions
 
 These events led regulators worldwide to impose strict controls on algorithmic trading.
 
@@ -48,16 +45,13 @@ To prevent this, regulators require **market access controls** and **pre-trade r
 
 **Core requirements:**
 
-**Broker-dealer responsibility**: Firms providing market access are responsible for all orders
-
-**Risk management controls**: Must be reasonably designed to prevent:
-- Orders exceeding appropriate pre-set capital thresholds
-- Orders exceeding appropriate pre-set credit thresholds
-- Erroneous orders
-
-**Supervisory procedures**: Written policies for managing financial and regulatory risks
-
-**Annual CEO certification**: Senior management must certify compliance
+- **Broker-dealer responsibility**: Firms providing market access are responsible for all orders
+- **Risk management controls**: Must be reasonably designed to prevent:
+- **Orders exceeding appropriate pre-set capital thresholds**
+- **Orders exceeding appropriate pre-set credit thresholds**
+- **Erroneous orders**
+  - **Supervisory procedures**: Written policies for managing financial and regulatory risks
+  -  **Annual CEO certification**: Senior management must certify compliance
 
 **Implementation details:**
 
@@ -78,33 +72,22 @@ European funds must comply with **MiFID II** (Markets in Financial Instruments D
 
 **MiFID II algorithmic trading obligations:**
 
-**Algorithm registration**: Each algorithm must be registered with regulators
-
-**Self-assessment**: Annual review of algorithmic trading systems
-
-**Testing requirements**: Mandatory testing in non-production environments
-
-**Conformance testing**: Ensure algorithms meet exchange requirements
-
-**Kill switch functionality**: Ability to immediately shut down all trading
-
-**Staff training**: Personnel must understand systems and risks
-
-**Business continuity planning**: Disaster recovery procedures
+- **Algorithm registration**: Each algorithm must be registered with regulators
+- **Self-assessment**: Annual review of algorithmic trading systems
+- **Testing requirements**: Mandatory testing in non-production environments
+- **Conformance testing**: Ensure algorithms meet exchange requirements
+- **Kill switch functionality**: Ability to immediately shut down all trading
+- **Staff training**: Personnel must understand systems and risks
+- **Business continuity planning**: Disaster recovery procedures
 
 **Additional MiFID II requirements:**
 
-**Algorithm ID tagging**: Every order must include algorithm identifier
-
-**Clock synchronization**: All systems synchronized to UTC within microseconds
-
-**Order record keeping**: Six years of detailed order data
-
-**Direct electronic access controls**: Similar to SEC 15c3-5 but more detailed
-
-**Throttling mechanisms**: Limits on order message rates
-
-**Periodic reviews**: Regular audits by independent parties
+- **Algorithm ID tagging**: Every order must include algorithm identifier
+- **Clock synchronization**: All systems synchronized to UTC within microseconds
+- **Order record keeping**: Six years of detailed order data
+- **Direct electronic access controls**: Similar to SEC 15c3-5 but more detailed
+- **Throttling mechanisms**: Limits on order message rates
+- **Periodic reviews**: Regular audits by independent parties
 
 **Documentation standards:**
 
@@ -157,6 +140,7 @@ Example: Cannot trade more than 10% of daily volume in 10 minutes
 Example: Reject any order more than 5% away from last trade price
 
 **Reference prices:**
+
 - Last traded price
 - Volume-weighted average price (VWAP)
 - Mid-quote (average of bid and ask)
@@ -191,7 +175,7 @@ Before each order:
 
 Track mark-to-market P&L continuously:
 
-\\[\\text{Current Capital} = \\text{Starting Capital} + \\text{Realized P&L} + \\text{Unrealized P&L}\\]
+\\[\\text{Current Capital} = \\text{Starting Capital} + \\text{Realized P\\&L} + \\text{Unrealized P\\&L}\\]
 
 If capital drops below threshold → stop all trading
 
@@ -201,13 +185,10 @@ If capital drops below threshold → stop all trading
 
 **Types of kill switches:**
 
-**Manual kill switch**: Button that compliance or risk officers can press
-
-**Automatic kill switch**: Triggered by predefined conditions
-
-**Partial kill switch**: Stops specific algorithms or instruments
-
-**Full kill switch**: Stops all trading firm-wide
+- **Manual kill switch**: Button that compliance or risk officers can press
+- **Automatic kill switch**: Triggered by predefined conditions
+- **Partial kill switch**: Stops specific algorithms or instruments
+- **Full kill switch**: Stops all trading firm-wide
 
 **Automatic trigger conditions:**
 
@@ -256,6 +237,7 @@ Every algorithmic trade must leave a complete **audit trail**: who deployed it, 
 **Required data elements:**
 
 **Order lifecycle:**
+
 - Order creation time (microsecond precision)
 - Order parameters (symbol, side, size, price, type)
 - Order modifications (if any)
@@ -263,6 +245,7 @@ Every algorithmic trade must leave a complete **audit trail**: who deployed it, 
 - Fill details (price, quantity, counterparty)
 
 **Algorithm metadata:**
+
 - Algorithm ID and version
 - Model inputs and features
 - Predicted signals and confidence scores
@@ -270,12 +253,14 @@ Every algorithmic trade must leave a complete **audit trail**: who deployed it, 
 - Risk checks and their outcomes
 
 **Market data:**
+
 - Best bid/offer at decision time
 - Order book depth (multiple levels)
 - Recent trades
 - Volatility measures
 
 **System state:**
+
 - Current positions
 - Available capital
 - Risk metrics
@@ -283,29 +268,22 @@ Every algorithmic trade must leave a complete **audit trail**: who deployed it, 
 
 **Storage infrastructure:**
 
-**Time-series databases**: InfluxDB, TimescaleDB for high-frequency data
-
-**Data lakes**: S3, HDFS for long-term storage
-
-**Structured databases**: PostgreSQL for order and execution records
-
-**Log aggregation**: ELK stack (Elasticsearch, Logstash, Kibana)
+- **Time-series databases**: InfluxDB, TimescaleDB for high-frequency data
+- **Data lakes**: S3, HDFS for long-term storage
+- **Structured databases**: PostgreSQL for order and execution records
+- **Log aggregation**: ELK stack (Elasticsearch, Logstash, Kibana)
 
 **Retention requirements:**
 
-**SEC**: 6 years for order records
-
-**MiFID II**: 5 years for most data, longer for some records
-
-**Internal policies**: Often longer than regulatory minimums
+- **SEC**: 6 years for order records
+- **MiFID II**: 5 years for most data, longer for some records
+- **Internal policies**: Often longer than regulatory minimums
 
 **Compression and archival:**
 
-Hot storage (< 90 days): Fast access, uncompressed
-
-Warm storage (90 days to 2 years): Compressed, slower access
-
-Cold storage (> 2 years): Heavily compressed, tape or glacier storage
+- **Hot storage**: (< 90 days): Fast access, uncompressed
+- **Warm storage**: (90 days to 2 years): Compressed, slower access
+- **Cold storage**: (> 2 years): Heavily compressed, tape or glacier storage
 
 ## Real-Time Surveillance Systems
 
@@ -314,23 +292,27 @@ Larger funds use **real-time surveillance dashboards** that flag anomalies, moni
 **Dashboard components:**
 
 **Position monitoring:**
+
 - Current positions by asset, sector, strategy
 - Real-time P&L
 - Risk metrics (VaR, Greeks, factor exposures)
 
 **Order flow monitoring:**
+
 - Orders per second
 - Fill rates
 - Rejection rates
 - Latency distributions
 
 **Risk limit tracking:**
+
 - Capital utilization
 - Margin usage
 - Position concentration
 - Correlation exposure
 
 **Anomaly detection:**
+
 - Statistical outliers in order patterns
 - Unusual price impacts
 - Unexpected strategy behavior
@@ -338,27 +320,25 @@ Larger funds use **real-time surveillance dashboards** that flag anomalies, moni
 
 **Alert escalation:**
 
-**Level 1 (Information)**: Log to dashboard, no action required
-
-**Level 2 (Warning)**: Notify traders and risk managers
-
-**Level 3 (Critical)**: Escalate to compliance, may require intervention
-
-**Level 4 (Emergency)**: Automatic kill switch trigger, immediate management notification
+- **Level 1 (Information)**: Log to dashboard, no action required
+- **Level 2 (Warning)**: Notify traders and risk managers
+- **Level 3 (Critical)**: Escalate to compliance, may require intervention
+- **Level 4 (Emergency)**: Automatic kill switch trigger, immediate management notification
 
 **Machine learning for surveillance:**
 
 Train models to detect:
-- Anomalous trading patterns
-- System malfunctions before they cause damage
-- Regulatory violations
-- Market manipulation attempts
+- **Anomalous trading patterns**: Unusual trading patterns that may indicate manipulation or fraud
+- **System malfunctions**: Before they cause damage
+- **Regulatory violations**: Violations of trading regulations
+- **Market manipulation attempts**: Attempts to manipulate the market
 
 Features include:
-- Order size distributions
-- Timing patterns
-- Fill rate changes
-- Correlation with market moves
+
+- **Order size distributions**: Distribution of order sizes
+- **Timing patterns**: Patterns in the timing of trades
+- **Fill rate changes**: Changes in the fill rate
+- **Correlation with market moves**: Correlation between the market and the trading strategy
 
 ## Testing and Validation Requirements
 
@@ -366,43 +346,39 @@ These systems are not optional. They're what let a hedge fund operate at institu
 
 **Pre-production testing:**
 
-**Unit tests**: Each component tested in isolation
-
-**Integration tests**: Components tested together
-
-**System tests**: Full end-to-end workflow validation
-
-**Stress tests**: Performance under extreme conditions
-
-**Conformance tests**: Meet exchange requirements
+- **Unit tests**: Each component tested in isolation
+- **Integration tests**: Components tested together
+- **System tests**: Full end-to-end workflow validation
+- **Stress tests**: Performance under extreme conditions
+- **Conformance tests**: Meet exchange requirements
 
 **MiFID II testing scenarios:**
 
-**Market stress**: How algorithm behaves during volatility spike
-
-**Liquidity shock**: Response when liquidity disappears
-
-**Price gaps**: Behavior across market open or after halts
-
-**Erroneous input**: Handling of bad data or corrupted feeds
-
-**Kill switch activation**: Proper shutdown sequence
-
-**Recovery**: Restarting after emergency stop
+- **Market stress**: How algorithm behaves during volatility spike
+- **Liquidity shock**: Response when liquidity disappears
+- **Price gaps**: Behavior across market open or after halts
+- **Erroneous input**: Handling of bad data or corrupted feeds
+- **Kill switch activation**: Proper shutdown sequence
+- **Recovery**: Restarting after emergency stop
 
 **Production monitoring:**
 
-**A/B testing**: Run new algorithm versions alongside old ones
-
-**Shadow mode**: Execute decisions in simulation, compare to production
-
-**Gradual rollout**: Deploy to small percentage of capital first
-
-**Performance tracking**: Continuous comparison to expected behavior
+- **A/B testing**: Run new algorithm versions alongside old ones
+- **Shadow mode**: Execute decisions in simulation, compare to production
+- **Gradual rollout**: Deploy to small percentage of capital first
+- **Performance tracking**: Continuous comparison to expected behavior
+- **Version control and deployment**: Every algorithm change requires:
+- **Code review by senior developers**
+- **Risk review by risk managers**
+- **Compliance approval**
+- **Documentation update**
+- **Staged deployment (dev → test → production)**
+- **Rollback plan**
 
 **Version control and deployment:**
 
 Every algorithm change requires:
+
 - Code review by senior developers
 - Risk review by risk managers
 - Compliance approval
@@ -413,6 +389,7 @@ Every algorithm change requires:
 **Post-deployment surveillance:**
 
 Monitor for:
+
 - Performance degradation
 - Increased risk
 - Unexpected behavior
@@ -421,6 +398,7 @@ Monitor for:
 **Incident response:**
 
 When issues occur:
+
 1. Isolate problem algorithm
 2. Assess impact on positions and P&L
 3. Document incident thoroughly

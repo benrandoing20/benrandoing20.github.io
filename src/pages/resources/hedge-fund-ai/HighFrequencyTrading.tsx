@@ -5,12 +5,15 @@ const HighFrequencyTrading = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [What is High-Frequency Trading](#what-is-high-frequency-trading)
 - [Market Making at Microsecond Speed](#market-making-at-microsecond-speed)
 - [Latency Arbitrage and Cross-Market Strategies](#latency-arbitrage-and-cross-market-strategies)
 - [Microstructure Features and Prediction](#microstructure-features-and-prediction)
 - [Engineering and Infrastructure](#engineering-and-infrastructure)
 - [Risk and Competition](#risk-and-competition)
+
+## Overview
 
 High-frequency trading, or HFT, operates on an entirely different timescale. Instead of holding positions for hours or days, HFT strategies act in microseconds. They profit from tiny inefficiencies in how orders are placed and matched across markets.
 
@@ -20,17 +23,17 @@ An HFT system sits physically close to exchange servers, often in the same data 
 
 **Key characteristics:**
 
-**Speed**: Trades execute in microseconds to milliseconds
+- **Speed**: Trades execute in microseconds to milliseconds
 
-**Volume**: Millions of orders per day, most of which are cancelled
+- **Volume**: Millions of orders per day, most of which are cancelled
 
-**Short holding periods**: Positions held for seconds or minutes, rarely hours
+- **Short holding periods**: Positions held for seconds or minutes, rarely hours
 
-**Tight margins**: Profit per trade is tiny (fractions of a cent), but volume compounds it
+- **Tight margins**: Profit per trade is tiny (fractions of a cent), but volume compounds it
 
-**Market making**: Providing liquidity by continuously posting bids and asks
+- **Market making**: Providing liquidity by continuously posting bids and asks
 
-**Technology-driven**: Success depends on hardware, network optimization, and low-level code
+- **Technology-driven**: Success depends on hardware, network optimization, and low-level code
 
 HFT firms don't predict market direction. They provide liquidity, exploit fleeting mispricings, and react faster than anyone else.
 
@@ -40,16 +43,9 @@ The simplest form of HFT is **market making**, where the algorithm continuously 
 
 **How it works:**
 
-1. **Post quotes**: Simultaneously offer to buy at the bid and sell at the ask
-
-\\[\\text{Bid} = P - \\frac{s}{2}, \\quad \\text{Ask} = P + \\frac{s}{2}\\]
-
-Where \\(P\\) is fair value and \\(s\\) is the spread.
-
+1. **Post quotes**: Simultaneously offer to buy at the bid and sell at the ask \\[\\text{Bid} = P - \\frac{s}{2}, \\quad \\text{Ask} = P + \\frac{s}{2}\\] where \\(P\\) is fair value and \\(s\\) is the spread.
 2. **Capture spread**: When someone buys from your ask and someone else sells to your bid, you profit \\(s\\)
-
 3. **Manage inventory**: If you accumulate too much long or short inventory, adjust quotes to encourage rebalancing trades
-
 4. **Repeat**: Thousands of times per second
 
 **Inventory risk:**
@@ -149,26 +145,23 @@ Where \\(V_{\\text{bid}}\\) and \\(V_{\\text{ask}}\\) are volumes at the best bi
 If imbalance > 0 (more buy interest), price likely moves up.
 
 **Book depth**: Total volume across multiple price levels. Deep books are more stable.
-
 **Spread**: Tight spreads indicate high liquidity. Widening spreads signal stress.
 
 **Quote dynamics:**
 
-**Arrival rate**: How many new quotes per second?
-
-**Cancellation rate**: What fraction of quotes are canceled before execution?
-
-**Update speed**: How often are quotes revised?
+- **Arrival rate**: How many new quotes per second?
+- **Cancellation rate**: What fraction of quotes are canceled before execution?
+- **Update speed**: How often are quotes revised?
 
 High cancellation rates often signal low conviction or algorithmic probing (testing liquidity).
 
 **Trade flow features:**
 
-**Trade size**: Large trades indicate institutional activity.
+- **Trade size**: Large trades indicate institutional activity.
 
-**Trade direction**: More buys than sells (or vice versa)?
+- **Trade direction**: More buys than sells (or vice versa)?
 
-**Trade velocity**: Acceleration in trade frequency often precedes price moves.
+- **Trade velocity**: Acceleration in trade frequency often precedes price moves.
 
 **Machine learning models:**
 
@@ -191,9 +184,11 @@ The edge is tiny (53% vs 50%), but over millions of trades, it compounds.
 **Deep learning for order books:**
 
 **LSTMs** process sequences of order book snapshots, learning patterns like:
+
 "When large orders appear deep in the book, price tends to move in that direction within 500ms"
 
 **Convolutional Neural Networks (CNNs)** treat the order book as a 2D image:
+
 - Rows = price levels (bids and asks)
 - Columns = time steps
 - Pixel values = volume
@@ -206,40 +201,35 @@ Because competition is fierce and margins are razor thin, success in HFT depends
 
 **Colocation:**
 
-HFT firms rent space in exchange data centers to minimize latency. Every foot of cable adds nanoseconds of delay.
-
-The closer you are to the exchange's matching engine, the faster you receive data and send orders.
+- HFT firms rent space in exchange data centers to minimize latency. Every foot of cable adds nanoseconds of delay.
+- The closer you are to the exchange's matching engine, the faster you receive data and send orders.
 
 **Network optimization:**
 
-Use **microwave towers** and **fiber optic cables** optimized for speed. Microwave is faster than fiber for long distances (light travels faster in air than glass).
-
-Some firms lease dedicated microwave links between Chicago (CME) and New York (NYSE) to shave milliseconds off round-trip times.
+- Use **microwave towers** and **fiber optic cables** optimized for speed. Microwave is faster than fiber for long distances (light travels faster in air than glass).
+- Some firms lease dedicated microwave links between Chicago (CME) and New York (NYSE) to shave milliseconds off round-trip times.
 
 **Hardware:**
 
-**FPGAs (Field-Programmable Gate Arrays)**: Custom chips that execute trading logic in hardware, bypassing the CPU entirely. Latency: 100s of nanoseconds.
-
-**Custom NICs (Network Interface Cards)**: Direct memory access to avoid OS overhead.
-
-**Kernel bypass**: Networking stacks that skip the Linux kernel for lower latency.
+- **FPGAs (Field-Programmable Gate Arrays)**: Custom chips that execute trading logic in hardware, bypassing the CPU entirely. Latency: 100s of nanoseconds.
+- **Custom NICs (Network Interface Cards)**: Direct memory access to avoid OS overhead.
+- **Kernel bypass**: Networking stacks that skip the Linux kernel for lower latency.
 
 **Software:**
 
-Systems are written in **C++** or **Rust**, run on custom hardware, and optimized for **deterministic timing**.
-
-Every line of code is profiled for performance. Even a single branch misprediction or cache miss can cost microseconds.
+- Systems are written in **C++** or **Rust**, run on custom hardware, and optimized for **deterministic timing**.
+- Every line of code is profiled for performance. Even a single branch misprediction or cache miss can cost microseconds.
 
 **Real-time risk control:**
 
-If a model goes haywire even for a few seconds, losses can be enormous.
+- If a model goes haywire even for a few seconds, losses can be enormous.
 
 **Risk checks run in microseconds:**
 
-- Position limits: Prevent accumulating too much inventory
-- Loss limits: Kill switch if daily loss exceeds threshold
-- Order rate limits: Prevent runaway order submission
-- Price checks: Reject orders far from current market price
+- **Position limits**: Prevent accumulating too much inventory
+- **Loss limits**: Kill switch if daily loss exceeds threshold
+- **Order rate limits**: Prevent runaway order submission
+- **Price checks**: Reject orders far from current market price
 
 These checks are implemented in hardware (FPGAs) to avoid software delays.
 
@@ -249,15 +239,11 @@ Despite the complexity, the core principle of HFT is simple: provide liquidity, 
 
 **Risks:**
 
-**Technology failure**: A bug, network outage, or hardware failure can cause catastrophic losses in seconds.
-
-**Adverse selection**: Getting filled on orders that immediately move against you (trading with informed participants).
-
-**Inventory risk**: Holding positions when the market moves sharply.
-
-**Regulatory risk**: Rules around market making, order types, and latency arbitrage evolve constantly.
-
-**Competition**: The speed race never ends. Firms constantly upgrade infrastructure to stay ahead.
+- **Technology failure**: A bug, network outage, or hardware failure can cause catastrophic losses in seconds.
+- **Adverse selection**: Getting filled on orders that immediately move against you (trading with informed participants).
+- **Inventory risk**: Holding positions when the market moves sharply.
+- **Regulatory risk**: Rules around market making, order types, and latency arbitrage evolve constantly.
+- **Competition**: The speed race never ends. Firms constantly upgrade infrastructure to stay ahead.
 
 **Why HFT matters:**
 
@@ -265,11 +251,9 @@ For most hedge funds, understanding how HFT works is valuable even if they don't
 
 **HFT provides:**
 
-**Tighter spreads**: Competition between market makers narrows bid-ask spreads, reducing trading costs for everyone
-
-**Deeper liquidity**: More quotes in the book at tighter levels
-
-**Price discovery**: Fast incorporation of information into prices
+- **Tighter spreads**: Competition between market makers narrows bid-ask spreads, reducing trading costs for everyone
+- **Deeper liquidity**: More quotes in the book at tighter levels
+- **Price discovery**: Fast incorporation of information into prices
 
 **Criticism:**
 

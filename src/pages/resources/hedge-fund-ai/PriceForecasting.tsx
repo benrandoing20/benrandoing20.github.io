@@ -5,6 +5,7 @@ const PriceForecasting = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [The Challenge of Price Prediction](#the-challenge-of-price-prediction)
 - [Cross-Sectional vs Time-Series Models](#cross-sectional-vs-time-series-models)
 - [Statistical Methods](#statistical-methods)
@@ -12,19 +13,22 @@ const PriceForecasting = () => {
 - [Deep Learning Architectures](#deep-learning-architectures)
 - [Advanced Techniques](#advanced-techniques)
 
+
+## Overview
+
 Price forecasting is the most intuitive form of modeling but also the most difficult. Markets are noisy, adaptive systems where information is constantly priced in. The goal is not to predict every price move but to estimate whether a stock, asset, or factor is more likely to outperform or underperform over a specific time horizon.
 
 ## The Challenge of Price Prediction
 
-Markets are fundamentally different from other forecasting problems. Unlike weather or sales data, financial markets are:
+Markets are fundamentally different from other forecasting problems. Unlike weather or sales data, financial markets are: 
 
-**Adversarial**: Other traders are trying to exploit the same patterns. Once a signal becomes known, it gets traded away.
+- **Adversarial**: Other traders are trying to exploit the same patterns. Once a signal becomes known, it gets traded away.
 
-**Non-stationary**: Relationships that work for years can suddenly break as market structure, regulations, or participant behavior changes.
+- **Non-stationary**: Relationships that work for years can suddenly break as market structure, regulations, or participant behavior changes.
 
-**Low signal-to-noise ratio**: Most price movement is random. The predictable component is small and hard to isolate.
+- **Low signal-to-noise ratio**: Most price movement is random. The predictable component is small and hard to isolate.
 
-**Path-dependent**: Current prices embed all past information, making it difficult to find incremental alpha.
+- **Path-dependent**: Current prices embed all past information, making it difficult to find incremental alpha.
 
 Given these constraints, successful price forecasting focuses on **relative performance** (which stock outperforms others) rather than absolute levels (what will the price be tomorrow).
 
@@ -82,9 +86,7 @@ Combines L1 and L2 regularization, balancing feature selection with stability wh
 
 **Why regularization matters:**
 
-Without it, models overfit — they memorize noise in the training data and fail on new data. Regularization keeps models **simple and generalizable**.
-
-These methods are simple but powerful when regularized correctly, as they help prevent overfitting and identify which signals truly matter.
+Without it, models overfit, they memorize noise in the training data and fail on new data. Regularization keeps models **simple and generalizable**. These methods are simple but powerful when regularized correctly, as they help prevent overfitting and identify which signals truly matter.
 
 ## Machine Learning Approaches
 
@@ -92,7 +94,7 @@ For nonlinear relationships, funds use machine learning techniques that can hand
 
 **Gradient-Boosted Decision Trees:**
 
-The workhorse of modern quant finance. These algorithms build an ensemble of decision trees, each correcting the errors of the previous ones.
+These algorithms build an ensemble of decision trees, each correcting the errors of the previous ones.
 
 **Popular implementations:**
 - **XGBoost**: Fast, parallelized, widely used
@@ -119,7 +121,7 @@ Similar to gradient boosting but builds trees independently and averages their p
 
 **Support Vector Machines (SVM):**
 
-Find optimal decision boundaries in high-dimensional space. Less common now but still used for classification (up/down/flat).
+Find optimal decision boundaries in high-dimensional space. Less common now but still used for classification tasks (up/down/flat).
 
 ## Deep Learning Architectures
 
@@ -153,9 +155,14 @@ Originally developed for NLP, transformers use **attention mechanisms** to ident
 **Example:**
 
 A transformer model might combine:
-- Historical price sequences (60 days of OHLCV data)
-- Order flow statistics (bid-ask spread, volume imbalance)
+- Historical price sequences (60 days of OHLCV data: Open, High, Low, Close, Volume)
+- Order flow statistics (bid-ask spread, volume imbalance, trade aggression)
+  - **Bid-ask spread**: The difference between the highest price a buyer is willing to pay and the lowest price a seller will accept. Wider spreads often indicate lower liquidity or higher uncertainty.
+  - **Volume imbalance**: The ratio of buy volume to sell volume. Persistent imbalances can signal institutional accumulation or distribution.
 - Macroeconomic indicators (yield curve, VIX, credit spreads)
+  - **Yield curve**: The relationship between interest rates and bond maturities. A normal upward-sloping curve indicates healthy economic expectations, while an inverted curve (short-term rates higher than long-term) has historically preceded recessions. The 10-year minus 2-year spread is closely watched as a recession indicator.
+  - **Credit spreads**: The difference in yield between corporate bonds and risk-free government bonds of similar maturity. Widening spreads indicate investors demanding more compensation for credit risk, often signaling economic stress or deteriorating corporate health. High-yield (junk bond) spreads are particularly sensitive to recession fears.
+  - **VIX (Volatility Index)**: Often called the "fear gauge," VIX measures expected market volatility over the next 30 days based on S&P 500 options prices. High VIX indicates market stress and uncertainty, while low VIX suggests complacency. Spikes in VIX often precede or accompany market selloffs.
 - Sentiment scores from news and earnings calls
 
 The attention mechanism learns: "When VIX spikes, pay more attention to credit spreads than momentum."
@@ -180,6 +187,7 @@ One model outputs:
 - 20-day ahead forecast
 
 This helps because:
+
 - Short-term signals guide intraday trading
 - Long-term signals inform strategic positioning
 - Consistency across horizons indicates stronger conviction
@@ -203,6 +211,7 @@ This **filters false positives** and improves risk-adjusted returns.
 **Ensemble Methods:**
 
 Combine multiple models to reduce variance and improve stability:
+
 - Average predictions from XGBoost, LSTM, and linear models
 - Weight models by recent performance
 - Use stacking: train a meta-model on outputs of base models
@@ -212,6 +221,7 @@ Combine multiple models to reduce variance and improve stability:
 Models that update continuously as new data arrives, rather than requiring periodic retraining. Useful for adapting to changing market conditions.
 
 **Techniques:**
+
 - Exponentially weighted updates
 - Sliding window retraining
 - Active learning (retrain on mistakes)
@@ -220,15 +230,15 @@ Models that update continuously as new data arrives, rather than requiring perio
 
 In practice, the best price-forecasting models are **small and well-tested**. They focus on:
 
-**Stability**: Performance doesn't collapse when market conditions change
+- **Stability**: Performance doesn't collapse when market conditions change
 
-**Interpretability**: You understand why the model makes its predictions
+- **Interpretability**: You understand why the model makes its predictions
 
-**Repeatability**: Results are consistent across time periods and validation methods
+- **Repeatability**: Results are consistent across time periods and validation methods
 
-**Low turnover**: Predictions don't change dramatically from day to day
+- **Low turnover**: Predictions don't change dramatically from day to day
 
-**Risk-awareness**: Model knows when it doesn't know (uncertainty estimation)
+- **Risk-awareness**: Model knows when it doesn't know (uncertainty estimation)
 
 The goal is not chasing the illusion of perfect prediction. It's building models that give you a **small, consistent edge** that compounds over thousands of trades. In a world where being right 52% of the time can generate significant returns, discipline and infrastructure matter more than complexity.
 `;

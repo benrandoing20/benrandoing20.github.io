@@ -5,12 +5,15 @@ const DeepRLAllocation = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Beyond Static Optimization](#beyond-static-optimization)
 - [How Reinforcement Learning Works](#how-reinforcement-learning-works)
 - [The MDP Framework](#the-mdp-framework)
 - [Policy Gradient Methods](#policy-gradient-methods)
 - [Handling Real-World Constraints](#handling-real-world-constraints)
 - [Continuous Learning and Adaptation](#continuous-learning-and-adaptation)
+
+## Overview
 
 Deep reinforcement learning, or deep RL, takes portfolio optimization into the world of continuous learning and adaptation. Instead of solving a static optimization problem, you train an agent to make allocation decisions over time.
 
@@ -27,6 +30,7 @@ Deep RL addresses this by training an agent that **learns** how to allocate dyna
 **Deep RL**: Learn a policy that continuously adapts to market conditions
 
 This allows the system to:
+
 - React to regime changes automatically
 - Learn when to trade aggressively vs conservatively
 - Incorporate transaction costs into decision-making
@@ -48,9 +52,8 @@ Over thousands or millions of episodes (simulated trading periods), the agent di
 
 **Key difference from supervised learning:**
 
-Supervised learning: "Here's what you should do"
-
-Reinforcement learning: "Try things and I'll tell you how well you did"
+- Supervised learning: "Here's what you should do"
+- Reinforcement learning: "Try things and I'll tell you how well you did"
 
 The agent has to **explore** different strategies to discover what works, not just imitate historical decisions.
 
@@ -59,6 +62,7 @@ The agent has to **explore** different strategies to discover what works, not ju
 Portfolio allocation can be formalized as a **Markov Decision Process (MDP)**.
 
 **State** (\\(s_t\\)):
+
 - Current portfolio weights
 - Asset returns over recent periods
 - Volatility forecasts
@@ -66,17 +70,21 @@ Portfolio allocation can be formalized as a **Markov Decision Process (MDP)**.
 - Transaction cost estimates
 
 **Action** (\\(a_t\\)):
+
 - New portfolio weights (how to rebalance)
 
 **Reward** (\\(r_t\\)):
+
 - Return from time \\(t\\) to \\(t+1\\)
 - Minus transaction costs
 - Minus penalty for excessive turnover or concentration
 
 **Transition dynamics** (\\(P(s_{t+1} | s_t, a_t)\\)):
+
 - How the market evolves after taking action \\(a_t\\)
 
 **Policy** (\\(\\pi(a_t | s_t)\\)):
+
 - The strategy the agent uses to choose actions given states
 
 **Objective:**
@@ -100,6 +108,7 @@ The agent is trained with algorithms like **policy gradients**, **Deep Determini
 **Output**: Action (new portfolio weights)
 
 For continuous actions (portfolio weights), the network might output:
+
 - Mean and standard deviation of a Gaussian distribution
 - Agent samples from this distribution to get weights
 - Softmax to ensure weights sum to 1
@@ -151,6 +160,7 @@ This teaches the agent to:
 **Position constraints:**
 
 Add to the network output:
+
 - Softmax layer to ensure weights sum to 1
 - Clipping to enforce position limits (e.g., max 5% per asset)
 - Penalty for violating leverage constraints
@@ -158,8 +168,9 @@ Add to the network output:
 **Liquidity awareness:**
 
 Include liquidity features in the state. The agent learns:
-"When this asset is illiquid, trade smaller sizes"
-"During market stress, reduce overall exposure"
+
+- "When this asset is illiquid, trade smaller sizes"
+- "During market stress, reduce overall exposure"
 
 ## Continuous Learning and Adaptation
 
@@ -171,39 +182,29 @@ The reward can be structured as the portfolio's **Sharpe ratio**, or as a combin
 
 **Regime adaptation:**
 
-"When volatility spikes, reduce leverage and shift to defensive assets"
-
-"When correlations drop, increase diversification across uncorrelated bets"
-
-"When spreads widen, wait for liquidity to return before trading"
+- "When volatility spikes, reduce leverage and shift to defensive assets"
+- "When correlations drop, increase diversification across uncorrelated bets"
+- "When spreads widen, wait for liquidity to return before trading"
 
 **Cost minimization:**
 
-"If current weights are close to optimal, don't trade (avoid costs)"
-
-"If a large rebalance is needed, split it over multiple periods"
-
-"Trade more aggressively when spreads are tight"
+- "If current weights are close to optimal, don't trade (avoid costs)"
+- "If a large rebalance is needed, split it over multiple periods"
+- "Trade more aggressively when spreads are tight"
 
 **Dynamic risk control:**
 
-"After a losing streak, reduce position sizes to prevent blowup"
-
-"After strong performance, take some risk off the table"
-
-"In trending markets, let winners run; in mean-reverting markets, trim winners"
+- After a losing streak, reduce position sizes to prevent blowup
+- After strong performance, take some risk off the table
+- In trending markets, let winners run; in mean-reverting markets, trim winners
 
 **Example architecture:**
 
-**State**: [current weights (10 assets), returns (60 days), volatility (20 days), VIX, credit spreads, regime probability]
-
-**Network**: 3 hidden layers (128, 64, 32 neurons)
-
-**Output**: New weights (10 values summing to 1)
-
-**Reward**: Sharpe ratio over next rebalancing period
-
-**Training**: 100,000 episodes of simulated trading
+- **State**: [current weights (10 assets), returns (60 days), volatility (20 days), VIX, credit spreads, regime probability]
+- **Network**: 3 hidden layers (128, 64, 32 neurons)
+- **Output**: New weights (10 values summing to 1)
+- **Reward**: Sharpe ratio over next rebalancing period
+- **Training**: 100,000 episodes of simulated trading
 
 After training, the agent has learned a **non-linear, adaptive policy** that responds intelligently to changing market conditions.
 
@@ -213,25 +214,18 @@ While deep RL remains an active research area, it represents the future directio
 
 **Advantages over static optimization:**
 
-**Adaptive**: Responds to regime changes automatically
-
-**Non-linear**: Captures complex relationships traditional optimizers miss
-
-**Cost-aware**: Learns to trade efficiently, not just optimally
-
-**Robust**: Handles constraints and edge cases gracefully
-
-**Scalable**: Can manage large portfolios with many assets
+- **Adaptive**: Responds to regime changes automatically
+- **Non-linear**: Captures complex relationships traditional optimizers miss
+- **Cost-aware**: Learns to trade efficiently, not just optimally
+- **Robust**: Handles constraints and edge cases gracefully
+- **Scalable**: Can manage large portfolios with many assets
 
 **Challenges:**
 
-**Sample efficiency**: Needs lots of data (or simulated episodes) to train
-
-**Stability**: RL can be unstable; requires careful hyperparameter tuning
-
-**Interpretability**: Hard to understand why the agent makes specific decisions
-
-**Overfitting**: Agent might exploit artifacts of the training environment
+- **Sample efficiency**: Needs lots of data (or simulated episodes) to train
+- **Stability**: RL can be unstable; requires careful hyperparameter tuning
+- **Interpretability**: Hard to understand why the agent makes specific decisions
+- **Overfitting**: Agent might exploit artifacts of the training environment
 
 Despite these challenges, leading hedge funds are deploying RL-based allocation systems for specific tasks like execution timing, dynamic hedging, and regime-dependent rebalancing.
 

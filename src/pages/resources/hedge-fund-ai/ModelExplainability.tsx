@@ -5,6 +5,7 @@ const ModelExplainability = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [Why Explainability Matters](#why-explainability-matters)
 - [SHAP Values](#shap-values)
 - [LIME Local Interpretable Explanations](#lime-local-interpretable-explanations)
@@ -13,6 +14,8 @@ const ModelExplainability = () => {
 - [Documentation Standards](#documentation-standards)
 - [Model Governance Committees](#model-governance-committees)
 - [Investor Transparency](#investor-transparency)
+
+## Overview
 
 As AI and machine learning have become central to hedge fund operations, regulators have demanded that models be interpretable, not just accurate. You must be able to explain why a model made a decision, not only that it did.
 
@@ -24,19 +27,16 @@ Traditional statistical models (linear regression, logistic regression) are natu
 
 Modern machine learning models (deep neural networks, gradient boosting with thousands of trees, ensemble methods) are different. They work, but their internal logic is opaque. This creates problems:
 
-**Regulatory scrutiny**: Regulators want to understand decision processes
-
-**Investor confidence**: Allocators need to trust that returns are skill based, not luck
-
-**Risk management**: You cannot manage risks you don't understand
-
-**Debugging**: When models fail, you need to know why
-
-**Bias detection**: Hidden biases can lead to unfair or illegal decisions
+- **Regulatory scrutiny**: Regulators want to understand decision processes
+- **Investor confidence**: Allocators need to trust that returns are skill based, not luck
+- **Risk management**: You cannot manage risks you don't understand
+- **Debugging**: When models fail, you need to know why
+- **Bias detection**: Hidden biases can lead to unfair or illegal decisions
 
 **Real world example:**
 
 A model predicts a stock will outperform, and the fund goes long. The stock crashes. Without explainability:
+
 - Was it bad luck or bad model?
 - Which feature was most responsible?
 - Should you retrain, or was this an outlier?
@@ -70,21 +70,15 @@ The SHAP value measures the average marginal contribution of a feature across al
 
 **Properties:**
 
-**Additivity**: Sum of SHAP values equals prediction minus baseline:
-
-\\[f(x) - E[f(X)] = \\sum_{i=1}^{n} \\phi_i\\]
-
-**Consistency**: If a feature's contribution increases, its SHAP value increases
-
-**Local accuracy**: Explains individual predictions accurately
+- **Additivity**: Sum of SHAP values equals prediction minus baseline: \\[f(x) - E[f(X)] = \\sum_{i=1}^{n} \\phi_i\\]
+- **Consistency**: If a feature's contribution increases, its SHAP value increases
+- **Local accuracy**: Explains individual predictions accurately
 
 **Practical example:**
 
-**Model**: Predict next day stock return
-
-**Features**: Momentum, value, volatility, volume, earnings surprise
-
-**Prediction**: +2.5% return for Stock A
+- **Model**: Predict next day stock return from features: momentum, value, volatility, volume, earnings surprise
+- **Features**: Momentum, value, volatility, volume, earnings surprise
+- **Prediction**: +2.5% return for Stock A
 
 **Baseline** (average prediction): +0.5%
 
@@ -101,15 +95,14 @@ The SHAP value measures the average marginal contribution of a feature across al
 
 **Visualization:**
 
-**Waterfall plot**: Shows how each feature contributes to moving prediction from baseline to final value
-
-**Force plot**: Displays features pushing prediction higher (red) vs lower (blue)
-
-**Summary plot**: Shows feature importance across many predictions
+- **Waterfall plot**: Shows how each feature contributes to moving prediction from baseline to final value
+- **Force plot**: Displays features pushing prediction higher (red) vs lower (blue)
+- **Summary plot**: Shows feature importance across many predictions
 
 **Python implementation:**
 
-\`\`\`python
+\`\`\`
+
 import shap
 
 # Train model
@@ -140,17 +133,10 @@ Instead of explaining the entire model globally, LIME explains a **single predic
 **Algorithm:**
 
 1. **Select instance** to explain (e.g., one stock prediction)
-
-2. **Generate perturbed samples** near that instance
-   - Add noise to features
-   - Create synthetic neighbors
-
+2. **Generate perturbed samples** near that instance: Add noise to features, Create synthetic neighbors
 3. **Get model predictions** for perturbed samples
-
 4. **Weight samples** by proximity to original instance
-
 5. **Fit simple linear model** on weighted perturbed samples
-
 6. **Interpret coefficients** of simple model as explanations
 
 **Mathematical formulation:**
@@ -182,19 +168,15 @@ Fit local linear model showing:
 
 **Advantages:**
 
-**Model-agnostic**: Works with any black box model
-
-**Local fidelity**: Accurate explanation for the specific prediction
-
-**Intuitive**: Linear explanations are easy to understand
+- **Model-agnostic**: Works with any black box model
+- **Local fidelity**: Accurate explanation for the specific prediction
+- **Intuitive**: Linear explanations are easy to understand
 
 **Limitations:**
 
-**Instability**: Small changes in instance can produce different explanations
-
-**Sampling sensitivity**: Results depend on how perturbations are generated
-
-**Only local**: Does not explain global model behavior
+- **Instability**: Small changes in instance can produce different explanations
+- **Sampling sensitivity**: Results depend on how perturbations are generated
+- **Only local**: Does not explain global model behavior
 
 ## Attention Visualization
 
@@ -263,6 +245,7 @@ Funds use these tools not just for internal transparency but to satisfy **model 
 **Risk**: High (direct P&L impact)
 
 **Requirements**:
+
 - Full documentation
 - Quarterly validation
 - Independent review
@@ -280,6 +263,7 @@ Funds use these tools not just for internal transparency but to satisfy **model 
 **Risk**: Medium (indirect P&L impact)
 
 **Requirements**:
+
 - Standard documentation
 - Semi-annual validation
 - Periodic review
@@ -295,6 +279,7 @@ Funds use these tools not just for internal transparency but to satisfy **model 
 **Risk**: Low (no direct P&L impact)
 
 **Requirements**:
+
 - Minimal documentation
 - Informal review
 - No production deployment
@@ -314,12 +299,14 @@ Each tier has its own **documentation standard**: data lineage, feature descript
 **Required documentation elements:**
 
 **Model overview:**
+
 - Purpose and intended use
 - Developer and owner
 - Development date and version
 - Risk tier classification
 
 **Data lineage:**
+
 - Source systems
 - Data transformations
 - Feature engineering logic
@@ -327,6 +314,7 @@ Each tier has its own **documentation standard**: data lineage, feature descript
 - Data quality metrics
 
 **Model methodology:**
+
 - Algorithm type and architecture
 - Hyperparameters and tuning process
 - Training procedure
@@ -334,12 +322,14 @@ Each tier has its own **documentation standard**: data lineage, feature descript
 - Performance metrics
 
 **Feature descriptions:**
+
 - Name and definition of each feature
 - Expected range and distribution
 - Business rationale
 - Known limitations or biases
 
 **Testing results:**
+
 - In-sample performance
 - Out-of-sample performance
 - Walk-forward analysis
@@ -347,6 +337,7 @@ Each tier has its own **documentation standard**: data lineage, feature descript
 - Comparison to benchmarks
 
 **Risk assessment:**
+
 - Known failure modes
 - Sensitivity analysis
 - Scenario testing
@@ -354,12 +345,14 @@ Each tier has its own **documentation standard**: data lineage, feature descript
 - Mitigation controls
 
 **Validation approvals:**
+
 - Validator name and date
 - Findings and recommendations
 - Approval status
 - Conditions for use
 
 **Change log:**
+
 - Version history
 - Material changes
 - Revalidation dates
@@ -370,19 +363,16 @@ Many firms maintain **Model Risk Committees** that review these logs quarterly.
 
 **Committee composition:**
 
-**Quant researchers**: Understand model design
-
-**Risk managers**: Assess potential risks
-
-**Compliance officers**: Ensure regulatory adherence
-
-**Technology leads**: Evaluate infrastructure and deployment
-
-**Senior management**: Final approval authority
+- **Quant researchers**: Understand model design
+- **Risk managers**: Assess potential risks
+- **Compliance officers**: Ensure regulatory adherence
+- **Technology leads**: Evaluate infrastructure and deployment
+- **Senior management**: Final approval authority
 
 **Review process:**
 
 **Quarterly reviews:**
+
 - Performance versus expectations
 - Incidents or failures
 - Model drift or decay
@@ -390,6 +380,7 @@ Many firms maintain **Model Risk Committees** that review these logs quarterly.
 - Regulatory updates
 
 **Annual comprehensive review:**
+
 - Full revalidation
 - Documentation update
 - Stress testing refresh
@@ -407,15 +398,11 @@ Triggered by:
 
 **Governance outcomes:**
 
-**Approved**: Continue using model as is
-
-**Approved with conditions**: Use but enhance monitoring or controls
-
-**Requires remediation**: Fix identified issues before continued use
-
-**Suspended**: Stop using until problems resolved
-
-**Retired**: Decommission model permanently
+- **Approved**: Continue using model as is
+- **Approved with conditions**: Use but enhance monitoring or controls
+- **Requires remediation**: Fix identified issues before continued use
+- **Suspended**: Stop using until problems resolved
+- **Retired**: Decommission model permanently
 
 ## Investor Transparency
 
@@ -423,25 +410,16 @@ Explainability also matters for investors. Allocators increasingly demand transp
 
 **What investors want to know:**
 
-**Source of alpha**: What patterns do models exploit?
-
-**Risk factors**: What exposures do models create?
-
-**Stability**: How consistent are returns over time?
-
-**Robustness**: How do models perform in stress scenarios?
-
-**Governance**: What controls prevent model failures?
-
-**Transparency without giving away secrets:**
-
-**High level explanations**: Describe strategy families (momentum, mean reversion) without exact formulas
-
-**Performance attribution**: Show which factors contributed to returns
-
-**Risk decomposition**: Break down risk by source (market, sector, idiosyncratic)
-
-**Explainability examples**: Demonstrate that predictions are sensible
+- **Source of alpha**: What patterns do models exploit?
+- **Risk factors**: What exposures do models create?
+- **Stability**: How consistent are returns over time?
+- **Robustness**: How do models perform in stress scenarios?
+- **Governance**: What controls prevent model failures?
+- **Transparency without giving away secrets**: Show how models work without revealing trade secrets
+- **High level explanations**: Describe strategy families (momentum, mean reversion) without exact formulas
+- **Performance attribution**: Show which factors contributed to returns
+- **Risk decomposition**: Break down risk by source (market, sector, idiosyncratic)
+- **Explainability examples**: Demonstrate that predictions are sensible
 
 **Example investor presentation:**
 

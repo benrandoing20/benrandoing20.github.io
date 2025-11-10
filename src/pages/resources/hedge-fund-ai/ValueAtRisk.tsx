@@ -5,12 +5,15 @@ const ValueAtRisk = () => {
 ## Overview
 
 **In this section:**
+- [Overview](#overview)
 - [What is Value at Risk](#what-is-value-at-risk)
 - [Expected Shortfall](#expected-shortfall)
 - [Parametric VaR](#parametric-var)
 - [Historical VaR](#historical-var)
 - [Monte Carlo VaR](#monte-carlo-var)
 - [Machine Learning Extensions](#machine-learning-extensions)
+
+## Overview
 
 Value at Risk, or VaR, is one of the most widely used risk measures in finance. It answers a simple question: what is the most I could lose over a given period, with a given level of confidence?
 
@@ -25,6 +28,7 @@ VaR at confidence level \\(\\alpha\\) is the loss threshold such that:
 \\[P(\\text{Loss} > \\text{VaR}_\\alpha) = 1 - \\alpha\\]
 
 Common confidence levels:
+
 - 95% VaR: Expect to exceed this loss 1 day out of 20
 - 99% VaR: Expect to exceed this loss 1 day out of 100
 - 99.9% VaR: Expect to exceed this loss 1 day out of 1000
@@ -38,10 +42,10 @@ This means: On 99% of days, losses will be less than $2 million (2% of portfolio
 
 **Why VaR matters:**
 
-**Risk limits**: Set position sizes and leverage based on VaR budgets
-**Regulatory capital**: Banks must hold capital against VaR
-**Performance measurement**: Compare returns to VaR to assess risk-adjusted skill
-**Investor reporting**: Communicate risk in understandable terms
+- **Risk limits**: Set position sizes and leverage based on VaR budgets
+- **Regulatory capital**: Banks must hold capital against VaR
+- **Performance measurement**: Compare returns to VaR to assess risk-adjusted skill
+- **Investor reporting**: Communicate risk in understandable terms
 
 ## Expected Shortfall
 
@@ -71,6 +75,7 @@ ES is **more informative** than VaR because it captures tail risk. Regulators in
 \\[\\text{VaR}_\\alpha = \\mu - z_\\alpha \\sigma\\]
 
 Where:
+
 - \\(\\mu\\) = expected portfolio return
 - \\(\\sigma\\) = portfolio standard deviation
 - \\(z_\\alpha\\) = z-score for confidence level \\(\\alpha\\)
@@ -89,15 +94,15 @@ For a $100M portfolio: 99% VaR = $3.44M
 
 **Advantages:**
 
-**Fast**: Just need mean and covariance
-**Analytical**: No simulation required
-**Intuitive**: Based on familiar statistics
+- **Fast**: Just need mean and covariance
+- **Analytical**: No simulation required
+- **Intuitive**: Based on familiar statistics
 
 **Limitations:**
 
-**Assumes normality**: Real returns have fat tails (more extreme moves than normal distribution predicts)
-**Linear**: Doesn't handle options or other nonlinear instruments well
-**Constant volatility**: Misses volatility clustering
+- **Assumes normality**: Real returns have fat tails (more extreme moves than normal distribution predicts)
+- **Linear**: Doesn't handle options or other nonlinear instruments well
+- **Constant volatility**: Misses volatility clustering
 
 ## Historical VaR
 
@@ -123,15 +128,15 @@ After sorting portfolio returns:
 
 **Advantages:**
 
-**No distributional assumptions**: Captures actual market behavior
-**Handles fat tails**: If history had crashes, they're in the data
-**Nonlinear instruments**: Works for options, futures, any asset
+- **No distributional assumptions**: Captures actual market behavior
+- **Handles fat tails**: If history had crashes, they're in the data
+- **Nonlinear instruments**: Works for options, futures, any asset
 
 **Limitations:**
 
-**Past may not repeat**: History might not include the next crisis
-**Look-back sensitivity**: Different windows give different VaR
-**Static**: Doesn't adapt to changing volatility regimes
+- **Past may not repeat**: History might not include the next crisis
+- **Look-back sensitivity**: Different windows give different VaR
+- **Static**: Doesn't adapt to changing volatility regimes
 
 ## Monte Carlo VaR
 
@@ -150,9 +155,10 @@ After sorting portfolio returns:
 \\[r_i = \\mu_i + L z_i\\]
 
 Where:
+
 - \\(r_i\\) = simulated returns
 - \\(\\mu_i\\) = expected returns
-- \\(L\\) = Cholesky factor of covariance matrix (\\(LL^T = \\Sigma\\))
+- \\(L\\) = Cholesky factor of covariance matrix (\\(LL^T = \\Sigma\\)). This lower-triangular matrix decomposes the covariance structure, allowing us to transform independent random draws into correlated returns. By multiplying \\(L\\) with uncorrelated standard normal variables \\(z_i\\), we generate returns that exhibit the same correlation patterns observed in the actual portfolio—ensuring that when one asset moves, related assets move together in a realistic way
 - \\(z_i \\sim N(0,1)\\) = random normal draws
 
 **Example:**
@@ -166,15 +172,17 @@ After sorting:
 
 **Advantages:**
 
-**Flexible**: Can model any distribution (Student-t, skewed, etc.)
-**Nonlinear**: Handles options and complex derivatives
-**Scenario control**: Can inject specific shocks or stress scenarios
+- **Realistic correlations**: Captures how assets move together
+- **Flexible**: Can model any distribution (Student-t, skewed, etc.)
+- **Nonlinear**: Handles options and complex derivatives
+- **Scenario control**: Can inject specific shocks or stress scenarios
 
 **Limitations:**
 
-**Computationally expensive**: Requires thousands of simulations
-**Model dependent**: Quality depends on assumptions about distributions
-**Calibration**: Needs accurate covariance estimates
+- **Computationally expensive**: Requires thousands of simulations
+- **Model dependent**: Quality depends on assumptions about distributions
+- **Calibration**: Needs accurate covariance estimates
+- **Sample size sensitivity**: Smaller samples may underestimate risk
 
 ## Machine Learning Extensions
 
